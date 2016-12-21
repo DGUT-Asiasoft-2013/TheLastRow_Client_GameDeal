@@ -60,22 +60,25 @@ public class BootActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pass.setText("跳过(" + passtime + ")");
-                        passtime--;
-                        if (passtime < 0) {
-                            timer.cancel();
+                        if (passtime <= 0) {
                             startMainActivity();
+                        } else {
+                            pass.setText("跳过" + passtime);
+                            passtime--;
                         }
                     }
                 });
             }
-        },1000,1000);
+        },0,1000);
 
 
 
     }
 
     private void startMainActivity() {
+        if (timer != null) {
+            timer.cancel();
+        }
         startActivity(new Intent(BootActivity.this,MainActivity.class));
         finish();
     }
