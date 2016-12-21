@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="AppTheme.base"></style>
     <!-- Base application theme. -->
-    <style name="AppTheme.base" parent="android:Theme.Light.NoTitleBar">
+    <style name="AppTheme.base" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
