@@ -10,4 +10,11 @@ public class BootActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boot);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
 }
