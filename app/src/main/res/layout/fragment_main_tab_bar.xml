@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="center"
+            android:layout_weight="0.6"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/tab_bar_img_feeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="0.4"
+            android:id="@+id/tab_bar_text_feeds"
+            android:text="feeds"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_weight="0.6"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/tab_bar_img_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_weight="0.4"
+            android:id="@+id/tab_bar_text_notes"
+            android:text="notes"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="0.6"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/tab_bar_img_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="0.4"
+            android:id="@+id/tab_bar_text_search"
+            android:text="search"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_weight="0.6"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/tab_bar_img_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="0.4"
+            android:id="@+id/tab_bar_text_me"
+            android:text="me"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

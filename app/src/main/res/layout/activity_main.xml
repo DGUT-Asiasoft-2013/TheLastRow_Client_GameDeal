@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_marginBottom="63dp"
+        android:id="@+id/main_contain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+    <fragment
+        android:id="@+id/frag_main_tab"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="2dp"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.MainTabBarFragment"
+        tool:layout="@layout/fragment_main_tab_bar"
+        />
+    <View
+        android:layout_marginBottom="61dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ff000000"/>
+</FrameLayout>
