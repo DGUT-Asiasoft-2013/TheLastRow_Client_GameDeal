@@ -22,8 +22,9 @@
         tool:layout="@layout/fragment_main_tab_bar"
         />
     <View
+        android:layout_gravity="bottom"
         android:layout_marginBottom="61dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ff000000"/>
+        android:background="#33000000"/>
 </FrameLayout>

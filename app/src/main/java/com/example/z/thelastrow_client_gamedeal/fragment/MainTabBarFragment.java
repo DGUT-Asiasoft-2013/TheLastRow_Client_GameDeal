@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 
@@ -18,6 +19,7 @@ public class MainTabBarFragment extends Fragment {
     View btnNew, tabFeeds, tabNotes, tabSearch, tabMe;
     View[] tabs;
 
+    TextView text_me,text_feeds,text_search,text_note;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,6 +28,11 @@ public class MainTabBarFragment extends Fragment {
         tabNotes = view.findViewById(R.id.tab_bar_img_notes);
         tabSearch = view.findViewById(R.id.tab_bar_img_search);
         tabMe = view.findViewById(R.id.tab_bar_img_me);
+
+        text_me=(TextView)view.findViewById(R.id.tab_bar_text_me);
+        text_feeds=(TextView)view.findViewById(R.id.tab_bar_text_feeds);
+        text_search=(TextView)view.findViewById(R.id.tab_bar_text_search);
+        text_note=(TextView)view.findViewById(R.id.tab_bar_text_notes);
 
         tabs = new View[]{
                 tabFeeds, tabNotes, tabSearch, tabMe
@@ -73,5 +80,19 @@ public class MainTabBarFragment extends Fragment {
         if (onTabSelectedListener != null && selectedIndex >= 0) {
             onTabSelectedListener.onTabSelected(selectedIndex);
         }
+    }
+
+    public void setTextColor(int i){
+        int textColorSelected=0xffff7a1b;
+        int textColorNormal=0x33000000;
+        TextView t[]={text_feeds,text_note,text_search,text_me};
+        for(int j=0;j<t.length;j++){
+            if(j==i){
+                t[i].setTextColor(textColorSelected);
+            }else {
+                t[j].setTextColor(textColorNormal);
+            }
+        }
+
     }
 }
