@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/login_frag_action_bar"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/frag_action_bar_height"
+        tools:layout="@layout/fragment_action_bar" />
+    <fragment
+        android:layout_below="@id/login_frag_action_bar"
+        android:id="@+id/login_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+        tools:layout="@layout/fragment_inputcell_simpletext"
+        />
+    <fragment
+        android:layout_below="@id/login_user_name"
+        android:id="@+id/login_user_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+        tools:layout="@layout/fragment_inputcell_simpletext"
+        />
+    <Button
+        android:layout_below="@id/login_user_pwd"
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录"/>
+</RelativeLayout>

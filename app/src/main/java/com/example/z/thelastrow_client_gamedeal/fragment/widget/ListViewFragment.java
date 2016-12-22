@@ -7,10 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 
@@ -23,9 +25,9 @@ public class ListViewFragment extends Fragment {
     ImageView imageView;
     TextView text1,text2;
 
-    int imgArray[];
-    String textArray1[];
-    String textArray2[];
+    static int imgArray[];
+    static String text1Array[];
+    static String text2Array[];
     Handler handler;
 
     int position=0;
@@ -35,6 +37,12 @@ public class ListViewFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_list,null);
         listView= (ListView) view.findViewById(R.id.frag_listView);
         listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),text1Array[position],Toast.LENGTH_SHORT).show();
+            }
+        });
         handler=new Handler();
         return view;
     }
@@ -42,7 +50,6 @@ public class ListViewFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         onReload();
     }
 
@@ -56,13 +63,15 @@ public class ListViewFragment extends Fragment {
             if (imgArray==null){
                 return 4;
             }else {
-                return imgArray.length;
+                int a=Math.max(imgArray.length,text1Array.length);
+                a=Math.max(a,text2Array.length);
+                return a;
             }
         }
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return text1Array[position];
         }
 
         @Override
@@ -84,22 +93,28 @@ public class ListViewFragment extends Fragment {
             return convertView;
         }
     };
-    public void setArrays(int[] imgArray, String[] textArray1,String[] textArray2){
-        this.imgArray=imgArray;
-        this.textArray1=textArray1;
-        this.textArray2=textArray2;
-
+    public static void setArrays(int[] imgArray1, String[] textArray1,String[] textArray2){
+        imgArray=imgArray1;
+        text1Array=textArray1;
+        text2Array=textArray2;
     }
 
     public void setItems(int position) {
-        if (imgArray != null) {
+        if (imgArray != null && imgArray.length>position) {
             imageView.setImageResource(imgArray[position]);
-            text1.setText(textArray1[position]);
-            text2.setText(textArray2[position]);
-        } else {
-            imageView.setImageResource(R.drawable.setting_48);
-            text1.setText("我的测试" + position);
-            text2.setText(">");
         }
+        if(text1Array!=null && text1Array.length>position){
+            text1.setText(text1Array[position]);
+        }
+        if(text2Array!=null && text2Array.length>position){
+            text2.setText(text2Array[position]);
+        }
+//        else {
+//            imageView.setImageResource(R.drawable.setting_48);
+//            text1.setText("我的测试" + position);
+//            text2.setText(">");
+//        }
     }
+
+
 }
