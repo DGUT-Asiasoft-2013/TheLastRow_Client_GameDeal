@@ -2,5 +2,24 @@
     <string name="app_name">GameDeal</string>
     <string name="slogan">无忧游戏生活!</string>
     <string name="advertisement">广告</string>
-    <string name="pass">跳过</string>
+    <string name="pass">跳过5</string>
+    <string name="frag_seach">输入搜索内容</string>
+    <string name="frag_buy">收购</string>
+    <string name="frag_sell">出售</string>
+    <string name="frag_tencent">腾讯</string>
+    <string name="frag_tencent_slogan">用钱创造快乐！</string>
+    <string name="frag_netease">网易游戏</string>
+    <string name="frag_netease_slogan">游戏热爱者！</string>
+    <string name="frag_shendagames">盛大游戏</string>
+    <string name="frag_shendagames_slogan">一起开心，一起游戏！</string>
+    <string name="frag_perfectworld">完美世界</string>
+    <string name="frag_perfectworld_slogan">完美游戏，世界同享！</string>
+    <string name="frag_cyou">搜狐畅游</string>
+    <string name="frag_cyou_slogan">永远追求卓越！</string>
+    <string name="frag_tiancity">世纪天成</string>
+    <string name="frag_tiancity_slogan">游戏世纪乐享天成！</string>
+    <string name="frag_seasun">西山居</string>
+    <string name="frag_seasun_slogan">创造快乐，传递快乐！</string>
+    <string name="frag_giant">巨人游戏</string>
+    <string name="frag_giant_slogan">做最好玩的游戏！</string>
 </resources>

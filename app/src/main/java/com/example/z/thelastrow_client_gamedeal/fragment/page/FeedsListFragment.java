@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 
@@ -14,10 +15,23 @@ import com.example.z.thelastrow_client_gamedeal.R;
  */
 
 public class FeedsListFragment extends Fragment {
+
+    TextView frag_seach;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_page_feeds,null);
+
+        frag_seach = (TextView) view.findViewById(R.id.frag_seach);
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
     }
 }
