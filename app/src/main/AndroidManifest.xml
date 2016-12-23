@@ -21,6 +21,10 @@
              />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".Register"/>
+        <activity android:name=".BuyActivity"></activity>
+        <activity android:name=".EquipmentNewsActivity"></activity>
+        <activity android:name=".SellActivity"></activity>
+        <activity android:name=".FeedsSearchActivity"></activity>
     </application>
 
 </manifest>
