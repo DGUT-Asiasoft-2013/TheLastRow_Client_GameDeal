@@ -24,7 +24,7 @@
             android:layout_height="@dimen/page_me_avatar_height"
             android:textSize="20sp"
             android:textColor="@android:color/white"
-            android:text="登录/注册"
+            android:text="@string/page_me_text_goto_login"
             android:focusable="true"
             android:clickable="true"
             />

@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
             default:
                 break;
         }
-        tabbar.setTextColor(index);
+        //tabbar.setTextColor(index);
         if (newFrag == null) return;
 
         getFragmentManager()

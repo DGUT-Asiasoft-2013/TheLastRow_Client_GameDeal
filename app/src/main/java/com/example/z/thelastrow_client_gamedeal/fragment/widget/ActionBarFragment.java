@@ -22,20 +22,21 @@ public class ActionBarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_action_bar,null);
-        imageView=(ImageView)view.findViewById(R.id.action_bar_back);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        textView=(TextView)view.findViewById(R.id.action_bar_text);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (setTextClick!=null) setTextClick.setTextClickLisener();
-            }
-        });
+            imageView=(ImageView)view.findViewById(R.id.action_bar_back);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().finish();
+                }
+            });
+            textView=(TextView)view.findViewById(R.id.action_bar_text);
+            textView.setText("");
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (setTextClick!=null) setTextClick.setTextClickLisener();
+                }
+            });
         return view;
     }
     public void setText(String s){

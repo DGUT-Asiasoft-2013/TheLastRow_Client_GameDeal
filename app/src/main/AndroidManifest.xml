@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.z.thelastrow_client_gamedeal">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +25,7 @@
         <activity android:name=".EquipmentNewsActivity"></activity>
         <activity android:name=".SellActivity"></activity>
         <activity android:name=".FeedsSearchActivity"></activity>
+        <activity android:name=".ActivityMeListViewJump"/>
     </application>
 
 </manifest>

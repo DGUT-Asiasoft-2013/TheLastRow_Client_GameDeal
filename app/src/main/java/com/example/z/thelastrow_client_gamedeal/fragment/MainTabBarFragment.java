@@ -29,10 +29,10 @@ public class MainTabBarFragment extends Fragment {
         tabSearch = view.findViewById(R.id.tab_bar_img_search);
         tabMe = view.findViewById(R.id.tab_bar_img_me);
 
-        text_me=(TextView)view.findViewById(R.id.tab_bar_text_me);
-        text_feeds=(TextView)view.findViewById(R.id.tab_bar_text_feeds);
-        text_search=(TextView)view.findViewById(R.id.tab_bar_text_search);
-        text_note=(TextView)view.findViewById(R.id.tab_bar_text_notes);
+//        text_me=(TextView)view.findViewById(R.id.tab_bar_text_me);
+//        text_feeds=(TextView)view.findViewById(R.id.tab_bar_text_feeds);
+//        text_search=(TextView)view.findViewById(R.id.tab_bar_text_search);
+//        text_note=(TextView)view.findViewById(R.id.tab_bar_text_notes);
 
         tabs = new View[]{
                 tabFeeds, tabNotes, tabSearch, tabMe

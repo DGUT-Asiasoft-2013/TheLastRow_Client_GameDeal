@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/me_listview_jump_frag_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/frag_action_bar_height"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
+        tools:layout="@layout/fragment_action_bar"
+        />
+    <RelativeLayout
+        android:id="@+id/me_listview_jump_contain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/me_listview_jump_frag_action_bar">
+    </RelativeLayout>
+</RelativeLayout>
