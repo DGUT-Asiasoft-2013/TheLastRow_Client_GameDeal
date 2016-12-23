@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:gravity="center"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/page_me_line"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:text="me"/>
-</LinearLayout>
+        android:layout_height="200dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="@dimen/page_me_avatar_height"
+            android:layout_height="@dimen/page_me_avatar_height" />
+        <TextView
+            android:background="@drawable/tong_yong_background"
+            android:id="@+id/text_login_or_register"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/page_me_avatar_height"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:text="登录/注册"
+            android:focusable="true"
+            android:clickable="true"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignBottom="@id/page_me_line"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/page_me_text_money"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="余额：0.00"
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/page_me_text_recharge"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:text="充值"/>
+    </LinearLayout>
+
+    <fragment
+        android:layout_below="@id/page_me_line"
+        android:id="@+id/page_me_frag"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ListViewFragment"
+        tools:layout="@layout/fragment_list"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
