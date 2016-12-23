@@ -41,7 +41,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        tabbar.setSelectedItem(0);
+        if (mexitTime==-2000){
+            tabbar.setSelectedItem(0);
+            mexitTime=-2001;
+        }
+
     }
 
     //按两次返回键退出

@@ -1,6 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.widget;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.z.thelastrow_client_gamedeal.ActivityMeListViewJump;
 import com.example.z.thelastrow_client_gamedeal.R;
 
 /**
@@ -25,9 +27,9 @@ public class ListViewFragment extends Fragment {
     ImageView imageView;
     TextView text1,text2;
 
-    static int imgArray[];
-    static String text1Array[];
-    static String text2Array[];
+     int imgArray[];
+     String text1Array[];
+     String text2Array[];
     Handler handler;
 
     int position=0;
@@ -40,7 +42,9 @@ public class ListViewFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),text1Array[position],Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), ActivityMeListViewJump.class);
+                intent.putExtra("listViewItem",text1Array[position]);
+                startActivity(intent);
             }
         });
         handler=new Handler();
@@ -93,7 +97,7 @@ public class ListViewFragment extends Fragment {
             return convertView;
         }
     };
-    public static void setArrays(int[] imgArray1, String[] textArray1,String[] textArray2){
+    public  void setArrays(int[] imgArray1, String[] textArray1,String[] textArray2){
         imgArray=imgArray1;
         text1Array=textArray1;
         text2Array=textArray2;

@@ -17,33 +17,37 @@ import com.example.z.thelastrow_client_gamedeal.R;
 
 public class ActionBarFragment extends Fragment {
     ImageView imageView;
-    TextView textView;
+    TextView textView,title;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_action_bar,null);
-            imageView=(ImageView)view.findViewById(R.id.action_bar_back);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().finish();
-                }
-            });
-            textView=(TextView)view.findViewById(R.id.action_bar_text);
-            textView.setText("");
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (setTextClick!=null) setTextClick.setTextClickLisener();
-                }
-            });
+        View view = inflater.inflate(R.layout.fragment_action_bar, null);
+        imageView = (ImageView) view.findViewById(R.id.action_bar_back);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+        textView = (TextView) view.findViewById(R.id.action_bar_text);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (setTextClick != null) setTextClick.setTextClickLisener();
+            }
+        });
+        title = (TextView) view.findViewById(R.id.action_bar_title);
+        textView.setText("");
+        title.setText("");
         return view;
     }
     public void setText(String s){
         textView.setText(s);
     }
 
-
+    public void  setTitle(String s){
+        title.setText(s);
+    }
     public interface SetTextClick{
         public void setTextClickLisener();
     }
