@@ -48,6 +48,11 @@ public class MeListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setListView();
+        getAccountInformation();
+    }
+
+//    获取用户信息
+    private void getAccountInformation() {
     }
 
     private void setListView() {

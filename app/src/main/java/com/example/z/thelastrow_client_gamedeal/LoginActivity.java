@@ -50,9 +50,8 @@ public class LoginActivity extends Activity {
         login();
     }
 
+//    登录按钮出发的事件
     private void login() {
-        final String account=userName.getText();
-        final String passward=pwd.getText();
         userName.setLabelText("用户名：");
         userName.setHintText("请输入用户名");
         pwd.setLabelText("密码：");
@@ -61,59 +60,68 @@ public class LoginActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pdlg =new ProgressDialog(LoginActivity.this);
-                pdlg.setCanceledOnTouchOutside(true);
-                pdlg.setMessage("正在登陆");
-                pdlg.show();
-                MultipartBody requestBody=new MultipartBody.Builder()
-                        .addFormDataPart("account",account)
-                        .addFormDataPart("passwordHash",passward)
-                        .build();
-                Request request=Server.requestBuilderWithApi("login")
-                        .post(requestBody)
-                        .build();
-                Server.getSharedClient().newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, final IOException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                pdlg.setMessage(e.toString());
-                                try {
-                                    Thread.sleep(300);
-
-                                } catch (InterruptedException ee) {
-                                    ee.printStackTrace();
+                final String account=userName.getText();
+                final String passward=pwd.getText();
+                //判断是否为空
+                if(account.contentEquals("") || passward.contentEquals("")){
+                    Toast.makeText(LoginActivity.this,"不能为空 ",Toast.LENGTH_SHORT).show();
+                }else {
+                    pdlg =new ProgressDialog(LoginActivity.this);
+                    pdlg.setCanceledOnTouchOutside(true);
+                    pdlg.setMessage("正在登陆");
+                    pdlg.show();
+                    MultipartBody requestBody=new MultipartBody.Builder()
+                            .addFormDataPart("account",account)
+                            .addFormDataPart("passwordHash",passward)
+                            .build();
+                    Request request=Server.requestBuilderWithApi("login")
+                            .post(requestBody)
+                            .build();
+                    Server.getSharedClient().newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, final IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pdlg.setMessage(e.toString());
+//                                try {
+//                                    Thread.sleep(300);
+//
+//                                } catch (InterruptedException ee) {
+//                                    ee.printStackTrace();
+//                                }
                                 }
-                            }
-                        });
+                            });
 
-                    }
+                        }
 
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                pdlg.setMessage(response.toString());
-                                try {
-                                    Thread.sleep(300);
-                                    //pdlg.dismiss();
-                                    finish();
-                                    Toast.makeText(LoginActivity.this,"欢迎回来 "+account ,Toast.LENGTH_SHORT).show();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                        @Override
+                        public void onResponse(Call call, final Response response) throws IOException {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pdlg.setMessage(response.toString());
+                                    try {
+                                        Thread.sleep(200);
+                                        pdlg.dismiss();
+                                        finish();
+                                        Toast.makeText(LoginActivity.this,"欢迎回来 "+account ,Toast.LENGTH_SHORT).show();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
     }
+    public void onResponse(){
 
+    }
+//    ActionBar触发的事件
     private void actionBar() {
         actionBarFragment.setText("注册");
         actionBarFragment.setField(new ActionBarFragment.SetTextClick() {
