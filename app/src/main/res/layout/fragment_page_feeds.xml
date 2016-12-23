@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#cccc">
@@ -43,7 +44,7 @@
                 android:hint="@string/frag_seach" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/frag_camera"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@android:color/transparent"
@@ -127,90 +128,21 @@
                 android:layout_height="100dp"
                 android:weightSum="2">
 
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment1"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
-                    <TextView
-                        android:id="@+id/frag_text_tencent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_tencent"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_tencent"
-                        android:text="@string/frag_tencent_slogan"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_tencent_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment2"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/frag_text_netease"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_netease"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_netease"
-                        android:text="@string/frag_netease_slogan"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_netease_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-
-                </RelativeLayout>
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
             </LinearLayout>
 
@@ -219,90 +151,21 @@
                 android:layout_height="100dp"
                 android:weightSum="2">
 
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment3"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
-                    <TextView
-                        android:id="@+id/frag_text_shendagames"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_shendagames"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_shendagames"
-                        android:text="@string/frag_shendagames_slogan"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_shendagames_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment4"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/frag_text_perfectworld"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_perfectworld"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_perfectworld"
-                        android:text="@string/frag_perfectworld_slogan"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_perfectworld_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
             </LinearLayout>
 
@@ -311,89 +174,21 @@
                 android:layout_height="100dp"
                 android:weightSum="2">
 
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment5"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
-                    <TextView
-                        android:id="@+id/frag_text_cyou"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_cyou"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_cyou"
-                        android:text="@string/frag_cyou_slogan"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_cyou_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment6"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/frag_text_tiancity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_tiancity"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_tiancity"
-                        android:text="@string/frag_tiancity_slogan"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_tiancity_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
             </LinearLayout>
 
@@ -402,89 +197,22 @@
                 android:layout_height="100dp"
                 android:weightSum="2">
 
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment7"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
-                    <TextView
-                        android:id="@+id/frag_text_seasun"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_seasun"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_seasun"
-                        android:text="@string/frag_seasun_slogan"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_seasun_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
+                <fragment
+                    android:id="@+id/feeds_fragment8"
+                    android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+                    tools:layout="@layout/fragment_page_feeds_companyentity" />
 
-                    <TextView
-                        android:id="@+id/frag_text_giant"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:drawableLeft="@android:drawable/ic_notification_overlay"
-                        android:text="@string/frag_giant"
-                        android:textColor="@android:color/black"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@id/frag_text_giant"
-                        android:text="@string/frag_giant_slogan"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="10dp" />
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/frag_image_giant_big"
-                        android:layout_width="90dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/ic_launcher" />
-
-                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
