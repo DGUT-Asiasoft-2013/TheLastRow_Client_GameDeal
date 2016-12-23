@@ -1,93 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:padding="0dp"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <ImageView
-            android:scaleType="center"
-            android:layout_weight="0.6"
-            android:src="@drawable/tab_feed_background"
             android:id="@+id/tab_bar_img_feeds"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/tab_feed_background" />
 
         <TextView
-            android:layout_weight="0.4"
             android:id="@+id/tab_bar_text_feeds"
-            android:text="feeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_bar_img_feeds"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:textSize="10dp"
+            android:text="@string/main_bar_home" />
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
-            android:layout_weight="0.6"
-            android:src="@drawable/tab_note_background"
             android:id="@+id/tab_bar_img_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/tab_note_background" />
 
         <TextView
-            android:layout_weight="0.4"
             android:id="@+id/tab_bar_text_notes"
-            android:text="notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_bar_img_notes"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:textSize="10dp"
+            android:text="@string/main_bar_news" />
+    </RelativeLayout>
 
-    <LinearLayout
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
         <ImageView
-            android:layout_weight="0.6"
-            android:src="@drawable/tab_search_background"
             android:id="@+id/tab_bar_img_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/tab_search_background" />
+
         <TextView
-            android:layout_weight="0.4"
             android:id="@+id/tab_bar_text_search"
-            android:text="search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_bar_img_search"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:textSize="10dp"
+            android:text="@string/main_bar_buycar" />
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
         <ImageView
-            android:layout_weight="0.6"
-            android:src="@drawable/tab_me_background"
             android:id="@+id/tab_bar_img_me"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/tab_me_background" />
+
         <TextView
-            android:layout_weight="0.4"
             android:id="@+id/tab_bar_text_me"
-            android:text="me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_bar_img_me"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:textSize="10dp"
+            android:text="@string/main_bar_me" />
+    </RelativeLayout>
 
 </LinearLayout>

@@ -62,6 +62,7 @@
             android:id="@+id/frag_buy"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/feeds_buyorsell_background"
             android:layout_weight="1">
 
             <ImageView
@@ -88,6 +89,7 @@
         <RelativeLayout
             android:id="@+id/frag_sell"
             android:layout_width="0dp"
+            android:background="@drawable/feeds_buyorsell_background"
             android:layout_height="match_parent"
             android:layout_weight="1">
 

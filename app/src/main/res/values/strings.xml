@@ -23,4 +23,8 @@
     <string name="frag_giant">巨人游戏</string>
     <string name="frag_giant_slogan">做最好玩的游戏！</string>
     <string name="entity">请输入实体</string>
+    <string name="main_bar_home">首页</string>
+    <string name="main_bar_news">发现</string>
+    <string name="main_bar_buycar">购物车</string>
+    <string name="main_bar_me">我的</string>
 </resources>
