@@ -1,7 +1,6 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.inputmodule;
 
 import android.app.Fragment;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -21,8 +20,8 @@ import com.example.z.thelastrow_client_gamedeal.R;
 
 public class CompanyEntity extends Fragment {
 
-    private TextView companyname,companyslogan;
-    private ImageView smalllog,biglog;
+    private TextView companyname, companyslogan;
+    private ImageView smalllog, biglog;
     View view;
 
     @Nullable
@@ -31,12 +30,19 @@ public class CompanyEntity extends Fragment {
 
         if (view == null) {
 
-        view = inflater.inflate(R.layout.fragment_page_feeds_companyentity, null);
+            view = inflater.inflate(R.layout.fragment_page_feeds_companyentity, null);
 
-        companyname = (TextView) view.findViewById(R.id.companyentity_companyname);
-        companyslogan = (TextView) view.findViewById(R.id.companyentity_companyslogan);
-        smalllog = (ImageView) view.findViewById(R.id.companyentity_companylog_small);
-        biglog = (ImageView) view.findViewById(R.id.companyentity_companylog_big);
+            companyname = (TextView) view.findViewById(R.id.companyentity_companyname);
+            companyslogan = (TextView) view.findViewById(R.id.companyentity_companyslogan);
+            smalllog = (ImageView) view.findViewById(R.id.companyentity_companylog_small);
+            biglog = (ImageView) view.findViewById(R.id.companyentity_companylog_big);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    goEqipmentNewsActivity();
+                }
+            });
 
         }
 
@@ -44,20 +50,26 @@ public class CompanyEntity extends Fragment {
         return view;
     }
 
+    private void goEqipmentNewsActivity() {
+        if (onCompanyEntityListener != null) {
+            onCompanyEntityListener.onCampantEnyityClick();
+        }
+    }
+
     public void setCompanyNameText(String string) {
         companyname.setText(string);
     }
 
-    public void setCompanyNameColor(ColorStateList color) {
-        companyname.setTextColor(color);
+    public void setCompanyNameColor(int a, int r, int g, int b) {
+        companyname.setTextColor(Color.argb(a, r, g, b));
     }
 
     public void setCompanySloganText(String string) {
         companyslogan.setText(string);
     }
 
-    public void setCompanySloganColor() {
-        companyslogan.setTextColor(Color.parseColor("#ff0099cc"));
+    public void setCompanySloganColor(int a, int r, int g, int b) {
+        companyslogan.setTextColor(Color.argb(a, r, g, b));
     }
 
     public void setSmalllogDrawnable(Bitmap bitmap) {
@@ -73,6 +85,18 @@ public class CompanyEntity extends Fragment {
     }
 
     public Bitmap getSmalllog() {
-        return ((BitmapDrawable)smalllog.getDrawable()).getBitmap();
+        return ((BitmapDrawable) smalllog.getDrawable()).getBitmap();
     }
+
+
+    public static interface OnCompanyEntityListener{
+        void onCampantEnyityClick();
+    };
+
+    private OnCompanyEntityListener onCompanyEntityListener;
+
+    public void setOnCompanyEntityListener(OnCompanyEntityListener onCompanyEntityListener){
+        this.onCompanyEntityListener = onCompanyEntityListener;
+    }
+
 }
