@@ -20,15 +20,6 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/tab_feed_background" />
 
-        <TextView
-            android:id="@+id/tab_bar_text_feeds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tab_bar_img_feeds"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="10dp"
-            android:text="@string/main_bar_home" />
     </RelativeLayout>
 
 
@@ -43,18 +34,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleType="fitCenter"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/tab_note_background" />
+            android:src="@drawable/tab_note_background"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/tab_bar_text_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tab_bar_img_notes"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="10dp"
-            android:text="@string/main_bar_news" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -71,15 +54,7 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/tab_search_background" />
 
-        <TextView
-            android:id="@+id/tab_bar_text_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tab_bar_img_search"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="10dp"
-            android:text="@string/main_bar_buycar" />
+
     </RelativeLayout>
 
 
@@ -96,16 +71,7 @@
             android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             android:src="@drawable/tab_me_background" />
-
-        <TextView
-            android:id="@+id/tab_bar_text_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tab_bar_img_me"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="10dp"
-            android:text="@string/main_bar_me" />
+        
     </RelativeLayout>
 
 </LinearLayout>

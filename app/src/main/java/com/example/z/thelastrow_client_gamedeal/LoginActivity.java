@@ -118,9 +118,7 @@ public class LoginActivity extends Activity {
             }
         });
     }
-    public void onResponse(){
 
-    }
 //    ActionBar触发的事件
     private void actionBar() {
         actionBarFragment.setText("注册");

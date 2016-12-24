@@ -11,10 +11,12 @@
         class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
         tools:layout="@layout/fragment_action_bar"
         />
+
     <RelativeLayout
         android:id="@+id/me_listview_jump_contain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/me_listview_jump_frag_action_bar">
+
     </RelativeLayout>
 </RelativeLayout>

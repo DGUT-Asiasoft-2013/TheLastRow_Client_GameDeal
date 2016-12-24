@@ -20,6 +20,7 @@ import com.example.z.thelastrow_client_gamedeal.MainActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.AvatarView;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ListViewFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,12 +45,13 @@ public class MeListFragment extends Fragment {
 
     TextView txt_goto_login,text_money,text_recharge;
     ListViewFragment listViewFragment =new ListViewFragment();
-
+    AvatarView avatarView;
     User user;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_page_me,null);
+        avatarView=(AvatarView)view.findViewById(R.id.page_me_avatar);
         listViewFragment= (ListViewFragment) getChildFragmentManager().findFragmentById(R.id.page_me_frag);
         text_money= (TextView) view.findViewById(R.id.page_me_text_money);
         text_recharge= (TextView) view.findViewById(R.id.page_me_text_recharge);
@@ -124,6 +126,7 @@ public class MeListFragment extends Fragment {
         super.onResume();
         setListView();
         getAccountInformation();
+        avatarView.load(user);
     }
 
 //    获取用户信息
@@ -134,15 +137,19 @@ public class MeListFragment extends Fragment {
         Server.getSharedClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                //avatarView.load("me");
             }
-
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
                 user=new ObjectMapper().readValue(response.body().string(),User.class);
-                txt_goto_login.setText("Hello！ "+user.getName());
-                text_money.setText("余额："+user.getMoney());
-
+                //avatarView.load(user.getAvatar());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txt_goto_login.setText("Hello！ "+user.getName());
+                        text_money.setText("余额："+user.getMoney());
+                    }
+                });
             }
         });
     }
@@ -158,6 +165,6 @@ public class MeListFragment extends Fragment {
         drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_wallet,R.drawable.my_wallet,R.drawable.my_wallet};
         text1Array = new String[]{"我的订单","我的收藏", "消费记录","我的消息"};
         text2Array = new String[]{">", ">",">",">"};
-        ListViewFragment.setArrays(drawableArray, text1Array, text2Array);
+        listViewFragment.setArrays(drawableArray, text1Array, text2Array);
     }
 }

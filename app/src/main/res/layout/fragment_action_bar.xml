@@ -7,9 +7,9 @@
 
     <TextView
         android:background="@drawable/tong_yong_background"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:textSize="@dimen/list_view_item_textSize"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
         android:id="@+id/action_bar_text"
         android:layout_width="wrap_content"
@@ -25,4 +25,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+    <TextView
+        android:textSize="@dimen/list_view_item_textSize"
+        android:layout_toEndOf="@id/action_bar_back"
+        android:gravity="center_vertical"
+        android:id="@+id/action_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textColor="@android:color/white"
+        android:text="标题 "/>
 </RelativeLayout>
