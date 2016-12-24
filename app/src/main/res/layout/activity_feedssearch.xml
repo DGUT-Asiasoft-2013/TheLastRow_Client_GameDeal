@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="0dp"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_margin="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/frag_search_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:entries="@array/frag_search_array">
+
+
+        </Spinner>
+
+    <EditText
+        android:id="@+id/frag_search_text"
+        android:layout_margin="0dp"
+        android:padding="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="15dp"
+        android:gravity="center_vertical"
+        android:hint="@string/frag_seach"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/frag_search_cancel"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:text="@string/frag_search_cancel"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/frag_search_history_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_search_history"
+            android:textSize="20dp"/>
+
+            <ImageView
+                android:src="@android:drawable/ic_menu_delete"
+                android:id="@+id/frag_search_history_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@id/frag_search_history_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frag_search_array">
+        <item>搜装备</item>
+        <item>搜游戏</item>
+        <item>搜公司</item>
+    </string-array>
+
+</resources>

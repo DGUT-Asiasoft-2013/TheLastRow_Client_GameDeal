@@ -160,7 +160,7 @@ public class FeedsListFragment extends Fragment {
                 getString(R.string.frag_seasun_slogan),
                 getString(R.string.frag_giant_slogan)};
 
-        Bitmap[] bmp = new Bitmap[]{
+        Bitmap[] bmpSmall = new Bitmap[]{
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_tencent),
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_netease),
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_shendagames),
@@ -170,6 +170,15 @@ public class FeedsListFragment extends Fragment {
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_seasun),
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_giant)};
 
+        Bitmap[] bmpBig = new Bitmap[]{
+                BitmapFactory.decodeResource(getResources(), R.drawable.tencent_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.netease_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.shendagames_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.perfectworld_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.cyou_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.tiancity_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.seasun_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.giant_game)};
 
 
 
@@ -182,8 +191,9 @@ public class FeedsListFragment extends Fragment {
             }
             feeds_fragments[i].setCompanyNameText(companyname[i]);
             feeds_fragments[i].setCompanySloganText(companynameslogan[i]);
-            feeds_fragments[i].setSmalllogDrawnable(bmp[i]);
-            feeds_fragments[i].setCompanyNameColor(255,255,255,255);
+            feeds_fragments[i].setSmalllogDrawnable(bmpSmall[i]);
+            feeds_fragments[i].setBiglogDrawnable(bmpBig[i]);
+            feeds_fragments[i].setCompanyNameColor(255,0,0,0);
         }
 
 
