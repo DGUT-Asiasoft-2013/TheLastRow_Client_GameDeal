@@ -16,7 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.z.thelastrow_client_gamedeal.ActivityMeListViewJump;
+import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 
 /**
  * Created by Z on 2016/12/21.
@@ -44,6 +47,9 @@ public class ListViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(getActivity(), ActivityMeListViewJump.class);
                 intent.putExtra("listViewItem",text1Array[position]);
+                if(Server.getUser()==null){
+                    intent=new Intent(getActivity(), LoginActivity.class);
+                }
                 startActivity(intent);
             }
         });
@@ -97,10 +103,11 @@ public class ListViewFragment extends Fragment {
             return convertView;
         }
     };
-    public  void setArrays(int[] imgArray1, String[] textArray1,String[] textArray2){
+    public  void setArrays(int[] imgArray1, String[] textArray1, String[] textArray2, User user){
         imgArray=imgArray1;
         text1Array=textArray1;
         text2Array=textArray2;
+//        this.user=user;
     }
 
     public void setItems(int position) {
@@ -113,6 +120,7 @@ public class ListViewFragment extends Fragment {
         if(text2Array!=null && text2Array.length>position){
             text2.setText(text2Array[position]);
         }
+
 //        else {
 //            imageView.setImageResource(R.drawable.setting_48);
 //            text1.setText("我的测试" + position);

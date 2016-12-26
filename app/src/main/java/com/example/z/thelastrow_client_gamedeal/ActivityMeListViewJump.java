@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MyCollectionFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MyIndentFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MyMessageFragment;
@@ -18,7 +19,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
  */
 
 public class ActivityMeListViewJump extends Activity {
-
+    User user;
     ActionBarFragment actionBarFragment;
     MyIndentFragment myIndentFragment=new MyIndentFragment();
     MyCollectionFragment myCollectionFragment=new MyCollectionFragment();
@@ -28,6 +29,7 @@ public class ActivityMeListViewJump extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_me_listview_jump);
+        user= (User) getIntent().getSerializableExtra("user");
         actionBarFragment=(ActionBarFragment)getFragmentManager().findFragmentById(R.id.me_listview_jump_frag_action_bar);
     }
 
@@ -50,7 +52,10 @@ public class ActivityMeListViewJump extends Activity {
             case "消费记录": newFrag=myMoneyRecordFragment; break;
             case "我的消息": newFrag=myMessageFragment; break;
         }
-
+        if (newFrag!=null){
+            Intent intent=new Intent(this,newFrag.getClass());
+            intent.putExtra("user",user);
+        }
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.me_listview_jump_contain,newFrag)

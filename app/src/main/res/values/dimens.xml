@@ -3,6 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_view_item_textSize">20sp</dimen>
-    <dimen name="page_me_avatar_height">120dp</dimen>
+    <dimen name="page_me_avatar_height">80dp</dimen>
     <dimen name="frag_action_bar_height">60dp</dimen>
 </resources>
