@@ -30,4 +30,5 @@
     <string name="main_bar_news">发现</string>
     <string name="main_bar_buycar">购物车</string>
     <string name="main_bar_me">我的</string>
+    <string name="choosethings">选择物品照片</string>
 </resources>

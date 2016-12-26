@@ -36,11 +36,9 @@
             android:id="@+id/companyentity_companylog_big"
             android:layout_width="100dp"
             android:layout_height="60dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:layout_gravity="bottom"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignTop="@id/companyentity_company1"
-            android:layout_toRightOf="@+id/companyentity_company1" />
+            android:src="@mipmap/ic_launcher" />
 
     </LinearLayout>
 
@@ -49,7 +47,7 @@
         android:id="@+id/companyentity_companylog_small"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerInside"
         android:layout_gravity="center_vertical"
         android:src="@mipmap/ic_launcher" />
 
