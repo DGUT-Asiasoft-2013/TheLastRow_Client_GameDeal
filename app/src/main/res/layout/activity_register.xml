@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="注册页面"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+<fragment
+    android:id="@+id/register_action_bar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/frag_action_bar_height"
+    class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
+    tools:layout="@layout/fragment_action_bar"
+    />
+    <ScrollView
+        android:layout_below="@id/register_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/register_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_simpletext"
+                />
+            <fragment
+                android:id="@+id/register_user_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_simpletext"
+                />
+            <fragment
+                android:id="@+id/register_user_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_simpletext"
+                />
+            <fragment
+                android:id="@+id/register_user_pwd_repeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_simpletext"
+                />
+            <fragment
+                android:id="@+id/register_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputcells.SimpleTextInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_simpletext"
+                />
+            <fragment
+                android:id="@+id/input_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureInputCellFragment"
+                tools:layout="@layout/fragment_inputcell_picture" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="提交" />
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

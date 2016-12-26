@@ -106,6 +106,7 @@ public class MeListFragment extends Fragment {
                                             @Override
                                             public void run() {
                                                 text_recharge.setText("充值");
+                                                getAccountInformation();
                                                 ToastAndDialog.setToastShort(getActivity(), "充值成功！");
                                             }
                                         });
@@ -142,7 +143,7 @@ public class MeListFragment extends Fragment {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 user=new ObjectMapper().readValue(response.body().string(),User.class);
-                //avatarView.load(user.getAvatar());
+                avatarView.load(user.getAvatar());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -154,17 +155,17 @@ public class MeListFragment extends Fragment {
         });
     }
     public void goToLogin() {
-        if (txt_goto_login.getText().toString().contentEquals(getString(R.string.page_me_text_goto_login))) {
+//        if (txt_goto_login.getText().toString().contentEquals(getString(R.string.page_me_text_goto_login))) {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-        }else {
-            txt_goto_login.setClickable(false);
-        }
+//        }else {
+//            txt_goto_login.setClickable(false);
+//        }
     }
     private void setListView() {
         drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_wallet,R.drawable.my_wallet,R.drawable.my_wallet};
         text1Array = new String[]{"我的订单","我的收藏", "消费记录","我的消息"};
         text2Array = new String[]{">", ">",">",">"};
-        listViewFragment.setArrays(drawableArray, text1Array, text2Array);
+        listViewFragment.setArrays(drawableArray, text1Array, text2Array,user);
     }
 }

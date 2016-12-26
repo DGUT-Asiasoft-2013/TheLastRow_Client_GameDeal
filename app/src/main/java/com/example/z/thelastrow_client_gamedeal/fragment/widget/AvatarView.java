@@ -68,12 +68,12 @@ public class AvatarView extends View {
 		if (user==null){
 			mainThreadHandler.post(new Runnable() {
 				public void run() {
-					Bitmap bmp=BitmapFactory.decodeResource(getResources(),R.drawable.my_message);
+					Bitmap bmp=BitmapFactory.decodeResource(getResources(),R.drawable.me_head);
 					setBitmap(bmp);
 				}
 			});
 		}else {
-			load(Server.serverAddress + user.getAvatar());
+			load(user.getAvatar());
 		}
 
 	}
