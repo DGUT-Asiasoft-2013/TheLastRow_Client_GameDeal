@@ -47,25 +47,27 @@ public class AvatarView extends View {
 	//设置图像
 	public void setBitmap(Bitmap bmp){
 		if(bmp==null) {
-			paint = new Paint();
-			paint.setColor(Color.BLUE);
-			paint.setStyle(Paint.Style.STROKE);
-			paint.setStrokeWidth(10);
-		    paint.setPathEffect(new DashPathEffect(new float[]{5, 10, 15, 20}, 0));
-			paint.setAntiAlias(true);
-		}else{
+//			paint = new Paint();
+//			paint.setColor(Color.BLUE);
+//			paint.setStyle(Paint.Style.STROKE);
+//			paint.setStrokeWidth(10);
+//		    paint.setPathEffect(new DashPathEffect(new float[]{5, 10, 15, 20}, 0));
+//			paint.setAntiAlias(true);
+			bmp=BitmapFactory.decodeResource(getResources(),R.drawable.me_head);
+		}
+
 			paint = new Paint();
 			paint.setShader(new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT));
 			paint.setAntiAlias(true);
 			
 			srcWidth = bmp.getWidth();
 			srcHeight = bmp.getHeight();	
-		}
+
 		invalidate();
 	}
 	
 	public void load(User user){
-		if (user==null){
+		if (user==null||user.getAccount().contentEquals("")){
 			mainThreadHandler.post(new Runnable() {
 				public void run() {
 					Bitmap bmp=BitmapFactory.decodeResource(getResources(),R.drawable.me_head);
@@ -79,8 +81,9 @@ public class AvatarView extends View {
 	}
 	
 	public void load(String url){
-			Request request = Server.requestBuilderWithApi(url)
-					.method("get", null)
+			Request request = new Request.Builder()
+					.url(Server.serverAddress+url)
+					.get()
 					.build();
 			Server.getSharedClient().newCall(request).enqueue(new Callback() {
 				@Override
@@ -115,9 +118,7 @@ public class AvatarView extends View {
 			float scaleY = srcHeight / dstHeight;
 
 			canvas.scale(1/scaleX, 1/scaleY);
-
 			canvas.drawCircle(srcWidth/2, srcHeight/2, Math.min(srcWidth, srcHeight)/2, paint);
-			
 			canvas.restore();
 		}
 		

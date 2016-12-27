@@ -30,7 +30,7 @@ public class Server {
 		return client;
 	}
 	//192.168.253.4  //宿舍-172.27.148.80:8080
-	public static String serverAddress = "http://192.168.253.3:8080/membercenter/";
+	public static String serverAddress = "http://192.168.253.4:8080/membercenter/";
 //	public static String serverAddress = "http://172.27.148.80:8080/membercenter/";
 
 	public static Request.Builder requestBuilderWithApi(String api){

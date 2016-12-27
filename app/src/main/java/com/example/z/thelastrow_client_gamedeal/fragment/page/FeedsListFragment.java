@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
 
 /**
  * Created by Z on 2016/12/21.
@@ -31,7 +33,7 @@ public class FeedsListFragment extends Fragment {
     private ImageView frag_avatar, frag_camera;
     private CompanyEntity[] feeds_fragments;
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -93,6 +95,7 @@ public class FeedsListFragment extends Fragment {
                    R.id.feeds_fragment8};
 
             for (int i = 0; i < 8; i++) {
+
                 feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
                 feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
                     @Override
