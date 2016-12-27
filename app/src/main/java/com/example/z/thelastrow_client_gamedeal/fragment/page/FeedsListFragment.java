@@ -1,5 +1,6 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import com.example.z.thelastrow_client_gamedeal.FeedsSearchActivity;
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity;
 
 /**
@@ -26,7 +28,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEnti
 
 public class FeedsListFragment extends Fragment {
 
-    private View view,frag_buy,frag_sell;
+    private View view, frag_buy, frag_sell;
     private TextView frag_search;
     private ImageView frag_avatar, frag_camera;
     private CompanyEntity[] feeds_fragments;
@@ -83,23 +85,33 @@ public class FeedsListFragment extends Fragment {
             feeds_fragments = new CompanyEntity[8];
 
             int[] feeds_fragmentsid = new int[]{
-                   R.id.feeds_fragment1,
-                   R.id.feeds_fragment2,
-                   R.id.feeds_fragment3,
-                   R.id.feeds_fragment4,
-                   R.id.feeds_fragment5,
-                   R.id.feeds_fragment6,
-                   R.id.feeds_fragment7,
-                   R.id.feeds_fragment8};
+                    R.id.feeds_fragment1,
+                    R.id.feeds_fragment2,
+                    R.id.feeds_fragment3,
+                    R.id.feeds_fragment4,
+                    R.id.feeds_fragment5,
+                    R.id.feeds_fragment6,
+                    R.id.feeds_fragment7,
+                    R.id.feeds_fragment8};
 
             for (int i = 0; i < 8; i++) {
-                feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
-                feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
-                    @Override
-                    public void onCampantEnyityClick() {
-                        goEquipmentNews();
-                    }
-                });
+                if (SDKVersion.isMoreThanAPI19()) {
+                    feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
+                    feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
+                        @Override
+                        public void onCampantEnyityClick() {
+                            goEquipmentNews();
+                        }
+                    });
+                } else {
+                    feeds_fragments[i] = (CompanyEntity) getFragmentManager().findFragmentById(feeds_fragmentsid[i]);
+                    feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
+                        @Override
+                        public void onCampantEnyityClick() {
+                            goEquipmentNews();
+                        }
+                    });
+                }
             }
 
         }
@@ -181,21 +193,21 @@ public class FeedsListFragment extends Fragment {
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_giant_game)};
 
 
-
-
-        for (int i=0 ; i < 8 ;i++) {
+        for (int i = 0; i < 8; i++) {
             if (i % 2 == 0) {
-                feeds_fragments[i].setCompanySloganColor(255,0,153,204);
-            }else{
-                feeds_fragments[i].setCompanySloganColor(255,204,0,0);
+                feeds_fragments[i].setCompanySloganColor(255, 0, 153, 204);
+            } else {
+                feeds_fragments[i].setCompanySloganColor(255, 204, 0, 0);
             }
             feeds_fragments[i].setCompanyNameText(companyname[i]);
             feeds_fragments[i].setCompanySloganText(companynameslogan[i]);
             feeds_fragments[i].setSmalllogDrawnable(bmpSmall[i]);
             feeds_fragments[i].setBiglogDrawnable(bmpBig[i]);
-            feeds_fragments[i].setCompanyNameColor(255,0,0,0);
+            feeds_fragments[i].setCompanyNameColor(255, 0, 0, 0);
         }
 
 
     }
+
+
 }

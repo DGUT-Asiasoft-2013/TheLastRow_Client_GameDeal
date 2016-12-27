@@ -21,12 +21,13 @@ public class MainActivity extends Activity {
     NoteListFragment contentNoteList = new NoteListFragment();
     SearchListFragment contentSearchPage = new SearchListFragment();
     MeListFragment contentMyProfile = new MeListFragment();
-   MainTabBarFragment tabbar;
-    long mexitTime=-2000;
+    MainTabBarFragment tabbar;
+    long mexitTime = -2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main );
+        setContentView(R.layout.activity_main);
         //mexitTime=System.currentTimeMillis();
         tabbar = (MainTabBarFragment) getFragmentManager().findFragmentById(R.id.frag_main_tab);
         tabbar.setOnTabSelectedListener(new MainTabBarFragment.OnTabSelectedListener() {
@@ -41,9 +42,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mexitTime==-2000){
+        if (mexitTime == -2000) {
             tabbar.setSelectedItem(0);
-            mexitTime=-2001;
+            mexitTime = -2001;
         }
 
     }
@@ -52,11 +53,11 @@ public class MainActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            if(System.currentTimeMillis()-mexitTime>2000){
-                Toast.makeText(getApplicationContext(),"再按一次退出",Toast.LENGTH_SHORT).show();
-                mexitTime=System.currentTimeMillis();
-            }else{
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - mexitTime > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
+                mexitTime = System.currentTimeMillis();
+            } else {
                 finish();
             }
             return false;

@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsFragment;
 
 /**
@@ -11,7 +12,8 @@ import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsFragmen
 
 public class SellActivity extends Activity {
 
-    ThingsFragment thingsFragment;
+    private ThingsFragment thingsFragment;
+    private GameServiceFragment gameServiceFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +21,33 @@ public class SellActivity extends Activity {
         setContentView(R.layout.activity_sell);
 
         thingsFragment = new ThingsFragment();
+        thingsFragment.setOnSubmitListener(new ThingsFragment.OnSubmitListener() {
+            @Override
+            public void onSubmit() {
+                submit();
+            }
+        });
 
-        getFragmentManager().beginTransaction().replace(R.id.things_sell_content,thingsFragment).commit();
+        gameServiceFragment = new GameServiceFragment();
+        gameServiceFragment.setOnNextStepListener(new GameServiceFragment.OnNextStepListener() {
+            @Override
+            public void onNextstep() {
+                nextStep();
+            }
+        });
+
+        getFragmentManager().beginTransaction().replace(R.id.things_sell_content,gameServiceFragment).commit();
+    }
+
+    private void submit() {
+        finish();
+    }
+
+    private void nextStep() {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.things_sell_content,thingsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

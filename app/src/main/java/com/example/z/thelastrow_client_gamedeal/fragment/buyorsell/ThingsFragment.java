@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment;
 
@@ -28,11 +30,23 @@ public class ThingsFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_things, null);
 
-            things_name = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_name);
-            things_value = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_value);
+            if (SDKVersion.isMoreThanAPI19()) {
+                things_name = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_name);
+                things_value = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_value);
 
-            things_picture = (PictureThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_picture);
+                things_picture = (PictureThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_picture);
+            } else {
+                things_name = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_name);
+                things_value = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_value);
 
+                things_picture = (PictureThingsFragment) getFragmentManager().findFragmentById(R.id.things_picture);
+            }
+            view.findViewById(R.id.things_submit).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goSubmit();
+                }
+            });
         }
         return view;
     }
@@ -46,5 +60,22 @@ public class ThingsFragment extends Fragment {
 
         things_value.setThingsInputItemname("价格:");
         things_value.setThingsInputItemHint("请输入价格");
+        things_value.setThingsInputItemImeOption(EditorInfo.IME_ACTION_DONE);
+    }
+
+    public interface OnSubmitListener {
+        void onSubmit();
+    }
+
+    private OnSubmitListener onSubmitListener;
+
+    public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
+        this.onSubmitListener = onSubmitListener;
+    }
+
+    private void goSubmit() {
+        if (onSubmitListener != null) {
+            onSubmitListener.onSubmit();
+        }
     }
 }

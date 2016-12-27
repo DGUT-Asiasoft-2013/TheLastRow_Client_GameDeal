@@ -9,6 +9,13 @@
     android:padding="0dp">
 
     <fragment
+        android:id="@+id/things_picture"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout="@layout/fragment_things_picture" />
+
+    <fragment
         android:id="@+id/things_name"
         class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment"
         android:layout_width="match_parent"
@@ -26,11 +33,11 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/things_picture"
-        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment"
+    <Button
+        android:id="@+id/things_submit"
+        android:text="@string/submit"
+        android:textSize="15sp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:layout="@layout/fragment_things_picture" />
+        android:layout_height="40dp" />
 
 </LinearLayout>
