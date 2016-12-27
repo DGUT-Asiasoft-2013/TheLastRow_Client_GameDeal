@@ -52,6 +52,21 @@ public class GameServiceFragment extends Fragment {
         super.onResume();
     }
 
+    public String getGameName() {
+        return gameservice_gamename.getSelectedItem().toString();
+    }
+
+    public String getCompanyName() {
+        return gameservice_companyname.getText().toString();
+    }
+    public String getGameId() {
+        return gameservice_gameid.getText().toString();
+    }
+    public String getGameService() {
+        return gameservice_gameservice.getSelectedItem().toString();
+    }
+
+
     public interface OnNextStepListener {
         void onNextstep();
     }

@@ -63,6 +63,14 @@ public class ThingsFragment extends Fragment {
         things_value.setThingsInputItemImeOption(EditorInfo.IME_ACTION_DONE);
     }
 
+    public String getThingsName() {
+        return  things_name.getThingsInputItemtext();
+    }
+
+    public String getThingValue() {
+        return things_value.getThingsInputItemtext();
+    }
+
     public interface OnSubmitListener {
         void onSubmit();
     }
