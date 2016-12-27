@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <fragment
+        android:id="@+id/things_name"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        tools:layout="@layout/fragment_things_input">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/things_value"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        tools:layout="@layout/fragment_things_input">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/things_picture"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:layout="@layout/fragment_things_picture" />
+
+</LinearLayout>

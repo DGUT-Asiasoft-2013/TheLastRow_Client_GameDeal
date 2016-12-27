@@ -174,14 +174,14 @@ public class FeedsListFragment extends Fragment {
                 BitmapFactory.decodeResource(getResources(), R.drawable.logo_giant)};
 
         Bitmap[] bmpBig = new Bitmap[]{
-                BitmapFactory.decodeResource(getResources(), R.drawable.tencent_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.netease_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.shendagames_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.perfectworld_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.cyou_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.tiancity_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.seasun_game),
-                BitmapFactory.decodeResource(getResources(), R.drawable.giant_game)};
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_tencent_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_netease_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_shendagames_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_perfectworld_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_cyou_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_tiancity_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_seasun_game),
+                BitmapFactory.decodeResource(getResources(), R.drawable.logo_giant_game)};
 
 
 

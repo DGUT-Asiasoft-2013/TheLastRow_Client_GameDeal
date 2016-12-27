@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryDark"
-    android:layout_height="@dimen/frag_action_bar_height"
-    android:orientation="horizontal">
+    android:layout_height="35dp">
 
     <TextView
         android:background="@drawable/tong_yong_background"

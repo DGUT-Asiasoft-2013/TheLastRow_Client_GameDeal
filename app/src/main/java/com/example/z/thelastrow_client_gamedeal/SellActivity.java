@@ -2,7 +2,8 @@ package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+
+import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsFragment;
 
 /**
  * Created by Administrator on 2016/12/23.
@@ -10,9 +11,15 @@ import android.os.PersistableBundle;
 
 public class SellActivity extends Activity {
 
+    ThingsFragment thingsFragment;
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
+
+        thingsFragment = new ThingsFragment();
+
+        getFragmentManager().beginTransaction().replace(R.id.things_sell_content,thingsFragment).commit();
     }
 }

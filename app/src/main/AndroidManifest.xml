@@ -24,7 +24,8 @@
         <activity android:name=".BuyActivity"></activity>
         <activity android:name=".EquipmentNewsActivity"></activity>
         <activity android:name=".SellActivity"></activity>
-        <activity android:name=".FeedsSearchActivity"></activity>
+        <activity android:name=".FeedsSearchActivity"
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity android:name=".ActivityMeListViewJump"/>
     </application>
 

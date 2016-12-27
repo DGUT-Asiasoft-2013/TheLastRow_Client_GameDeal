@@ -20,25 +20,35 @@
             android:background="@android:color/white"
             android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/frag_search_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:entries="@array/frag_search_array">
+            <Spinner
+                android:id="@+id/frag_search_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/frag_search_array">
 
 
-        </Spinner>
+            </Spinner>
 
-    <EditText
-        android:id="@+id/frag_search_text"
-        android:layout_margin="0dp"
-        android:padding="0dp"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:textSize="15dp"
-        android:gravity="center_vertical"
-        android:hint="@string/frag_seach"/>
+            <EditText
+                android:maxLines="1"
+                android:maxLength="10"
+                android:id="@+id/frag_search_text"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/frag_seach"
+                android:inputType="text"
+                android:imeOptions="actionSearch">
+
+                <requestFocus/>
+            </EditText>
 
         </LinearLayout>
 
@@ -57,7 +67,7 @@
 
         <RelativeLayout
             android:layout_marginTop="5dp"
-            android:id="@+id/frag_search_history_text"
+            android:id="@+id/frag_search_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -65,13 +75,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/frag_search_history"
-            android:textSize="20dp"/>
+            android:textSize="12dp"/>
 
             <ImageView
                 android:src="@android:drawable/ic_menu_delete"
-                android:id="@+id/frag_search_history_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/frag_search_history_delete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
@@ -79,7 +89,10 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_below="@id/frag_search_history_text"
+            android:layout_below="@id/frag_search_history"
+            android:id="@+id/frag_search_history_text"
+            android:clickable="true"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

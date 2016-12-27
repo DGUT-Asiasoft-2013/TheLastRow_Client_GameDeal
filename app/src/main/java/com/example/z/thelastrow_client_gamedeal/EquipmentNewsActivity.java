@@ -2,7 +2,6 @@ package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 /**
  * Created by Administrator on 2016/12/23.
@@ -11,8 +10,8 @@ import android.os.PersistableBundle;
 public class EquipmentNewsActivity extends Activity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equipmentnews);
     }
 }
