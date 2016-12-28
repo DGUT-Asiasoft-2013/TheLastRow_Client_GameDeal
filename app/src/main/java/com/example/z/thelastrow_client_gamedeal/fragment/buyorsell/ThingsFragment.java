@@ -47,6 +47,13 @@ public class ThingsFragment extends Fragment {
                     goSubmit();
                 }
             });
+
+            view.findViewById(R.id.things_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getFragmentManager().popBackStack();
+                }
+            });
         }
         return view;
     }

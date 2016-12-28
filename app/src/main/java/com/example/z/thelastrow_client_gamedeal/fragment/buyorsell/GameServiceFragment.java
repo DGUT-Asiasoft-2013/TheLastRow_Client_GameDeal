@@ -42,6 +42,12 @@ public class GameServiceFragment extends Fragment {
                 }
             });
 
+            view.findViewById(R.id.gameservice_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().finish();
+                }
+            });
         }
         return view;
     }
