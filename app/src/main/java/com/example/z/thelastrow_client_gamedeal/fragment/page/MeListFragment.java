@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.MainActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.TestActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.AvatarView;
@@ -43,6 +45,7 @@ public class MeListFragment extends Fragment {
     String[] text1Array;
     String[] text2Array;
 
+    ImageView setting;
     TextView txt_goto_login,text_money,text_recharge;
     ListViewFragment listViewFragment =new ListViewFragment();
     AvatarView avatarView;
@@ -51,6 +54,14 @@ public class MeListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_page_me,null);
+        setting=(ImageView)view.findViewById(R.id.page_me_setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), TestActivity.class);
+                startActivity(intent);
+            }
+        });
         avatarView=(AvatarView)view.findViewById(R.id.page_me_avatar);
         listViewFragment= (ListViewFragment) getChildFragmentManager().findFragmentById(R.id.page_me_frag);
         text_money= (TextView) view.findViewById(R.id.page_me_text_money);
@@ -163,7 +174,7 @@ public class MeListFragment extends Fragment {
 //        }
     }
     private void setListView() {
-        drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_wallet,R.drawable.my_wallet,R.drawable.my_wallet};
+        drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_collection,R.drawable.my_wallet,R.drawable.my_message};
         text1Array = new String[]{"我的订单","我的收藏", "消费记录","我的消息"};
         text2Array = new String[]{">", ">",">",">"};
         listViewFragment.setArrays(drawableArray, text1Array, text2Array,user);
