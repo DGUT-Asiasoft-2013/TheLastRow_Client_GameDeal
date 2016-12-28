@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="48dp"
         android:id="@+id/main_contain"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,14 +16,14 @@
         android:id="@+id/frag_main_tab"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="2dp"
         class="com.example.z.thelastrow_client_gamedeal.fragment.MainTabBarFragment"
         tool:layout="@layout/fragment_main_tab_bar"
         />
     <View
         android:layout_gravity="bottom"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="46dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#33000000"/>

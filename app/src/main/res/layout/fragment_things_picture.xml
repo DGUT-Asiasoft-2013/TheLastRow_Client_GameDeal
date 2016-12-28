@@ -18,10 +18,12 @@
     <ImageView
         android:id="@+id/thing_input_picture"
         android:paddingTop="2dp"
+        android:scaleType="fitCenter"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <TextView
+        android:id="@+id/thing_input_picturetips"
         android:textColor="@android:color/black"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

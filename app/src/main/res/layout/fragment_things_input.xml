@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@android:color/transparent"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
-    android:paddingRight="0dp"
-    android:paddingLeft="0dp"
     android:layout_margin="1dp"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:paddingBottom="2dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="2dp"
     android:weightSum="5">
 
     <LinearLayout
@@ -17,30 +17,29 @@
         android:background="@android:color/white">
 
 
-    <TextView
-        android:id="@+id/things_input_itemname"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:text="@string/entity"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textColor="@android:color/black"
-        android:layout_marginRight="5dp"
-        android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/things_input_itemname"
+            style="@style/textSellOrBuy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="@string/entity"
+            android:textColor="@android:color/black" />
 
-    <EditText
-        android:id="@+id/things_input_itemtext"
-        android:layout_width="0dp"
-        android:inputType="text"
-        android:maxLines="1"
-        android:maxLength="15"
-        android:background="@null"
-        android:gravity="center_vertical"
-        android:hint="@string/entity"
-        android:textSize="12sp"
-        android:imeOptions="actionNext"
-        android:layout_height="match_parent"
-        android:layout_weight="4"/>
+        <EditText
+            android:id="@+id/things_input_itemtext"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/entity"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>

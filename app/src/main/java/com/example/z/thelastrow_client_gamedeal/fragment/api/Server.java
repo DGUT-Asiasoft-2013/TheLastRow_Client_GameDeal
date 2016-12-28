@@ -15,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Server {
+<<<<<<< HEAD
 	static OkHttpClient client;
 	 static User user;
 	static {
@@ -32,27 +33,49 @@ public class Server {
 	//192.168.253.4  //宿舍-172.27.148.80:8080
 //	public static String serverAddress = "http://192.168.253.3:8080/membercenter/";
 	public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
+=======
+    static OkHttpClient client;
+    static User user;
 
-	public static Request.Builder requestBuilderWithApi(String api){
-		return new Request.Builder()
-		.url(serverAddress+"api/"+api);
-	}
-	public static User getUser(){
-		Request request=requestBuilderWithApi("me")
-				.get()
-				.build();
-		getSharedClient().newCall(request).enqueue(new Callback() {
-			@Override
-			public void onFailure(Call call, IOException e) {
+    static {
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 
-			}
+        client = new OkHttpClient.Builder()
+                .cookieJar(new JavaNetCookieJar(cookieManager))
+                .build();
+    }
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				user=new ObjectMapper().readValue(response.body().string(),User.class);
+    public static OkHttpClient getSharedClient() {
+        return client;
+    }
 
-			}
-		});
-		return user;
-	}
+    //192.168.253.4  //宿舍-172.27.148.80:8080
+    public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
+//	public static String serverAddress = "http://172.27.148.80:8080/membercenter/";
+>>>>>>> b3d7fe464b8a84778c4ed1cb0712e183044dd97a
+
+    public static Request.Builder requestBuilderWithApi(String api) {
+        return new Request.Builder()
+                .url(serverAddress + "api/" + api);
+    }
+
+    public static User getUser() {
+        Request request = requestBuilderWithApi("me")
+                .get()
+                .build();
+        getSharedClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                user = new ObjectMapper().readValue(response.body().string(), User.class);
+
+            }
+        });
+        return user;
+    }
 }

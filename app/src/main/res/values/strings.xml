@@ -6,6 +6,7 @@
     <string name="page_me_text_goto_login">登录/注册</string>
     <string name="frag_seach">请输入搜索内容</string>
     <string name="frag_search_cancel">取消</string>
+    <string name="next_step">下一步</string>
     <string name="frag_search_history">历史搜索：</string>
     <string name="frag_buy">收购</string>
     <string name="frag_sell">出售</string>
@@ -31,4 +32,10 @@
     <string name="main_bar_buycar">购物车</string>
     <string name="main_bar_me">我的</string>
     <string name="choosethings">选择物品照片</string>
+    <string name="gamename">游戏名：</string>
+    <string name="companyname">运营公司：</string>
+    <string name="gameid">游戏帐号：</string>
+    <string name="gameid_hint">请输入游戏帐号</string>
+    <string name="gameservice">游戏分区：</string>
+    <string name="submit">提交</string>
 </resources>

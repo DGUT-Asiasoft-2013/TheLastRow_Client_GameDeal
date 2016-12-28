@@ -43,6 +43,10 @@ public class InputThingsFragment extends Fragment {
         things_input_itemtext.setHint(s);
     }
 
+    public void setThingsInputItemImeOption(int itemImeOption) {
+        things_input_itemtext.setImeOptions(itemImeOption);
+    }
+
     public String getThingsInputItemtext() {
         return things_input_itemtext.getText().toString();
     }
