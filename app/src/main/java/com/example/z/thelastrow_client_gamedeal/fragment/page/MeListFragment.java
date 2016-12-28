@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.MainActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
@@ -58,7 +59,7 @@ public class MeListFragment extends Fragment {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), TestActivity.class);
+                Intent intent=new Intent(getActivity(), GoodActivity.class);
                 startActivity(intent);
             }
         });

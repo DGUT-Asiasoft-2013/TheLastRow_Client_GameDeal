@@ -97,7 +97,6 @@ public class FeedsListFragment extends Fragment {
                     R.id.feeds_fragment8};
 
             for (int i = 0; i < 8; i++) {
-<<<<<<< HEAD
 
                 feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
                 feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
@@ -106,7 +105,6 @@ public class FeedsListFragment extends Fragment {
                         goEquipmentNews();
                     }
                 });
-=======
                 if (SDKVersion.isMoreThanAPI19()) {
                     feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
                     feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
@@ -124,7 +122,6 @@ public class FeedsListFragment extends Fragment {
                         }
                     });
                 }
->>>>>>> b3d7fe464b8a84778c4ed1cb0712e183044dd97a
             }
 
         }
