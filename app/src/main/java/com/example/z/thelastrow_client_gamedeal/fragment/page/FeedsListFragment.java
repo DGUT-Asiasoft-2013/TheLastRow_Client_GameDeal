@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,11 @@ import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity;
-import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Z on 2016/12/21.
@@ -86,7 +90,7 @@ public class FeedsListFragment extends Fragment {
 
             feeds_fragments = new CompanyEntity[8];
 
-            int[] feeds_fragmentsid = new int[]{
+            final int[] feeds_fragmentsid = new int[]{
                     R.id.feeds_fragment1,
                     R.id.feeds_fragment2,
                     R.id.feeds_fragment3,
@@ -96,21 +100,25 @@ public class FeedsListFragment extends Fragment {
                     R.id.feeds_fragment7,
                     R.id.feeds_fragment8};
 
-            for (int i = 0; i < 8; i++) {
+            final int[] feeds_smalllog = new int[]{
+                    R.drawable.logo_tencent,
+                    R.drawable.logo_netease,
+                    R.drawable.logo_shendagames,
+                    R.drawable.logo_perfectworld,
+                    R.drawable.logo_cyou,
+                    R.drawable.logo_tiancity,
+                    R.drawable.logo_seasun,
+                    R.drawable.logo_giant
+            };
 
-                feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
-                feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
-                    @Override
-                    public void onCampantEnyityClick() {
-                        goEquipmentNews();
-                    }
-                });
+            for (int i = 0; i < 8; i++) {
+                final int finalI = i;
                 if (SDKVersion.isMoreThanAPI19()) {
                     feeds_fragments[i] = (CompanyEntity) getChildFragmentManager().findFragmentById(feeds_fragmentsid[i]);
                     feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
                         @Override
                         public void onCampantEnyityClick() {
-                            goEquipmentNews();
+                            goEquipmentNews(feeds_fragments[finalI],feeds_smalllog[finalI]);
                         }
                     });
                 } else {
@@ -118,7 +126,7 @@ public class FeedsListFragment extends Fragment {
                     feeds_fragments[i].setOnCompanyEntityListener(new CompanyEntity.OnCompanyEntityListener() {
                         @Override
                         public void onCampantEnyityClick() {
-                            goEquipmentNews();
+                            goEquipmentNews(feeds_fragments[finalI],feeds_smalllog[finalI]);
                         }
                     });
                 }
@@ -129,8 +137,14 @@ public class FeedsListFragment extends Fragment {
         return view;
     }
 
-    private void goEquipmentNews() {
-        startActivity(new Intent(getActivity(), EquipmentNewsActivity.class));
+    private void goEquipmentNews(CompanyEntity companyEntity ,int logoID) {
+//        String logoPath = saveLogo(companyEntity.getSmalllog(), companyEntity.getCompanyName());
+
+        Intent intent = new Intent(getActivity(), EquipmentNewsActivity.class);
+        intent.putExtra("companyname", companyEntity.getCompanyName());
+
+        intent.putExtra("logo", logoID);
+        startActivity(intent);
     }
 
     private void goSell() {
@@ -217,6 +231,34 @@ public class FeedsListFragment extends Fragment {
         }
 
 
+    }
+
+
+    private String saveLogo(Bitmap bmp, String companyname) {
+        File companyLogo = new File(Environment.getExternalStorageDirectory(), "GameDeal");
+        if (!companyLogo.exists()) {
+            companyLogo.mkdir();
+        }
+        String fileName = companyname + ".png";
+        File file = new File(companyLogo, fileName);
+        if (file.exists()) {
+            Log.d("Logo", "已存在本地文件中");
+            return fileName;
+        } else {
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                Log.d("Logo", "文件已保存");
+                //清空流
+                fos.flush();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return fileName;
     }
 
 

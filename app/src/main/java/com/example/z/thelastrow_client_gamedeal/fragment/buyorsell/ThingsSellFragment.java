@@ -18,7 +18,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThin
  * Created by Administrator on 2016/12/26.
  */
 
-public class ThingsFragment extends Fragment {
+public class ThingsSellFragment extends Fragment {
 
     private View view;
     private InputThingsFragment things_name,things_value;
@@ -30,37 +30,37 @@ public class ThingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_things, null);
+            view = inflater.inflate(R.layout.fragment_sell_things, null);
 
             if (SDKVersion.isMoreThanAPI19()) {
-                things_name = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_name);
-                things_value = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_value);
+                things_name = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_sell_name);
+                things_value = (InputThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_sell_value);
 
-                things_picture = (PictureThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_picture);
+                things_picture = (PictureThingsFragment) getChildFragmentManager().findFragmentById(R.id.things_sell_picture);
             } else {
-                things_name = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_name);
-                things_value = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_value);
+                things_name = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_sell_name);
+                things_value = (InputThingsFragment) getFragmentManager().findFragmentById(R.id.things_sell_value);
 
-                things_picture = (PictureThingsFragment) getFragmentManager().findFragmentById(R.id.things_picture);
+                things_picture = (PictureThingsFragment) getFragmentManager().findFragmentById(R.id.things_sell_picture);
             }
 
-            things_number = (EditText) view.findViewById(R.id.things_number);
+            things_number = (EditText) view.findViewById(R.id.things_sell_number);
 
-            view.findViewById(R.id.things_submit).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.things_sell_submit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     goSubmit();
                 }
             });
 
-            view.findViewById(R.id.things_back).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.things_sell_back).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getFragmentManager().popBackStack();
                 }
             });
 
-            view.findViewById(R.id.things_plus).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.things_sell_plus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int number = Integer.parseInt(things_number.getText().toString());
@@ -69,7 +69,7 @@ public class ThingsFragment extends Fragment {
                 }
             });
 
-            view.findViewById(R.id.things_minus).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.things_sell_minus).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int number = Integer.parseInt(things_number.getText().toString());
@@ -114,19 +114,19 @@ public class ThingsFragment extends Fragment {
         return things_picture.getData();
     }
 
-    public interface OnSubmitListener {
+    public interface OnSellSubmitListener {
         void onSubmit();
     }
 
-    private OnSubmitListener onSubmitListener;
+    private OnSellSubmitListener onSellSubmitListener;
 
-    public void setOnSubmitListener(OnSubmitListener onSubmitListener) {
-        this.onSubmitListener = onSubmitListener;
+    public void setOnSubmitListener(OnSellSubmitListener onSellSubmitListener) {
+        this.onSellSubmitListener = onSellSubmitListener;
     }
 
     private void goSubmit() {
-        if (onSubmitListener != null) {
-            onSubmitListener.onSubmit();
+        if (onSellSubmitListener != null) {
+            onSellSubmitListener.onSubmit();
         }
     }
 }

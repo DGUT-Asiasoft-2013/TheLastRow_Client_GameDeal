@@ -10,7 +10,7 @@
     <string name="frag_search_history">历史搜索：</string>
     <string name="frag_buy">求购</string>
     <string name="frag_sell">出售</string>
-    <string name="frag_tencent">腾讯</string>
+    <string name="frag_tencent">腾讯游戏</string>
     <string name="frag_tencent_slogan">用钱创造快乐！</string>
     <string name="frag_netease">网易游戏</string>
     <string name="frag_netease_slogan">游戏热爱者！</string>
@@ -49,4 +49,6 @@
     <string name="good_activity_game_area">游戏大区</string>
     <string name="good_activity_game_name">游戏名字</string>
     <string name="good_activity_price">单价</string>
+    <string name="notes_title">上新</string>
+    <string name="gamemoney">充值游戏币</string>
 </resources>

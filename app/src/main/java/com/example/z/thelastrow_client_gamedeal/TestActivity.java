@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureInputCellFragment;
@@ -62,7 +61,7 @@ public class TestActivity extends Activity {
                                             pictureInputCellFragment.getPngData()));
         }
 
-        Request request = Server.requestBuilderWithApi("good")
+        Request request = Server.requestBuilderWithApi("Good")
                 .method("post", null)
                 .post(requestBodyBuilder.build())
                 .build();

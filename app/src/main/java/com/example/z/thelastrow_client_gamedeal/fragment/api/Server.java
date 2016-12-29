@@ -1,7 +1,5 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.api;
 
-import android.content.Intent;
-
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,10 +26,7 @@ public class Server {
 				.cookieJar(new JavaNetCookieJar(cookieManager))
 				.build();
 	}
-	
-	public static OkHttpClient getSharedClient(){
-		return client;
-	}
+
 
     static {
         CookieManager cookieManager = new CookieManager();
@@ -42,6 +37,9 @@ public class Server {
                 .build();
     }
 
+    public static OkHttpClient getSharedClient() {
+        return client;
+    }
 
     //192.168.253.4  //宿舍-172.27.148.80:8080
     public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
