@@ -11,13 +11,13 @@ public class User implements Serializable {
 	String name;
 	String email;
 	String avatar;
-	String money;
+	int money;
 
-	public String getMoney() {
+	public int getMoney() {
 		return money;
 	}
 
-	public void setMoney(String money) {
+	public void setMoney(int money) {
 		this.money = money;
 	}
 

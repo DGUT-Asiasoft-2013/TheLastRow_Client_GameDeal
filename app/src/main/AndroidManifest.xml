@@ -29,6 +29,7 @@
             android:windowSoftInputMode="stateVisible"></activity>
         <activity android:name=".ActivityMeListViewJump"/>
         <activity android:name=".TestActivity"/>
+        <activity android:name=".GoodActivity"/>
     </application>
 
 </manifest>

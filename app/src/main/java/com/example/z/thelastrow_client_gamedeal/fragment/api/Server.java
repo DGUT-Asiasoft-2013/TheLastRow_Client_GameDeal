@@ -1,5 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.api;
 
+import android.content.Intent;
+
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Server {
-<<<<<<< HEAD
+
 	static OkHttpClient client;
 	 static User user;
 	static {
@@ -30,12 +32,6 @@ public class Server {
 	public static OkHttpClient getSharedClient(){
 		return client;
 	}
-	//192.168.253.4  //宿舍-172.27.148.80:8080
-//	public static String serverAddress = "http://192.168.253.3:8080/membercenter/";
-	public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
-=======
-    static OkHttpClient client;
-    static User user;
 
     static {
         CookieManager cookieManager = new CookieManager();
@@ -46,14 +42,11 @@ public class Server {
                 .build();
     }
 
-    public static OkHttpClient getSharedClient() {
-        return client;
-    }
 
     //192.168.253.4  //宿舍-172.27.148.80:8080
     public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
 //	public static String serverAddress = "http://172.27.148.80:8080/membercenter/";
->>>>>>> b3d7fe464b8a84778c4ed1cb0712e183044dd97a
+
 
     public static Request.Builder requestBuilderWithApi(String api) {
         return new Request.Builder()
@@ -78,4 +71,5 @@ public class Server {
         });
         return user;
     }
+
 }
