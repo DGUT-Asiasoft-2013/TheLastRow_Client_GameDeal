@@ -2,6 +2,7 @@ package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
@@ -9,12 +10,15 @@ import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFr
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsFragment;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -54,12 +58,31 @@ public class SellActivity extends Activity {
         OkHttpClient client = Server.getSharedClient();
 
         //待编辑
-        MultipartBody multipartBody = new MultipartBody.Builder()
+        MultipartBody.Builder multipartBody = new MultipartBody.Builder()
                 .addFormDataPart("game_equip", thingsFragment.getThingsName())
                 .addFormDataPart("price", thingsFragment.getThingValue())
-                .build();
+                .addFormDataPart("game_name",gameServiceFragment.getGameName())
+                .addFormDataPart("game_company",gameServiceFragment.getCompanyName())
+                .addFormDataPart("game_account",gameServiceFragment.getGameId())
+                .addFormDataPart("game_area",gameServiceFragment.getGameService());
 
-        Request request = Server.requestBuilderWithApi("/good").post(multipartBody).build();
+        if (thingsFragment.getThingPicture() != null) {
+            Calendar calendar = Calendar.getInstance();
+            String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
+            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsFragment.getThingPicture()));
+        }
+
+
+        Request request = Server.requestBuilderWithApi("/good").post(multipartBody.build()).build();
+
+        final ProgressDialog progressDialog = new ProgressDialog(SellActivity.this);
+        progressDialog.setMessage("请稍等");
+        //点屏幕和物理返回键退出进度对话框
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        //物理返回键可以退出进度框，点屏幕无效
+        progressDialog.setCanceledOnTouchOutside(false);
+
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -67,6 +90,7 @@ public class SellActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
                         SellActivity.this.showAlertDialog(e.toString());
                     }
                 });
@@ -80,6 +104,7 @@ public class SellActivity extends Activity {
                     @Override
                     public void run() {
 
+                        progressDialog.dismiss();
                         try {
                             SellActivity.this.showAlertDialog(responseString);
                         } catch (Exception e) {

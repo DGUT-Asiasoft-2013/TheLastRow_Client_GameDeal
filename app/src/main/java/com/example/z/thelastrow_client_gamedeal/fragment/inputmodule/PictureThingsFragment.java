@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by Administrator on 2016/12/26.
  */
@@ -34,6 +36,8 @@ public class PictureThingsFragment extends Fragment {
     private ImageView image;
     private TextView tips;
     private Uri imgUri;
+
+    private byte[] data;
 
     @Nullable
     @Override
@@ -159,6 +163,17 @@ public class PictureThingsFragment extends Fragment {
         options.inSampleSize = scaleFactor;
 
         Bitmap bmp = BitmapFactory.decodeFile(imgUri.getPath(),options);
+        saveBitmap(BitmapFactory.decodeFile(imgUri.getPath()));
         image.setImageBitmap(bmp);
+    }
+
+    private void saveBitmap(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        data = baos.toByteArray();
+    }
+
+    public byte[] getData() {
+        return data;
     }
 }

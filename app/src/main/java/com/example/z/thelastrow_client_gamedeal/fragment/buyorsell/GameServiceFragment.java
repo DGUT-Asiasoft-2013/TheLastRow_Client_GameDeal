@@ -18,10 +18,10 @@ import com.example.z.thelastrow_client_gamedeal.R;
 
 public class GameServiceFragment extends Fragment {
 
-    View view;
-    Spinner gameservice_gamename,gameservice_gameservice;
-    TextView gameservice_companyname;
-    EditText gameservice_gameid;
+    private View view;
+    private Spinner gameservice_gamename,gameservice_gameservice;
+    private TextView gameservice_companyname;
+    private EditText gameservice_gameid;
 
     @Nullable
     @Override

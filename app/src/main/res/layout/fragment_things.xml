@@ -10,14 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="30dp">
 
         <ImageView
             android:id="@+id/things_back"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@drawable/action_bar_back" />
 
     </LinearLayout>
@@ -28,6 +28,48 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         tools:layout="@layout/fragment_things_picture" />
+
+    <LinearLayout
+        android:background="@android:color/white"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageButton
+            android:id="@+id/things_minus"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:background="@drawable/minus_48"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:digits="0123456789"
+            android:id="@+id/things_number"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/things_number"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/things_plus"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:background="@drawable/plus_48"/>
+
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/things_name"

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
@@ -19,9 +20,10 @@ import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThin
 
 public class ThingsFragment extends Fragment {
 
-    View view;
-    InputThingsFragment things_name,things_value;
-    PictureThingsFragment things_picture;
+    private View view;
+    private InputThingsFragment things_name,things_value;
+    private PictureThingsFragment things_picture;
+    private EditText things_number;
 
     @Nullable
     @Override
@@ -41,6 +43,9 @@ public class ThingsFragment extends Fragment {
 
                 things_picture = (PictureThingsFragment) getFragmentManager().findFragmentById(R.id.things_picture);
             }
+
+            things_number = (EditText) view.findViewById(R.id.things_number);
+
             view.findViewById(R.id.things_submit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,6 +59,28 @@ public class ThingsFragment extends Fragment {
                     getFragmentManager().popBackStack();
                 }
             });
+
+            view.findViewById(R.id.things_plus).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int number = Integer.parseInt(things_number.getText().toString());
+                    number++;
+                    things_number.setText("" + number);
+                }
+            });
+
+            view.findViewById(R.id.things_minus).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int number = Integer.parseInt(things_number.getText().toString());
+                    if (number == 0) {
+                        return;
+                    } else {
+                        number--;
+                        things_number.setText("" + number);
+                    }
+                }
+            });
         }
         return view;
     }
@@ -64,6 +91,7 @@ public class ThingsFragment extends Fragment {
 
         things_name.setThingsInputItemname("装备名称：");
         things_name.setThingsInputItemHint("请输入装备名");
+        things_name.setThingsInputItemtypeText();
 
         things_value.setThingsInputItemname("价格:");
         things_value.setThingsInputItemHint("请输入价格");
@@ -76,6 +104,14 @@ public class ThingsFragment extends Fragment {
 
     public String getThingValue() {
         return things_value.getThingsInputItemtext();
+    }
+
+    public String getThingNumber() {
+        return things_number.getText().toString();
+    }
+
+    public byte[] getThingPicture() {
+        return things_picture.getData();
     }
 
     public interface OnSubmitListener {
