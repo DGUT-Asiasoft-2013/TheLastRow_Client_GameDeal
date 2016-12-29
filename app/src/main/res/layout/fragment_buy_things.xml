@@ -13,7 +13,7 @@
         android:layout_height="30dp">
 
         <ImageView
-            android:id="@+id/things_back"
+            android:id="@+id/things_buy_back"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
             android:layout_width="25dp"
@@ -21,13 +21,6 @@
             android:background="@drawable/action_bar_back" />
 
     </LinearLayout>
-
-    <fragment
-        android:id="@+id/things_picture"
-        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:layout="@layout/fragment_things_picture" />
 
     <LinearLayout
         android:background="@android:color/white"
@@ -43,7 +36,7 @@
         android:layout_height="30dp">
 
         <ImageButton
-            android:id="@+id/things_minus"
+            android:id="@+id/things_buy_minus"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:background="@drawable/minus_48"/>
@@ -51,7 +44,7 @@
         <EditText
             android:layout_width="100dp"
             android:digits="0123456789"
-            android:id="@+id/things_number"
+            android:id="@+id/things_buy_number"
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center"
@@ -63,7 +56,7 @@
             android:textSize="15sp" />
 
         <ImageButton
-            android:id="@+id/things_plus"
+            android:id="@+id/things_buy_plus"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:background="@drawable/plus_48"/>
@@ -72,7 +65,7 @@
     </LinearLayout>
 
     <fragment
-        android:id="@+id/things_name"
+        android:id="@+id/things_buy_name"
         class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -81,7 +74,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/things_value"
+        android:id="@+id/things_buy_value"
         class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -89,8 +82,56 @@
 
     </fragment>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/things_buy_ishavepicture"
+        android:text="我有图"
+        android:textSize="15sp"
+        android:checked="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <GridLayout
+            android:id="@+id/things_buy_gridpicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:rowCount="3"
+            android:columnCount="3">
+
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+            <ImageView
+                android:background="@mipmap/ic_launcher"/>
+
+        </GridLayout>
+
+
+
+    </LinearLayout>
+
     <Button
-        android:id="@+id/things_submit"
+        android:id="@+id/things_buy_submit"
         android:text="@string/submit"
         android:textSize="15sp"
         android:layout_width="match_parent"

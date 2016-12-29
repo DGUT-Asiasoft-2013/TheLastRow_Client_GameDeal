@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.good;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,7 +37,7 @@ public class NoteListFragment extends Fragment {
     private TextView notes_sell,notes_buy;
     private ListView notes_list;
 
-    private List<good> equipList;
+    private List<Good> equipList;
     private int page;
 
     @Nullable
@@ -83,8 +83,8 @@ public class NoteListFragment extends Fragment {
 
                 try {
 
-                    final Page<good> data = new ObjectMapper()
-                            .readValue(response.body().string(), new TypeReference<Page<good>>() {});
+                    final Page<Good> data = new ObjectMapper()
+                            .readValue(response.body().string(), new TypeReference<Page<Good>>() {});
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -134,7 +134,7 @@ public class NoteListFragment extends Fragment {
             TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.notes_listitem_thingsvalue);
             ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.notes_listitem_thingspicture);
 
-            good equip = equipList.get(position);
+            Good equip = equipList.get(position);
 
             notes_listitem_gamename.setText(equip.getGame_name());
             notes_listitem_companyname.setText(equip.getGame_company());

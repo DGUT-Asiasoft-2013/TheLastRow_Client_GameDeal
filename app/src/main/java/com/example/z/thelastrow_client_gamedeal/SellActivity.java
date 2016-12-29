@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFragment;
-import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsSellFragment;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -27,7 +27,7 @@ import okhttp3.Response;
 
 public class SellActivity extends Activity {
 
-    private ThingsFragment thingsFragment;
+    private ThingsSellFragment thingsSellFragment;
     private GameServiceFragment gameServiceFragment;
 
     @Override
@@ -35,8 +35,8 @@ public class SellActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
 
-        thingsFragment = new ThingsFragment();
-        thingsFragment.setOnSubmitListener(new ThingsFragment.OnSubmitListener() {
+        thingsSellFragment = new ThingsSellFragment();
+        thingsSellFragment.setOnSubmitListener(new ThingsSellFragment.OnSellSubmitListener() {
             @Override
             public void onSubmit() {
                 submit();
@@ -59,21 +59,21 @@ public class SellActivity extends Activity {
 
         //待编辑
         MultipartBody.Builder multipartBody = new MultipartBody.Builder()
-                .addFormDataPart("game_equip", thingsFragment.getThingsName())
-                .addFormDataPart("price", thingsFragment.getThingValue())
+                .addFormDataPart("game_equip", thingsSellFragment.getThingsName())
+                .addFormDataPart("price", thingsSellFragment.getThingValue())
                 .addFormDataPart("game_name",gameServiceFragment.getGameName())
                 .addFormDataPart("game_company",gameServiceFragment.getCompanyName())
                 .addFormDataPart("game_account",gameServiceFragment.getGameId())
                 .addFormDataPart("game_area",gameServiceFragment.getGameService());
 
-        if (thingsFragment.getThingPicture() != null) {
+        if (thingsSellFragment.getThingPicture() != null) {
             Calendar calendar = Calendar.getInstance();
             String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
-            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsFragment.getThingPicture()));
+            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsSellFragment.getThingPicture()));
         }
 
 
-        Request request = Server.requestBuilderWithApi("/good").post(multipartBody.build()).build();
+        Request request = Server.requestBuilderWithApi("/Good").post(multipartBody.build()).build();
 
         final ProgressDialog progressDialog = new ProgressDialog(SellActivity.this);
         progressDialog.setMessage("请稍等");
@@ -121,7 +121,7 @@ public class SellActivity extends Activity {
     private void nextStep() {
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.things_sell_content, thingsFragment)
+                .replace(R.id.things_sell_content, thingsSellFragment)
                 .addToBackStack(null)
                 .commit();
     }
