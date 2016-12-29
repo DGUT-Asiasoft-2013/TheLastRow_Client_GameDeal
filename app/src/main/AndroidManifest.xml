@@ -28,6 +28,7 @@
         <activity android:name=".FeedsSearchActivity"
             android:windowSoftInputMode="stateVisible"></activity>
         <activity android:name=".ActivityMeListViewJump"/>
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>
