@@ -22,7 +22,7 @@ public class CompanyEntity extends Fragment {
 
     private TextView companyname, companyslogan;
     private ImageView smalllog, biglog;
-    View view;
+    private View view;
 
     @Nullable
     @Override

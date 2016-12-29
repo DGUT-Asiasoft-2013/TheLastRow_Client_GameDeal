@@ -8,7 +8,7 @@
     <string name="frag_search_cancel">取消</string>
     <string name="next_step">下一步</string>
     <string name="frag_search_history">历史搜索：</string>
-    <string name="frag_buy">收购</string>
+    <string name="frag_buy">求购</string>
     <string name="frag_sell">出售</string>
     <string name="frag_tencent">腾讯</string>
     <string name="frag_tencent_slogan">用钱创造快乐！</string>
@@ -38,4 +38,11 @@
     <string name="gameid_hint">请输入游戏帐号</string>
     <string name="gameservice">游戏分区：</string>
     <string name="submit">提交</string>
+    <string name="notes_listitem_gamename">地下城与勇士</string>
+    <string name="notes_listitem_gameservice">广东一区</string>
+    <string name="notes_listitem_tingsname">破旧的武士剑+50</string>
+    <string name="notes_listitem_thingsvalue">5000RMB</string>
+    <string name="frag_sort">综合-</string>
+    <string name="things_number">1</string>
+    <string name="RMB">￥</string>
 </resources>

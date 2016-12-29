@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal.fragment.inputmodule;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,10 @@ public class InputThingsFragment extends Fragment {
 
     public void setThingsInputItemImeOption(int itemImeOption) {
         things_input_itemtext.setImeOptions(itemImeOption);
+    }
+
+    public void setThingsInputItemtypeText() {
+        things_input_itemtext.setInputType(InputType.TYPE_CLASS_TEXT);
     }
 
     public String getThingsInputItemtext() {

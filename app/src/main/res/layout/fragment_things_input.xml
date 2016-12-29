@@ -36,10 +36,11 @@
             android:gravity="center_vertical"
             android:hint="@string/entity"
             android:imeOptions="actionNext"
-            android:inputType="text"
+            android:inputType="number"
+            android:digits="0123456789"
             android:maxLength="15"
             android:maxLines="1"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </LinearLayout>
