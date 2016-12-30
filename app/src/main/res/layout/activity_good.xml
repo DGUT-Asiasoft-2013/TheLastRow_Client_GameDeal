@@ -32,7 +32,7 @@
             <ImageView
                 android:id="@+id/good_img"
                 android:layout_below="@id/good_text_title"
-                android:layout_width="@dimen/good_activity_img_height"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/good_activity_img_height" />
             <LinearLayout
                 android:id="@+id/good_line1"
@@ -63,12 +63,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/good_activity_item_height">
+
                     <TextView
                         android:gravity="center_vertical"
                         android:textSize="@dimen/good_activity_text_size"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/good_activity_game_name"/>
+                        android:text="@string/good_activity_game_name"
+                        android:id="@+id/textView" />
+
                     <TextView
                         android:id="@+id/good_text_game_name"
                         android:gravity="center_vertical|right"

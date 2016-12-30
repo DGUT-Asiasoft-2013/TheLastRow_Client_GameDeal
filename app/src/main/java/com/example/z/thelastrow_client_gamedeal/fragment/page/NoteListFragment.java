@@ -2,16 +2,19 @@ package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
@@ -52,6 +55,12 @@ public class NoteListFragment extends Fragment {
             notes_list = (ListView) view.findViewById(R.id.notes_list);
 
             notes_list.setAdapter(baseAdapter);
+            notes_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    listClick(position);
+                }
+            });
         }
         return view;
     }
@@ -104,6 +113,12 @@ public class NoteListFragment extends Fragment {
 
     }
 
+    public void   listClick(int position){
+        Good good=equipList.get(position);
+        Intent intent=new Intent(getActivity(), GoodActivity.class);
+        intent.putExtra("good",good);
+        startActivity(intent);
+    }
 
     BaseAdapter baseAdapter = new BaseAdapter() {
         @Override

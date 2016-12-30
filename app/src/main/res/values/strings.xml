@@ -45,10 +45,10 @@
     <string name="frag_sort">综合-</string>
     <string name="things_number">1</string>
     <string name="RMB">￥</string>
-    <string name="good_activity_price">价格</string>
-    <string name="good_activity_game_name">游戏名</string>
-    <string name="good_activity_game_area">游戏分区</string>
     <string name="good_activity_game_repertory">库存</string>
+    <string name="good_activity_game_area">游戏大区</string>
+    <string name="good_activity_game_name">游戏名字</string>
+    <string name="good_activity_price">单价</string>
     <string name="notes_title">上新</string>
     <string name="gamemoney">充值游戏币</string>
 </resources>

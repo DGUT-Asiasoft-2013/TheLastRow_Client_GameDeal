@@ -2,12 +2,15 @@ package com.example.z.thelastrow_client_gamedeal.fragment.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/12/28.
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Good {
+public class Good implements Serializable{
+    Integer id;
     User author;
     String game_equip;
     int price;
@@ -17,6 +20,14 @@ public class Good {
     String game_company;
     String game_account;
     String game_area;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public User getAuthor() {
         return author;
