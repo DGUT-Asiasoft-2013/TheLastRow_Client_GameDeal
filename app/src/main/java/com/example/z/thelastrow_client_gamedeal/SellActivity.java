@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
+import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameIDFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsSellFragment;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -28,12 +29,32 @@ import okhttp3.Response;
 public class SellActivity extends Activity {
 
     private ThingsSellFragment thingsSellFragment;
+    private GameIDFragment gameIDFragment;
+    private GameFragment gameFragment;
     private GameServiceFragment gameServiceFragment;
+    private String gamenamestring,gameservicenamestring,gameidstring,thingsname,thingsvalue,thingsnumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
+
+
+        gameServiceFragment = new GameServiceFragment();
+        gameServiceFragment.setOnGameServiceItemClick(new GameServiceFragment.OnGameServiceItemClick() {
+            @Override
+            public void onItemClick(View view) {
+                ongameIDClick(view);
+            }
+        });
+
+        gameFragment = new GameFragment();
+        gameFragment.setOnGameItemClick(new GameFragment.OnGameItemClick() {
+            @Override
+            public void onItemClick(View view) {
+                ongameserviceClick(view);
+            }
+        });
 
         thingsSellFragment = new ThingsSellFragment();
         thingsSellFragment.setOnSubmitListener(new ThingsSellFragment.OnSellSubmitListener() {
@@ -43,37 +64,77 @@ public class SellActivity extends Activity {
             }
         });
 
-        gameServiceFragment = new GameServiceFragment();
-        gameServiceFragment.setOnNextStepListener(new GameServiceFragment.OnNextStepListener() {
+        gameIDFragment = new GameIDFragment();
+        gameIDFragment.setOnNextStepListener(new GameIDFragment.OnNextStepListener() {
             @Override
             public void onNextstep() {
                 nextStep();
             }
         });
 
-        getFragmentManager().beginTransaction().replace(R.id.things_sell_content, gameServiceFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.things_sell_content, gameFragment).commit();
+    }
+
+    private void ongameIDClick(View view) {
+        TextView gameservicename = (TextView)view.findViewById(R.id.gameservice_listitem_text);
+        gameservicenamestring = gameservicename.getText().toString();
+
+        Bundle data = new Bundle();
+        data.putString("gameservicename",gameservicenamestring);
+        data.putString("gamename",gamenamestring);
+
+        gameIDFragment.setArguments(data);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.things_sell_content, gameIDFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void ongameserviceClick(View view) {
+
+        TextView gamename = (TextView)view.findViewById(R.id.game_listitem_text);
+        gamenamestring = gamename.getText().toString();
+
+        Bundle data = new Bundle();
+        data.putString("gamename",gamenamestring);
+
+        gameServiceFragment.setArguments(data);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.things_sell_content, gameServiceFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void submit() {
+
+        thingsname = thingsSellFragment.getThingsName();
+        thingsvalue = thingsSellFragment.getThingValue();
+        thingsnumber = thingsSellFragment.getThingNumber();
+
+
         OkHttpClient client = Server.getSharedClient();
 
         //待编辑
         MultipartBody.Builder multipartBody = new MultipartBody.Builder()
-                .addFormDataPart("game_equip", thingsSellFragment.getThingsName())
-                .addFormDataPart("price", thingsSellFragment.getThingValue())
-                .addFormDataPart("game_name",gameServiceFragment.getGameName())
-                .addFormDataPart("game_company",gameServiceFragment.getCompanyName())
-                .addFormDataPart("game_account",gameServiceFragment.getGameId())
-                .addFormDataPart("game_area",gameServiceFragment.getGameService());
+                .addFormDataPart("gamename",gamenamestring)
+                .addFormDataPart("gameservicename",gameservicenamestring)
+                .addFormDataPart("equipname",thingsname)
+                .addFormDataPart("equipvalue",thingsvalue)
+                .addFormDataPart("gameid",gameidstring)
+                .addFormDataPart("equipnumber",thingsnumber);
 
-        if (thingsSellFragment.getThingPicture() != null) {
-            Calendar calendar = Calendar.getInstance();
-            String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
-            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsSellFragment.getThingPicture()));
-        }
+//        if (thingsSellFragment.getThingPicture() != null) {
+//            Calendar calendar = Calendar.getInstance();
+//            String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
+//            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsSellFragment.getThingPicture()));
+//        }
 
 
-        Request request = Server.requestBuilderWithApi("/Good").post(multipartBody.build()).build();
+        Request request = Server.saveEquipment(gamenamestring,gameservicenamestring).post(multipartBody.build()).build();
 
         final ProgressDialog progressDialog = new ProgressDialog(SellActivity.this);
         progressDialog.setMessage("请稍等");
@@ -119,6 +180,9 @@ public class SellActivity extends Activity {
     }
 
     private void nextStep() {
+
+        gameidstring = gameIDFragment.getGameId();
+
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.things_sell_content, thingsSellFragment)

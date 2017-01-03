@@ -51,4 +51,6 @@
     <string name="good_activity_price">单价</string>
     <string name="notes_title">上新</string>
     <string name="gamemoney">充值游戏币</string>
+    <string name="choosegame">请选择游戏</string>
+    <string name="choosegameservice">请选择游戏区服</string>
 </resources>

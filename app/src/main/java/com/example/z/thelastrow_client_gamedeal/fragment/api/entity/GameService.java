@@ -10,7 +10,7 @@ public class GameService implements Serializable {
 
     private Integer id;
 
-    private Game gamename;
+    private Game game;
     private String gameservicename;
 
     public Integer getId() {
@@ -21,12 +21,12 @@ public class GameService implements Serializable {
         this.id = id;
     }
 
-    public Game getGamename() {
-        return gamename;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGamename(Game gamename) {
-        this.gamename = gamename;
+    public void setGame(Game gamen) {
+        this.game = gamen;
     }
 
     public String getGameservicename() {

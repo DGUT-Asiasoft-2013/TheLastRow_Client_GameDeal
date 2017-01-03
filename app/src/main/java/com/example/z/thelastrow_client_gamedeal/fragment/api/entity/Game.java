@@ -10,15 +10,15 @@ public class Game implements Serializable {
 
     private Integer id;
 
-    private Company companyname;
+    private Company company;
     private String gamename;
 
-    public Company getCompanyname() {
-        return companyname;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyname(Company companyname) {
-        this.companyname = companyname;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String getGamename() {

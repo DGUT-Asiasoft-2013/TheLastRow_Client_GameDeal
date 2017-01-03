@@ -1,52 +1,23 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.api.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * Created by Administrator on 2016/12/30.
+ * Created by Administrator on 2017/1/3.
  */
 
-public class Equipment implements Serializable {
-
-    private Integer id;
-
-    private Date createDate;
-    private Date editDate;
+public class EquipmentOfBuy implements Serializable {
 
     private User owner;
     private GameService gameservice;
 
     private String equipname;
-    private String equipvalue;
+    private String maxvalue;			//收购最高价
+    private String minvalue;			//收购最低价
 
     private Integer equipnumber;
 
     private String[] equippicture;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getEditDate() {
-        return editDate;
-    }
-
-    public void setEditDate(Date editDate) {
-        this.editDate = editDate;
-    }
 
     public User getOwner() {
         return owner;
@@ -72,12 +43,20 @@ public class Equipment implements Serializable {
         this.equipname = equipname;
     }
 
-    public String getEquipvalue() {
-        return equipvalue;
+    public String getMaxvalue() {
+        return maxvalue;
     }
 
-    public void setEquipvalue(String equipvalue) {
-        this.equipvalue = equipvalue;
+    public void setMaxvalue(String maxvalue) {
+        this.maxvalue = maxvalue;
+    }
+
+    public String getMinvalue() {
+        return minvalue;
+    }
+
+    public void setMinvalue(String minvalue) {
+        this.minvalue = minvalue;
     }
 
     public Integer getEquipnumber() {
