@@ -48,12 +48,7 @@ public class NoteListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_page_notes, null);
-
-
-            notes_buy = (TextView) view.findViewById(R.id.notes_buy);
-            notes_sell = (TextView) view.findViewById(R.id.notes_sell);
             notes_list = (ListView) view.findViewById(R.id.notes_list);
-
             notes_list.setAdapter(baseAdapter);
             notes_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -68,7 +63,6 @@ public class NoteListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         reload();
     }
 
@@ -105,8 +99,14 @@ public class NoteListFragment extends Fragment {
                         }
                     });
 
-                } catch (Exception ex) {
-                    showAlertDialog(ex.getMessage());
+                } catch (final Exception ex) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            showAlertDialog(ex.getMessage());
+//                        }
+//                    });
+
                 }
             }
         });
@@ -139,22 +139,24 @@ public class NoteListFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_page_notes_listitem, null);
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_goods_item, null);
             }
 
-            TextView notes_listitem_gamename = (TextView) convertView.findViewById(R.id.notes_listitem_gamename);
-            TextView notes_listitem_companyname = (TextView) convertView.findViewById(R.id.notes_listitem_companyname);
-            TextView notes_listitem_gameservice = (TextView) convertView.findViewById(R.id.notes_listitem_gameservice);
-            TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.notes_listitem_thingsname);
-            TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.notes_listitem_thingsvalue);
-            ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.notes_listitem_thingspicture);
+
+            TextView text_type=(TextView)convertView.findViewById(R.id.list_good_text_type);
+            TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.list_good_text_title);
+            TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.list_good_text_price);
+            TextView text_equip=(TextView)convertView.findViewById(R.id.list_good_text_equip);
+            ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.list_good_avatar);
 
             Good equip = equipList.get(position);
 
-            notes_listitem_gamename.setText(equip.getGame_name());
-            notes_listitem_companyname.setText(equip.getGame_company());
-            notes_listitem_gameservice.setText(equip.getGame_area());
-            notes_listitem_thingsname.setText(equip.getGame_equip());
+            notes_listitem_thingsname.setText(""
+                    +"["+equip.getGame_name()+"]"
+                    +"["+equip.getGame_area()+"]"
+            );
+            text_equip.setText(equip.getGame_equip());
+
             notes_listitem_thingsvalue.setText("" +equip.getPrice());
 
             return convertView;

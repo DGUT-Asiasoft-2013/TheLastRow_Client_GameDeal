@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +87,7 @@ public class MeListFragment extends Fragment {
     //充值
     private void Recharge() {
         final EditText et = new EditText(getActivity());
+        et.setInputType(InputType.TYPE_CLASS_NUMBER);
          String rechargeMoney;
         if(user==null){
             ToastAndDialog.setToastShort(getActivity(),"请先登录");
@@ -155,6 +157,7 @@ public class MeListFragment extends Fragment {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 user=new ObjectMapper().readValue(response.body().string(),User.class);
+
                 avatarView.load(user.getAvatar());
                 handler.post(new Runnable() {
                     @Override

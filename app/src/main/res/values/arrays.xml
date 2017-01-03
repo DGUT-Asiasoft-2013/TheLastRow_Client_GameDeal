@@ -6,4 +6,27 @@
         <item>搜公司</item>
     </string-array>
 
+    <string-array name="frag_game_name_array">
+        <item>英雄联盟</item>
+        <item>CF</item>
+        <item>QQ飞车</item>
+    </string-array>
+
+    <string-array name="frag_game_area_array">
+        <item>电信区</item>
+        <item>网通区</item>
+        <item>黑色玫瑰</item>
+    </string-array>
+
+    <string-array name="notes_type_spinner">
+        <item>全部</item>
+        <item>出售</item>
+        <item>求购</item>
+    </string-array>
+    <string-array name="notes_order_spinner">
+        <item>默认</item>
+        <item>时间</item>
+        <item>价格从低到高</item>
+        <item>价格从高到低</item>
+    </string-array>
 </resources>

@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:entries="@array/frag_search_array"></Spinner>
+            android:entries="@array/frag_game_name_array"></Spinner>
 
     </LinearLayout>
 
@@ -131,7 +131,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:entries="@array/frag_search_array"></Spinner>
+            android:entries="@array/frag_game_area_array"></Spinner>
 
         </LinearLayout>
 

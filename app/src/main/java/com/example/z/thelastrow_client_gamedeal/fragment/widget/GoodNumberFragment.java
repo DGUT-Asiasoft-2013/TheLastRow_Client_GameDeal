@@ -96,4 +96,8 @@ public class GoodNumberFragment extends Fragment {
         });
         return money1;
     }
+    public int getEdiTextNumber(){
+        int i=Integer.parseInt(edi.getText().toString());
+        return i;
+    }
 }

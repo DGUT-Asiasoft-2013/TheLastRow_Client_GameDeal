@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.z.thelastrow_client_gamedeal.fragment.MainTabBarFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.FeedsListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MeListFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.page.NewFeedsListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.NoteListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.SearchListFragment;
 
@@ -17,7 +18,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.page.SearchListFragment
  */
 
 public class MainActivity extends Activity {
-    FeedsListFragment contentFeedList = new FeedsListFragment();
+    NewFeedsListFragment contentFeedList = new NewFeedsListFragment();
     NoteListFragment contentNoteList = new NoteListFragment();
     SearchListFragment contentSearchPage = new SearchListFragment();
     MeListFragment contentMyProfile = new MeListFragment();

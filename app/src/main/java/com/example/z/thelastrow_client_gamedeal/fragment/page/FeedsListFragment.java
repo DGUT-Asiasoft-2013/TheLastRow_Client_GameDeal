@@ -21,6 +21,7 @@ import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity;
 
 import java.io.File;
@@ -148,11 +149,20 @@ public class FeedsListFragment extends Fragment {
     }
 
     private void goSell() {
-        startActivity(new Intent(getActivity(), SellActivity.class));
+        if(Server.getUser()==null){
+            goLogin();
+        }else {
+            startActivity(new Intent(getActivity(), SellActivity.class));
+        }
+
     }
 
     private void goBuy() {
-        startActivity(new Intent(getActivity(), BuyActivity.class));
+        if(Server.getUser()==null){
+            goLogin();
+        }else {
+            startActivity(new Intent(getActivity(), BuyActivity.class));
+        }
     }
 
     private void goCamera() {

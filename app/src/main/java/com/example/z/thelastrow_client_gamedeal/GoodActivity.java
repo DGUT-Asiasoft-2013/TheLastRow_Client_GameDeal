@@ -14,6 +14,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Like;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Payments;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.GoodNumberFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
@@ -246,6 +247,29 @@ public class GoodActivity extends Activity {
     }
 
     public void  buy(){
+        MultipartBody requestBody=new MultipartBody.Builder()
+                .addFormDataPart("good_number",String.valueOf(goodNumberFragment.getEdiTextNumber()))
+                .build();
+        Request request=Server.requestBuilderWithApi("user/"+good.getId()+"/payments")
+                .post(requestBody)
+                .build();
+        Server.getSharedClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                final Payments payments=new ObjectMapper().readValue(response.body().string(),Payments.class);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastAndDialog.setToastShort(GoodActivity.this,payments.getUser().getName()+"购买成功");
+                    }
+                });
+            }
+        });
 
     }
 }

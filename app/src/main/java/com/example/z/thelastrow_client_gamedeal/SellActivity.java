@@ -73,7 +73,7 @@ public class SellActivity extends Activity {
         }
 
 
-        Request request = Server.requestBuilderWithApi("/Good").post(multipartBody.build()).build();
+        Request request = Server.requestBuilderWithApi("good").post(multipartBody.build()).build();
 
         final ProgressDialog progressDialog = new ProgressDialog(SellActivity.this);
         progressDialog.setMessage("请稍等");
