@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:id="@+id/gameid_back"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/action_bar_back" />
+
+        <Button
+            android:padding="0dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/gameid_nextstep"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:text="@string/next_step"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:weightSum="5">
+
+        <TextView
+            style="@style/textSellOrBuy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/gamename" />
+
+        <TextView
+            android:textColor="@android:color/black"
+            android:text="游戏名"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:id="@+id/gameid_gamename"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:weightSum="5">
+
+        <TextView
+            style="@style/textSellOrBuy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/gameservice" />
+
+        <TextView
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:text="游戏分区"
+            android:id="@+id/gameid_gamenservice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/textSellOrBuy"
+            android:text="@string/gameid"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:id="@+id/gameid_gamenid"
+            android:background="@null"
+            android:textSize="15sp"
+            android:textColorHint="@android:color/darker_gray"
+            android:hint="@string/gameid_hint"
+            android:layout_width="0dp"
+            android:inputType="text"
+            android:layout_weight="4"
+            android:imeOptions="actionNone"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:maxLength="12"/>
+
+        </LinearLayout>
+
+</LinearLayout>

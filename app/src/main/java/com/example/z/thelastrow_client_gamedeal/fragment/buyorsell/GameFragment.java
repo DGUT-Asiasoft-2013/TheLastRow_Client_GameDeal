@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.GameService;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Game;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,34 +31,32 @@ import okhttp3.Response;
  * Created by Administrator on 2017/1/3.
  */
 
-public class GameServiceFragment extends Fragment {
+public class GameFragment extends Fragment {
 
     private View view;
     private ListView list;
-    private List<GameService> gameServices;
-    private String gamename;
+    private List<Game> games;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_gameservice, null);
+            view = inflater.inflate(R.layout.fragment_game, null);
+            list = (ListView)view.findViewById(R.id.game_listview);
 
-
-            list = (ListView)view.findViewById(R.id.gameservice_listview);
-            list.setAdapter(gameserviceslist);
+            list.setAdapter(gameslist);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    onGameServiceClick(view);
+                    ongameItemClick(view);
                 }
             });
 
-            view.findViewById(R.id.gameservice_back).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.game_back).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getFragmentManager().popBackStack();
+                    getActivity().finish();
                 }
             });
 
@@ -66,39 +64,31 @@ public class GameServiceFragment extends Fragment {
         return view;
     }
 
-    public interface OnGameServiceItemClick{
+    public interface OnGameItemClick{
         void onItemClick(View view);
+    };
+
+    private OnGameItemClick onGameItemClick;
+
+    public void setOnGameItemClick(OnGameItemClick onGameItemClick){
+        this.onGameItemClick = onGameItemClick;
     }
 
-    private OnGameServiceItemClick onGameServiceItemClick;
-
-    public void setOnGameServiceItemClick(OnGameServiceItemClick onGameServiceItemClick){
-        this.onGameServiceItemClick = onGameServiceItemClick;
-    }
-
-    private void onGameServiceClick(View view) {
-        if (onGameServiceItemClick != null) {
-            onGameServiceItemClick.onItemClick(view);
+    private void ongameItemClick(View view) {
+        if (onGameItemClick != null) {
+            onGameItemClick.onItemClick(view);
         }
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
 
-        if (getArguments() != null) {
-            gamename = getArguments().getString("gamename");
-        }
-
-        ((TextView)view.findViewById(R.id.gameservice_text)).setText(gamename);
-
         reload();
     }
 
     private void reload() {
-
-        Request request = Server.getAllGameService(gamename).get().build();
+        Request request = Server.getAllGame().get().build();
 
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
@@ -128,16 +118,16 @@ public class GameServiceFragment extends Fragment {
 
                 try {
 
-                    final List<GameService> getgamesservice = new ObjectMapper().readValue(response.body().string(), new TypeReference<List<GameService>>() {});
+                    final List<Game> getgames = new ObjectMapper().readValue(response.body().string(), new TypeReference<List<Game>>() {});
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             progressDialog.dismiss();
 
-                            GameServiceFragment.this.gameServices = getgamesservice;
+                            GameFragment.this.games = getgames;
 
-                            gameserviceslist.notifyDataSetChanged();
+                            gameslist.notifyDataSetChanged();
                         }
                     });
 
@@ -154,15 +144,15 @@ public class GameServiceFragment extends Fragment {
                 .setMessage(message).setNegativeButton("知道",null).show();
     }
 
-    BaseAdapter gameserviceslist = new BaseAdapter() {
+    BaseAdapter gameslist = new BaseAdapter() {
         @Override
         public int getCount() {
-            return (gameServices == null ? 0 : gameServices.size());
+            return (games == null ? 0 : games.size());
         }
 
         @Override
         public Object getItem(int position) {
-            return gameServices.get(position);
+            return games.get(position);
         }
 
         @Override
@@ -173,14 +163,14 @@ public class GameServiceFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_gameservice_listitem, null);
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_game_listitem, null);
             }
 
-            TextView gameservicename = (TextView) convertView.findViewById(R.id.gameservice_listitem_text);
+            TextView gamename = (TextView) convertView.findViewById(R.id.game_listitem_text);
 
-            GameService gameService = gameServices.get(position);
+            Game game = games.get(position);
 
-            gameservicename.setText(gameService.getGameservicename());
+            gamename.setText(game.getGamename());
 
             return  convertView;
         }

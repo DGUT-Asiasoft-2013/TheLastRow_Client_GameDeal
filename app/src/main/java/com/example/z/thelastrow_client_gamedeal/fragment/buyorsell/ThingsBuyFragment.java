@@ -106,7 +106,7 @@ public class ThingsBuyFragment extends Fragment {
         things_name.setThingsInputItemHint("请输入装备名");
         things_name.setThingsInputItemtypeText();
 
-        things_value.setThingsInputItemname("价格:");
+        things_value.setThingsInputItemname("最低收购价:");
         things_value.setThingsInputItemHint("请输入价格");
         things_value.setThingsInputItemImeOption(EditorInfo.IME_ACTION_DONE);
 
