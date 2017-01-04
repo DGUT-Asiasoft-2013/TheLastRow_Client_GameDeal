@@ -30,6 +30,7 @@
         <activity android:name=".ActivityMeListViewJump"/>
         <activity android:name=".TestActivity"/>
         <activity android:name=".GoodActivity"/>
+        <activity android:name=".PersonInfoActivity"/>
     </application>
 
 </manifest>

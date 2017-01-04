@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/info_action_bar"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/frag_action_bar_height"
+        tools:layout="@layout/fragment_action_bar" />
+
+    <!--用户头像-->
+    <LinearLayout
+        android:layout_margin="@dimen/item_space_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/info_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:id="@+id/info_text_avatar"
+            android:clickable="true"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/font_size_article_title"
+            android:text="点我更改头像"/>
+    </LinearLayout>
+
+    <!--用户名-->
+    <LinearLayout
+        android:layout_margin="@dimen/item_space_margin"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="用户名"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:focusable="false"
+            android:id="@+id/info_account"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="请输入昵称" />
+    </LinearLayout>
+
+
+    <!--昵称-->
+   <LinearLayout
+       android:layout_margin="@dimen/item_space_margin"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="昵称"
+           android:textColor="@android:color/black"
+           android:textSize="12sp" />
+
+       <EditText
+           android:id="@+id/info_name"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:hint="请输入昵称" />
+   </LinearLayout>
+
+    <!--邮箱-->
+    <LinearLayout
+        android:layout_margin="@dimen/item_space_margin"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="邮箱"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/info_email"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="邮箱" />
+    </LinearLayout>
+
+</LinearLayout>
