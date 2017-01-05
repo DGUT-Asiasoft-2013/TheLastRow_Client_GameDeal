@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#fe6700</color>
     <color name="colorAccent">#0f8ef5</color>
     <color name="good_activity_game_info_color">#0f8ef5</color>
+    <color name="color_red">#c70025</color>
 </resources>

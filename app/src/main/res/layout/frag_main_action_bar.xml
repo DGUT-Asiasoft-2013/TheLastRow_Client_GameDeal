@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="游戏交易"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/font_size_navigation_daohang"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="@dimen/item_space_margin"
+        android:id="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/main_bar_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/item_space_margin"
+        android:layout_marginRight="@dimen/item_space_margin"
+        android:src="@drawable/main_bar_search" />
+
+    <ImageView
+        android:id="@+id/main_bar_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/item_space_margin"
+        android:src="@drawable/main_bar_add" />
+</LinearLayout>

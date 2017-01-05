@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.MainActivity;
+import com.example.z.thelastrow_client_gamedeal.PersonInfoActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.TestActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
@@ -41,26 +43,27 @@ import okhttp3.Response;
  */
 
 public class MeListFragment extends Fragment {
-    Handler handler;
+    static Handler handler=new Handler();
     int[] drawableArray;
     String[] text1Array;
     String[] text2Array;
+    View view;
 
-    ImageView setting;
-    TextView txt_goto_login,text_money,text_recharge;
+    TextView txt_goto_login,text_money,text_recharge,text_sign_out;
     ListViewFragment listViewFragment =new ListViewFragment();
     AvatarView avatarView;
     User user;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_page_me,null);
-        setting=(ImageView)view.findViewById(R.id.page_me_setting);
-        setting.setOnClickListener(new View.OnClickListener() {
+        view=inflater.inflate(R.layout.fragment_page_me,null);
+        text_sign_out=(TextView)view.findViewById(R.id.page_me_text_sign_out);
+        text_sign_out.setClickable(true);
+        text_sign_out.setFocusable(true);
+        text_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), GoodActivity.class);
-                startActivity(intent);
+                signOut();
             }
         });
         avatarView=(AvatarView)view.findViewById(R.id.page_me_avatar);
@@ -80,15 +83,43 @@ public class MeListFragment extends Fragment {
                goToLogin();
             }
         });
-        handler=new Handler();
+
+        setListView();
+
         return view;
     }
+
+    private void signOut() {
+        ToastAndDialog.setDialog(getActivity(), "退出当前账号？", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Request request=Server.requestBuilderWithApi("exit")
+                        .get()
+                        .build();
+                Server.getSharedClient().newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Server.setUser(null);
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+    }
+
     //充值
     private void Recharge() {
         final EditText et = new EditText(getActivity());
+        et.setInputType(InputType.TYPE_CLASS_NUMBER);
          String rechargeMoney;
-        if(user==null){
-            ToastAndDialog.setToastShort(getActivity(),"请先登录");
+        if(Server.getUser()==null){
+            goToLogin();
         }else {
             new AlertDialog.Builder(getActivity()).setTitle("充值")
                     //.setIcon(android.R.drawable.ic_dialog_info)
@@ -137,47 +168,42 @@ public class MeListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setListView();
         getAccountInformation();
-        avatarView.load(user);
+
     }
 
-//    获取用户信息
+    //    获取用户信息
     private void getAccountInformation() {
-        Request request= Server.requestBuilderWithApi("me")
-                .get()
-                .build();
-        Server.getSharedClient().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                //avatarView.load("me");
-            }
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                user=new ObjectMapper().readValue(response.body().string(),User.class);
-                avatarView.load(user.getAvatar());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        txt_goto_login.setText("Hello！ "+user.getName());
-                        text_money.setText("余额："+user.getMoney());
-                    }
-                });
-            }
-        });
+        avatarView.load(Server.getUser());
+        if (Server.getUser() != null) {
+            txt_goto_login.setText("Hello！ " + Server.getUser().getName());
+            text_money.setText("余额：" + Server.getUser().getMoney());
+            text_sign_out.setVisibility(View.VISIBLE);
+        } else {
+            txt_goto_login.setText("登录/注册");
+            text_money.setText("余额：0");
+        }
     }
+
     public void goToLogin() {
-//        if (txt_goto_login.getText().toString().contentEquals(getString(R.string.page_me_text_goto_login))) {
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
-//        }else {
-//            txt_goto_login.setClickable(false);
-//        }
+        Intent intent = null;
+        if (txt_goto_login.getText().toString().contentEquals("登录/注册")){
+            intent=new Intent(getActivity(), LoginActivity.class);
+        }else {
+            intent=new Intent(getActivity(), PersonInfoActivity.class);
+        }
+        startActivity(intent);
     }
     private void setListView() {
         drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_collection,R.drawable.my_wallet,R.drawable.my_message};
         text1Array = new String[]{"我的订单","我的收藏", "消费记录","我的消息"};
         text2Array = new String[]{">", ">",">",">"};
         listViewFragment.setArrays(drawableArray, text1Array, text2Array,user);
+    }
+    private class load extends Thread{
+        @Override
+        public void run() {
+            super.run();
+        }
     }
 }

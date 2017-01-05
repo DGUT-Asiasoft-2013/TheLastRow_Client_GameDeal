@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <fragment
+        android:id="@+id/frag_main_bar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.MainBarFragment"
+        tools:layout="@layout/frag_main_action_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@mipmap/ic_launcher"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/new_feeds_tab_img1"
+                        android:paddingBottom="@dimen/font_size_navigation_daohang"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/font_size_navigation_daohang"
+                        android:text="排行榜"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/new_feeds_tab_img2"
+                        android:paddingBottom="@dimen/font_size_navigation_daohang"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/font_size_navigation_daohang"
+                        android:text="分类"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/new_feeds_tab_img3"
+                        android:paddingBottom="@dimen/font_size_navigation_daohang"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_gravity="bottom"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/font_size_navigation_daohang"
+                        android:text="排行榜"/>
+                </FrameLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_margin="@dimen/item_space_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_min"
+                android:text="最新发布"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

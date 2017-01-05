@@ -77,5 +77,7 @@ public class Server {
         });
         return user;
     }
-
+    public static void setUser(User u){
+        user=u;
+    }
 }
