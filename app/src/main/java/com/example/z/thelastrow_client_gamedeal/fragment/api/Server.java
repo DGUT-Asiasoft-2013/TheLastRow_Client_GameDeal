@@ -34,8 +34,8 @@ public class Server {
     }
 
     //192.168.253.4  //宿舍-172.27.148.80:8080
-//    public static String serverAddress = "http://172.27.15.26:8080/membercenter/";
-    public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
+    public static String serverAddress = "http://172.27.15.26:8080/membercenter/";
+//    public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
 //	public static String serverAddress = "http://172.27.148.80:8080/membercenter/";
 
     public static Request.Builder getAllGame(){

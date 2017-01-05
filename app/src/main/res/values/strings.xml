@@ -53,4 +53,6 @@
     <string name="gamemoney">充值游戏币</string>
     <string name="choosegame">请选择游戏</string>
     <string name="choosegameservice">请选择游戏区服</string>
+    <string name="finish">完成</string>
+    <string name="entity_picture_text">实物照：</string>
 </resources>

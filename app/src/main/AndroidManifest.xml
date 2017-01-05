@@ -17,19 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-             />
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".BuyActivity"></activity>
-        <activity android:name=".EquipmentNewsActivity"></activity>
-        <activity android:name=".SellActivity"></activity>
+        <activity android:name=".BuyActivity"/>
+        <activity android:name=".EquipmentNewsActivity"/>
+        <activity android:name=".SellActivity"/>
         <activity android:name=".FeedsSearchActivity"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".ActivityMeListViewJump"/>
         <activity android:name=".TestActivity"/>
         <activity android:name=".GoodActivity"/>
+        <activity android:name=".fragment.buyorsell.GetAllLocalPicture"/>
     </application>
 
 </manifest>

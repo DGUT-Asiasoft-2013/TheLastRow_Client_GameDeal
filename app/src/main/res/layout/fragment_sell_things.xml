@@ -14,62 +14,62 @@
 
         <ImageView
             android:id="@+id/things_sell_back"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center_vertical"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
             android:background="@drawable/action_bar_back" />
 
         <Button
-            android:padding="0dp"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true"
             android:id="@+id/things_sell_submit"
-            android:text="@string/submit"
-            android:textSize="14sp"
             android:layout_width="55dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:padding="0dp"
+            android:text="@string/submit"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:background="@android:color/white"
-        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:paddingTop="2dp">
 
         <ImageButton
             android:id="@+id/things_sell_minus"
             android:layout_width="29dp"
             android:layout_height="29dp"
-            android:background="@drawable/minus_48"/>
+            android:background="@drawable/minus_48" />
 
         <EditText
-            android:layout_width="100dp"
-            android:digits="0123456789"
             android:id="@+id/things_sell_number"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="@null"
+            android:digits="0123456789"
             android:gravity="center"
-            android:text="@string/things_number"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:maxLength="15"
             android:maxLines="1"
+            android:text="@string/things_number"
             android:textSize="15sp" />
 
         <ImageButton
             android:id="@+id/things_sell_plus"
             android:layout_width="29dp"
             android:layout_height="29dp"
-            android:background="@drawable/plus_48"/>
+            android:background="@drawable/plus_48" />
 
 
     </LinearLayout>
@@ -92,11 +92,34 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/things_sell_picture"
-        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.PictureThingsFragment"
+    <LinearLayout
+        android:id="@+id/things_sell_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:layout="@layout/fragment_things_picture" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/things_sell_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/entity_picture_text"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp" />
+
+        <GridView
+            android:id="@+id/things_sell_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="150dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp">
+
+        </GridView>
+
+    </LinearLayout>
 
 </LinearLayout>
