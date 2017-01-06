@@ -16,13 +16,18 @@ import android.widget.TextView;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.User;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -49,7 +54,17 @@ public class PersonInfoActivity extends Activity {
         actionBarFragment.setField(new ActionBarFragment.SetTextClick() {
             @Override
             public void setTextClickLisener() {
-                change();
+                new AlertDialog.Builder(PersonInfoActivity.this)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                new Thread(new changeThread()).start();
+                            }
+                        })
+                        .setNegativeButton("取消",null)
+                        .setMessage("确定修改？")
+                        .show();
+
             }
         });
         account=(TextView)findViewById(R.id.info_account);
@@ -63,21 +78,64 @@ public class PersonInfoActivity extends Activity {
             }
         });
         avatar=(ImageView)findViewById(R.id.info_avatar);
+
+        new Thread(new imgThread()).start();
+        user= Server.getUser();
+        account.setText(user.getAccount());
+        name.setText(user.getName());
+        email.setText(user.getEmail());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        user= Server.getUser();
-        account.setText(user.getAccount());
-        name.setText(user.getName());
-        email.setText(user.getEmail());
-        new Thread(new imgThread()).start();
+
 
     }
 
+    public class changeThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            MultipartBody.Builder requestBody=new MultipartBody.Builder()
+                    .addFormDataPart("email",email.getText().toString())
+                    .addFormDataPart("name",name.getText().toString());
+            if (pngData!=null){
+                requestBody
+                        .addFormDataPart(
+                                "avatar",
+                                "avatar",
+                                RequestBody.create(MediaType.parse("image/png"),pngData));
+            }
 
-    private void change() {
+            Request request=Server.requestBuilderWithApi("changeInfo")
+                    .post(requestBody.build())
+                    .build();
+            Server.getSharedClient().newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                    ToastAndDialog.setDialog(PersonInfoActivity.this,e.toString());
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Boolean status=new ObjectMapper().readValue(response.body().string(),Boolean.class);
+                    if (status){
+                        new Server().setUser();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastAndDialog.setDialog(PersonInfoActivity.this,"修改成功");
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+
+
     }
 
 
@@ -168,7 +226,6 @@ public class PersonInfoActivity extends Activity {
 
             Bitmap bmp = (Bitmap)data.getExtras().get("data");
             saveBitmap(bmp);
-
             avatar.setImageBitmap(bmp);
         }else if(requestCode == REQUESTCODE_ALBUM){
 

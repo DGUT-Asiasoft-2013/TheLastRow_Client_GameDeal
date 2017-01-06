@@ -1,11 +1,15 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 /**
  * Created by Z on 2016/12/30.
  */
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Payments implements Serializable {
     User user;
     Good good;

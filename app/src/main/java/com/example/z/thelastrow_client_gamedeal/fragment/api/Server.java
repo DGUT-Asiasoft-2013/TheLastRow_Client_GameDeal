@@ -60,24 +60,33 @@ public class Server {
     }
 
     public static User getUser() {
-        Request request = requestBuilderWithApi("me")
-                .get()
-                .build();
-        getSharedClient().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
 
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                user = new ObjectMapper().readValue(response.body().string(), User.class);
-
-            }
-        });
         return user;
     }
     public static void setUser(User u){
         user=u;
+    }
+    public  void setUser(){
+        new Thread(new latestUserThread()).start();
+    }
+    private  class latestUserThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            Request request = requestBuilderWithApi("me")
+                    .get()
+                    .build();
+            getSharedClient().newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    user = new ObjectMapper().readValue(response.body().string(), User.class);
+                }
+            });
+        }
     }
 }
