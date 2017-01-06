@@ -73,12 +73,12 @@ public class NoteListFragment extends Fragment {
             @Override
             public void onFailure(Call call, final IOException e) {
 
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showAlertDialog(e.getMessage());
-                    }
-                });
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        showAlertDialog(e.getMessage());
+//                    }
+//                });
             }
 
             @Override

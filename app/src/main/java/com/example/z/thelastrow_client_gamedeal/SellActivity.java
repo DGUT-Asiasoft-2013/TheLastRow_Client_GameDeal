@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -125,7 +126,8 @@ public class SellActivity extends Activity {
                 .addFormDataPart("equipname",thingsname)
                 .addFormDataPart("equipvalue",thingsvalue)
                 .addFormDataPart("gameid",gameidstring)
-                .addFormDataPart("equipnumber",thingsnumber);
+                .addFormDataPart("equipnumber",thingsnumber)
+                .addFormDataPart("isSell" , "true");
 
 //        if (thingsSellFragment.getThingPicture() != null) {
 //            Calendar calendar = Calendar.getInstance();
@@ -193,6 +195,11 @@ public class SellActivity extends Activity {
     private void showAlertDialog(String string) {
         new AlertDialog.Builder(SellActivity.this)
                 .setMessage(string)
-                .setPositiveButton("好", null).show();
+                .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 }

@@ -50,8 +50,8 @@ public class Server {
         return (new Request.Builder().url(serverAddress + "equip/saveequipment/" + gamename +"/"+ gameservicename));
     }
 
-    public static Request.Builder saveEquipmentOfBuy(String gamename,String gameservicename){
-        return (new Request.Builder().url(serverAddress + "equip/saveequipmentofbuy/" + gamename +"/"+ gameservicename));
+    public static Request.Builder getEquipmentNew10() {
+        return (new Request.Builder().url(serverAddress + "equip/getequipmentnew10"));
     }
 
     public static Request.Builder requestBuilderWithApi(String api) {
