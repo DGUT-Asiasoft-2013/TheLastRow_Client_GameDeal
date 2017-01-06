@@ -52,7 +52,6 @@ public class MeListFragment extends Fragment {
     TextView txt_goto_login,text_money,text_recharge,text_sign_out;
     ListViewFragment listViewFragment =new ListViewFragment();
     AvatarView avatarView;
-    User user;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -134,7 +133,7 @@ public class MeListFragment extends Fragment {
                                 MultipartBody requestBody = new MultipartBody.Builder()
                                         .addFormDataPart("text", input)
                                         .build();
-                                Request request = Server.requestBuilderWithApi("/me/" + user.getId() + "/Recharge")
+                                Request request = Server.requestBuilderWithApi("/me/" + Server.getUser().getId() + "/Recharge")
                                         .post(requestBody)
                                         .build();
                                 Server.getSharedClient().newCall(request).enqueue(new Callback() {
@@ -174,6 +173,12 @@ public class MeListFragment extends Fragment {
 
     //    获取用户信息
     private void getAccountInformation() {
+        new Server().setUser();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         avatarView.load(Server.getUser());
         if (Server.getUser() != null) {
             txt_goto_login.setText("Hello！ " + Server.getUser().getName());
@@ -198,12 +203,7 @@ public class MeListFragment extends Fragment {
         drawableArray = new int[]{R.drawable.my_wallet, R.drawable.my_collection,R.drawable.my_wallet,R.drawable.my_message};
         text1Array = new String[]{"我的订单","我的收藏", "消费记录","我的消息"};
         text2Array = new String[]{">", ">",">",">"};
-        listViewFragment.setArrays(drawableArray, text1Array, text2Array,user);
+        listViewFragment.setArrays(drawableArray, text1Array, text2Array,Server.getUser());
     }
-    private class load extends Thread{
-        @Override
-        public void run() {
-            super.run();
-        }
-    }
+
 }

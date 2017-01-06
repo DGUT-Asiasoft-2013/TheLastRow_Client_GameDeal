@@ -3,7 +3,9 @@ package com.example.z.thelastrow_client_gamedeal.fragment.page;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.service.GoodService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,7 +38,7 @@ import okhttp3.Response;
  */
 
 public class NoteListFragment extends Fragment {
-
+    Handler handler=new Handler();
     private View view;
     private TextView notes_sell,notes_buy;
     private ListView notes_list;
@@ -140,25 +143,29 @@ public class NoteListFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_goods_item, null);
+                TextView text_type=(TextView)convertView.findViewById(R.id.list_good_text_type);
+                final TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.list_good_text_title);
+                final TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.list_good_text_price);
+                final TextView text_equip=(TextView)convertView.findViewById(R.id.list_good_text_equip);
+                final ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.list_good_avatar);
+
+                if (equipList.get(position)!=null){
+                    final Good equip = equipList.get(position);
+                    final Bitmap bmp=new GoodService().getBmp(equip.getAvatar_img1());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            notes_listitem_thingspicture.setImageBitmap(bmp);
+                            notes_listitem_thingsname.setText(""
+                                    +"["+equip.getGame_name()+"]"
+                                    +"["+equip.getGame_area()+"]"
+                            );
+                            text_equip.setText(equip.getGame_equip());
+                            notes_listitem_thingsvalue.setText("" +equip.getPrice());
+                        }
+                    });
+                }
             }
-
-
-            TextView text_type=(TextView)convertView.findViewById(R.id.list_good_text_type);
-            TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.list_good_text_title);
-            TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.list_good_text_price);
-            TextView text_equip=(TextView)convertView.findViewById(R.id.list_good_text_equip);
-            ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.list_good_avatar);
-
-            Good equip = equipList.get(position);
-
-            notes_listitem_thingsname.setText(""
-                    +"["+equip.getGame_name()+"]"
-                    +"["+equip.getGame_area()+"]"
-            );
-            text_equip.setText(equip.getGame_equip());
-
-            notes_listitem_thingsvalue.setText("" +equip.getPrice());
-
             return convertView;
         }
     };

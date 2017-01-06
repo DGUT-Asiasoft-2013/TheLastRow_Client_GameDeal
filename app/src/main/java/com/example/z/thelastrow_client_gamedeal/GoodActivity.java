@@ -153,7 +153,6 @@ public class GoodActivity extends Activity {
     }
 
     public boolean checkLike(){
-//        good.getAuthor().getId()
         Request request=Server.requestBuilderWithApi("good/"+good.getId()+"/isliked")
                 .get()
                 .build();
@@ -172,7 +171,6 @@ public class GoodActivity extends Activity {
                         if (like_state){
                             btn_like.setText("已收藏("+like_number+")");
                         }
-                       // ToastAndDialog.setToastShort(getApplicationContext(),like_state.toString());
                     }
                 });
             }

@@ -104,20 +104,12 @@ public class LoginActivity extends Activity {
                                 @Override
                                 public void run() {
                                     pdlg.setMessage(response.toString());
-                                    try {
-                                        if(user!=null){
-                                            Thread.sleep(200);
-                                            pdlg.dismiss();
-                                            Server.getUser();
-                                            finish();
-
-                                            Toast.makeText(LoginActivity.this,"欢迎回来 "+account ,Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            ToastAndDialog.setToastShort(LoginActivity.this,"密码错误");
-                                        }
-
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                                    if (user != null) {
+                                        pdlg.dismiss();
+                                        Toast.makeText(LoginActivity.this, "欢迎回来 " + account, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    } else {
+                                        ToastAndDialog.setToastShort(LoginActivity.this, "密码错误");
                                     }
                                 }
                             });
