@@ -1,14 +1,11 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.widget;
 
 import android.app.Fragment;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
@@ -42,8 +39,19 @@ public class MainBarFragment extends Fragment {
     }
 
     private void addClick() {
-        Animation animation= AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_45);
-        search.setAnimation(animation);
+        if (onAddListener != null) {
+            onAddListener.add();
+        }
+    }
+
+    public interface OnAddListener{
+        void add();
+    }
+
+    private OnAddListener onAddListener;
+
+    public void setOnAddListener(OnAddListener onAddListener) {
+        this.onAddListener = onAddListener;
     }
 
     private void searchClick() {

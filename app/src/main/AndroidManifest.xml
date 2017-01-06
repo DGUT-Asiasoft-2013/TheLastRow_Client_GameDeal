@@ -28,7 +28,7 @@
         <activity android:name=".ActivityMeListViewJump"/>
         <activity android:name=".TestActivity"/>
         <activity android:name=".GoodActivity"/>
-        <activity android:name=".fragment.buyorsell.GetAllLocalPicture"/>
+        <activity android:name=".fragment.buyorsell.GetAllLocalPictureActivity"/>
         <activity android:name=".PersonInfoActivity"/>
     </application>
 

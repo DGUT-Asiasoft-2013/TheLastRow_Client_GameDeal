@@ -1,6 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,13 +10,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.SellActivity;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.MainBarFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,25 +38,45 @@ import okhttp3.Response;
 
 public class NewFeedsListFragment extends Fragment {
 
-    private View view, listhead;
+    private View view, equiplisthead;
     private ImageView newFeeds_tab_image2;
-    private TextView newFeeds_newstext;
     private ListView listView;
     private List<Equipment> equipmentList;
-    private RelativeLayout loadingPanel;
+    private MainBarFragment mainBarFragment;
+    private FailurePanelFragment failurePanelFragment;
+    private LoadingPanelFragment loadingPanelFragment;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_page_feeds_new, null);
-            listhead = inflater.inflate(R.layout.fragment_page_feeds_new_headview, null);
+            equiplisthead = inflater.inflate(R.layout.fragment_page_feeds_new_headview, null);
 
-            loadingPanel = (RelativeLayout) view.findViewById(R.id.new_feeds_loadingPanel);
+            if (SDKVersion.isMoreThanAPI19()) {
+                mainBarFragment = (MainBarFragment) getChildFragmentManager().findFragmentById(R.id.frag_main_bar1);
+                failurePanelFragment = (FailurePanelFragment) getChildFragmentManager().findFragmentById(R.id.new_feeds_failurepanel);
+                loadingPanelFragment = (LoadingPanelFragment) getChildFragmentManager().findFragmentById(R.id.new_feeds_loadingpanel);
+            } else {
+                mainBarFragment = (MainBarFragment) getFragmentManager().findFragmentById(R.id.frag_main_bar1);
+                failurePanelFragment = (FailurePanelFragment) getFragmentManager().findFragmentById(R.id.new_feeds_failurepanel);
+                loadingPanelFragment = (LoadingPanelFragment) getFragmentManager().findFragmentById(R.id.new_feeds_loadingpanel);
+            }
+            mainBarFragment.setOnAddListener(new MainBarFragment.OnAddListener() {
+                @Override
+                public void add() {
+                    startActivity(new Intent(getActivity(), SellActivity.class));
+                }
+            });
 
-            newFeeds_newstext = (TextView) view.findViewById(R.id.new_feeds_newstext);
+            failurePanelFragment.setOnFailureButtonClickListener(new FailurePanelFragment.OnFailureButtonClickListener() {
+                @Override
+                public void click() {
+                    reload();
+                }
+            });
 
-            newFeeds_tab_image2 = (ImageView) listhead.findViewById(R.id.new_feeds_head_tab_img2);
+            newFeeds_tab_image2 = (ImageView) equiplisthead.findViewById(R.id.new_feeds_head_tab_img2);
             newFeeds_tab_image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,7 +85,7 @@ public class NewFeedsListFragment extends Fragment {
             });
 
             listView = (ListView) view.findViewById(R.id.new_feeds_listview);
-            listView.addHeaderView(listhead);
+            listView.addHeaderView(equiplisthead);
 
             listView.setAdapter(listAdapter);
         }
@@ -70,13 +95,13 @@ public class NewFeedsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        newFeeds_newstext.setVisibility(View.GONE);
         equipmentList = new ArrayList<>();
         reload();
     }
 
     private void reload() {
-        loadingPanel.setVisibility(View.VISIBLE);
+        failurePanelFragment.setMiss(true);
+        loadingPanelFragment.setMiss(false);
 
         Server.getSharedClient().newCall(Server.getEquipmentNew10().get().build()).enqueue(new Callback() {
             @Override
@@ -89,10 +114,10 @@ public class NewFeedsListFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        NewFeedsListFragment.this.loadingPanel.setVisibility(View.GONE);
+                        NewFeedsListFragment.this.loadingPanelFragment.setMiss(true);
                         NewFeedsListFragment.this.equipmentList.clear();
-                        NewFeedsListFragment.this.newFeeds_newstext.setText(R.string.failurelink_internet);
-                        NewFeedsListFragment.this.newFeeds_newstext.setVisibility(View.VISIBLE);
+                        NewFeedsListFragment.this.failurePanelFragment.setTextText(R.string.failurelink_internet);
+                        NewFeedsListFragment.this.failurePanelFragment.setMiss(false);
                     }
                 });
             }
@@ -100,7 +125,6 @@ public class NewFeedsListFragment extends Fragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                loadingPanel.setVisibility(View.GONE);
                 try {
                     final Page<Equipment> equipmentPage = new ObjectMapper().readValue(response.body().string(),
                             new TypeReference<Page<Equipment>>() {
@@ -113,9 +137,10 @@ public class NewFeedsListFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            NewFeedsListFragment.this.loadingPanelFragment.setMiss(true);
                             NewFeedsListFragment.this.equipmentList = equipmentPage.getContent();
                             listAdapter.notifyDataSetChanged();
-                            NewFeedsListFragment.this.newFeeds_newstext.setVisibility(View.GONE);
+                            NewFeedsListFragment.this.failurePanelFragment.setMiss(true);
                         }
                     });
                 } catch (final Exception e) {
@@ -128,9 +153,10 @@ public class NewFeedsListFragment extends Fragment {
                         public void run() {
 //                            new AlertDialog.Builder(getActivity())
 //                                    .setMessage(e.getMessage()).setNegativeButton("知道",null).show();
+                            NewFeedsListFragment.this.loadingPanelFragment.setMiss(true);
                             NewFeedsListFragment.this.equipmentList.clear();
-                            NewFeedsListFragment.this.newFeeds_newstext.setText(R.string.failureLink_response);
-                            NewFeedsListFragment.this.newFeeds_newstext.setVisibility(View.VISIBLE);
+                            NewFeedsListFragment.this.failurePanelFragment.setTextText(R.string.failureLink_response);
+                            NewFeedsListFragment.this.failurePanelFragment.setMiss(false);
                         }
                     });
                 }

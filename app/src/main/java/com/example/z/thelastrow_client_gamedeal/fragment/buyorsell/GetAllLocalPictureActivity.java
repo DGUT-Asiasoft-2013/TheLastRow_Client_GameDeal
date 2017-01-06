@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -23,13 +24,14 @@ import java.util.List;
  * Created by Administrator on 2017/1/4.
  */
 
-public class GetAllLocalPicture extends Activity {
+public class GetAllLocalPictureActivity extends Activity {
 
     final static int RESULT_CODE_PICTURECHOOSE = 0x606;
     private TextView checkText;
     private GridView gridView;
     private List<Uri> imagePathList;
     private List<String> positionList;
+    private Button button;
 //    private SimpleAdapter simpleAdapter;
 //    private List<Map<String,Object>> pictureMap;
 
@@ -42,7 +44,8 @@ public class GetAllLocalPicture extends Activity {
         checkText = (TextView) findViewById(R.id.getalllocalpicture_text);
         positionList = new ArrayList<>();
 
-        findViewById(R.id.getalllocalpicture_finish).setOnClickListener(new View.OnClickListener() {
+        button = (Button) findViewById(R.id.getalllocalpicture_finish);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -94,6 +97,7 @@ public class GetAllLocalPicture extends Activity {
     protected void onResume() {
         super.onResume();
 
+        button.setText("取消");
         findPicture();
     }
 
@@ -168,6 +172,11 @@ public class GetAllLocalPicture extends Activity {
                         }
                     }
                     checkText.setText("已选择（" + positionList.size() + "/6）张");
+                    if (positionList.size() == 0) {
+                        button.setText("取消");
+                    } else {
+                        button.setText("完成");
+                    }
 //                    Log.d("size", "" + positionList.size());
                 }
             });
