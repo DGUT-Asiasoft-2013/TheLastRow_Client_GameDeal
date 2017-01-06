@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:descendantFocusability= "blocksDescendants">
     android:layout_height="125dp">
 
     <ImageView
@@ -112,6 +114,7 @@
         </LinearLayout>
 
         <Button
+            android:focusable="false"
             android:background="@color/colorPrimaryDark"
             android:textColor="@android:color/white"
             android:visibility="gone"

@@ -17,7 +17,7 @@
         android:text="文本"/>
 
     <ImageView
-        android:padding="15dp"
+        android:padding="8dp"
         android:id="@+id/action_bar_back"
         android:src="@drawable/action_bar_back"
         android:layout_width="@dimen/frag_action_bar_height"
@@ -25,6 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
     <TextView
+        android:layout_marginLeft="@dimen/item_space_margin"
         android:textSize="@dimen/list_view_item_textSize"
         android:layout_toEndOf="@id/action_bar_back"
         android:gravity="center_vertical"

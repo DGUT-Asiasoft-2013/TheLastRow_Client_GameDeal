@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-<LinearLayout
-    android:id="@+id/line_switch"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="60dp">
 
-    <TextView
-        android:clickable="true"
 
-        android:background="@drawable/tong_yong_background"
-        android:gravity="center"
-        android:id="@+id/message_text_comment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="评论"
-        android:textSize="@dimen/list_view_item_textSize" />
-    <TextView
-        android:clickable="true"
-        android:background="@drawable/tong_yong_background"
-        android:gravity="center"
-        android:id="@+id/message_text_private_msg"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="私信"
-        android:textSize="@dimen/list_view_item_textSize" />
-    <TextView
-        android:clickable="true"
-        android:background="@drawable/tong_yong_background"
-        android:gravity="center"
-        android:id="@+id/message_text_collection"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="收藏"
-        android:textSize="@dimen/list_view_item_textSize" />
-    <TextView
-        android:clickable="true"
-        android:background="@drawable/tong_yong_background"
-        android:gravity="center"
-        android:id="@+id/message_text_like"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="点赞"
-        android:textSize="@dimen/list_view_item_textSize" />
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_switch"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bar_background"
+            android:gravity="center"
+            android:id="@+id/message_text_private_msg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="私信"
+            android:textSize="@dimen/font_size_article_title" />
+
+        <TextView
+            android:clickable="true"
+
+            android:background="@drawable/tong_yong_background"
+            android:gravity="center"
+            android:id="@+id/message_text_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="评价"
+            android:textSize="@dimen/font_size_article_title" />
+
+        <TextView
+            android:clickable="true"
+            android:background="@drawable/tong_yong_background"
+            android:gravity="center"
+            android:id="@+id/message_text_collection"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="收藏"
+            android:textSize="@dimen/font_size_article_title" />
+
+    </LinearLayout>
     <ListView
         android:id="@+id/message_list_view"
         android:layout_below="@id/line_switch"
@@ -56,5 +55,4 @@
         android:layout_height="wrap_content">
 
     </ListView>
-
 </RelativeLayout>

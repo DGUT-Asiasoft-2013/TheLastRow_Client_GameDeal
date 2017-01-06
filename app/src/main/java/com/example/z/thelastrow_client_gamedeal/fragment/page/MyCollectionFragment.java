@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal.fragment.page;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.ActivityMeListViewJump;
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
@@ -56,6 +59,14 @@ public class MyCollectionFragment extends Fragment {
         linearLayout=(LinearLayout)view.findViewById(R.id.collection_linearLayout);
         listView=(ListView)view.findViewById(R.id.collection_list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), GoodActivity.class);
+                intent.putExtra("good",data.get(position).getId().getGood());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
