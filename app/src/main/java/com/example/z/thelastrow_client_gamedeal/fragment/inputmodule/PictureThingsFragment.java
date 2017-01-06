@@ -176,4 +176,5 @@ public class PictureThingsFragment extends Fragment {
     public byte[] getData() {
         return data;
     }
+
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:layout_margin="1dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:layout_marginStart="5dp"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:id="@+id/getalllocalpicture_text"
+            android:text="已选择0张"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:padding="0dp"
+            android:id="@+id/getalllocalpicture_finish"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <GridView
+        android:id="@+id/getalllocalpicture_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="110dp"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:numColumns="4"
+        tools:listitem="@layout/getalllocalpicture_girdview_item">
+
+    </GridView>
+
+</LinearLayout>
