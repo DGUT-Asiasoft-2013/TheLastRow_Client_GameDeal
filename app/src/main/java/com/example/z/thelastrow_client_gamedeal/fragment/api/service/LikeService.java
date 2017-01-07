@@ -30,6 +30,7 @@ public class LikeService {
     Good good;
     User user;
     boolean s;
+    int i=0;
     public boolean postLike(Good good,boolean like_state){
         this.good=good;
 
@@ -61,13 +62,17 @@ public class LikeService {
         int i=0;
         return i;
     }
+
     public List<Like> getLikesByUserID(User user, ProgressDialog pdlg){
         this.user=user;
+        i=0;
         new Thread(new getLikesThread()).start();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (i==0){
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         pdlg.dismiss();
         return list_like;
@@ -94,7 +99,7 @@ public class LikeService {
         }
     }
 
-    public class  getLikesThread extends Thread{
+    private  class  getLikesThread extends Thread{
         @Override
         public void run() {
             super.run();
@@ -104,13 +109,14 @@ public class LikeService {
             Server.getSharedClient().newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-
+                    i=1;
                 }
 
                 @Override
                 public void onResponse(Call call, final Response response) throws IOException {
                     Page<Like> page=new ObjectMapper().readValue(response.body().string(), new TypeReference< Page<Like>>(){});
                     list_like=page.getContent();
+                    i=1;
                 }
             });
         }

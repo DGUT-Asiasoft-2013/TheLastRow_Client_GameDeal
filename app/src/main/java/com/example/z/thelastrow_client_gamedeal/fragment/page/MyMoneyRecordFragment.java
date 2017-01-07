@@ -46,6 +46,7 @@ public class MyMoneyRecordFragment extends Fragment {
     Page<Recharge> page;
     List<Recharge> list;
     Recharge recharge;
+    int i=0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,25 +63,33 @@ public class MyMoneyRecordFragment extends Fragment {
     }
 
     public void reload() {
+        i = 0;
+        Request request = Server.requestBuilderWithApi("me/" + Server.getUser().getId() + "/recharge/0")
+                .get()
+                .build();
+        Server.getSharedClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                i = 1;
+            }
 
-            Request request=Server.requestBuilderWithApi("me/"+Server.getUser().getId()+"/recharge/0")
-                    .get()
-                    .build();
-            Server.getSharedClient().newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    page=new ObjectMapper().readValue(response.body().string(),
-                            new TypeReference<Page<Recharge>>(){});
-                    list=page.getContent();
-//                    adapter.notifyDataSetInvalidated();
-                }
-            });
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                page = new ObjectMapper().readValue(response.body().string(),
+                        new TypeReference<Page<Recharge>>() {
+                        });
+                list = page.getContent();
+                i = 1;
+            }
+        });
+        while (i == 0) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+    }
 
     BaseAdapter adapter =new BaseAdapter() {
         @Override

@@ -1,24 +1,33 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Payments;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.service.GoodService;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.service.LikeService;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.service.PaymentService;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,46 +45,35 @@ import okhttp3.Response;
  */
 
 public class MyIndentFragment extends Fragment {
+    int i;
     ListView listView;
-    Page<Payments> page_pay;
     List<Payments> data;
-    Handler handler=new Handler();
+    Handler handler = new Handler();
+    int postState=0;
+    final String[] stateArray = {"发货", "等待收货", "等待评价", "交易成功","等待发货", "收货", "评价"};
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_page_my_indent,null);
         listView=(ListView)view.findViewById(R.id.indent_list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), GoodActivity.class);
+                intent.putExtra("good",data.get(position).getGood());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        new Thread(new getPaymentThread()).start();
+        data=new PaymentService().getPayment();
     }
-    public class getPaymentThread extends Thread{
-        @Override
-        public void run() {
-            super.run();
-            Request request= Server.requestBuilderWithApi("/user/"+Server.getUser().getId()+"/payments")
-                    .get()
-                    .build();
-            Server.getSharedClient().newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
 
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    page_pay=new ObjectMapper().readValue(response.body().string(), new TypeReference<Page<Payments>>() {});
-                    data=page_pay.getContent();
-                }
-            });
-
-        }
-    }
     BaseAdapter adapter=new BaseAdapter() {
         @Override
         public int getCount() {
@@ -101,32 +99,86 @@ public class MyIndentFragment extends Fragment {
                 final TextView title=(TextView)convertView.findViewById(R.id.list_good_text_title);
                 final TextView price=(TextView)convertView.findViewById(R.id.list_good_text_price);
                 final TextView equip=(TextView)convertView.findViewById(R.id.list_good_text_equip);
-                TextView type=(TextView)convertView.findViewById(R.id.list_good_text_type);
+                final TextView type=(TextView)convertView.findViewById(R.id.list_good_text_type);
                 final TextView buyers=(TextView)convertView.findViewById(R.id.list_good_text_people_buy);
                 final TextView state=(TextView)convertView.findViewById(R.id.list_good_pay);
-                Button btn=(Button)convertView.findViewById(R.id.list_good_btn);
+                final Button btn=(Button)convertView.findViewById(R.id.list_good_btn);
                 btn.setVisibility(View.VISIBLE);
 
                 if (data!=null){
                     final Payments payments=data.get(position);
                     final Bitmap bmp=new GoodService().getBmp(payments.getGood().getAvatar_img1());
+                    final boolean buyType=payments.getUser().getId().equals(Server.getUser().getId());
+                    final boolean sellType=payments.getGood().getAuthor().getId().equals(Server.getUser().getId());
+                    final int good_state=payments.getState();
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            img.setImageBitmap(bmp);
                             buyers.setText(payments.getNumber()+"");
                             state.setText(" 件");
                             title.setText(payments.getGood().getGame_name()+" "+payments.getGood().getGame_area());
                             equip.setText(payments.getGood().getGame_equip());
                             price.setText(payments.getGood().getPrice()+"");
+                            setBtnText(buyType,sellType,good_state,type,btn);
+                            img.setImageBitmap(bmp);
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setBtnClick(btn);
+                                }
+                            });
                         }
                     });
-
                 }
-
-
             }
             return convertView;
         }
     };
+
+    void setBtnText(boolean buyType,boolean sellType,int good_state,TextView type,Button btn){
+        if (buyType){
+            type.setText("买入");
+            switch(good_state){
+                case 0:btn.setText(stateArray[4]);break;
+                case 1:btn.setText(stateArray[5]);break;
+                case 2:btn.setText(stateArray[6]);break;
+                case 3:btn.setText(stateArray[3]);break;
+                default:break;
+            }
+        }else {
+            if (sellType){
+                type.setText("售出");
+                switch(good_state){
+                    case 0:btn.setText(stateArray[0]);break;
+                    case 1:btn.setText(stateArray[1]);break;
+                    case 2:btn.setText(stateArray[2]);break;
+                    case 3:btn.setText(stateArray[3]);break;
+                    default:break;
+                }
+            }
+        }
+
+        String btn_text=btn.getText().toString();
+        switch (btn_text){
+            case "发货": postState=1;break;
+            case "确认收货": postState=2;break;
+            case "评价": postState=3;break;
+            default:btn.setEnabled(false); btn.setBackgroundColor(Color.GRAY); break;
+        }
+
+    }
+    void setBtnClick(Button btn){
+        String msg;
+        String text=btn.getText().toString();
+        if(text.contentEquals(stateArray[0])){msg="确定"+stateArray[0]+"？";}
+        else if (text.contentEquals(stateArray[5])){msg="确定"+stateArray[5]+"？";}
+        else if(text.contentEquals(stateArray[6])){msg="确定"+stateArray[6]+"？";}
+        ToastAndDialog.setDialog(getActivity(), "取消收藏？", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+    }
 }

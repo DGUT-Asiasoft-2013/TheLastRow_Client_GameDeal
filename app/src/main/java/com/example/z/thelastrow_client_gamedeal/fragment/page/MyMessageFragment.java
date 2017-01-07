@@ -33,7 +33,7 @@ import okhttp3.Response;
  */
 
 public class MyMessageFragment extends Fragment {
-    TextView [] textViews=new TextView[4];
+    TextView [] textViews=new TextView[3];
     ListView listView;
 
     ImageView imageView;
@@ -53,11 +53,11 @@ public class MyMessageFragment extends Fragment {
         textViews[0]=(TextView)view.findViewById(R.id.message_text_comment);
         textViews[1]=(TextView)view.findViewById(R.id.message_text_collection);
         textViews[2]=(TextView)view.findViewById(R.id.message_text_private_msg);
-        textViews[3]=(TextView)view.findViewById(R.id.message_text_like);
-        for (TextView textView : textViews) {
+        for (final TextView textView : textViews) {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     MyMessageFragment.this.textViewsClick(v);
                 }
             });
@@ -74,7 +74,7 @@ public class MyMessageFragment extends Fragment {
     public void  textViewsClick(View v){
         int id=v.getId();
         switch (id){
-            case R.id.message_text_comment: count=0;
+            case R.id.message_text_comment: count=1;
         }
     }
 

@@ -86,12 +86,6 @@ public class LoginActivity extends Activity {
                                 @Override
                                 public void run() {
                                     pdlg.setMessage(e.toString());
-//                                try {
-//                                    Thread.sleep(300);
-//
-//                                } catch (InterruptedException ee) {
-//                                    ee.printStackTrace();
-//                                }
                                 }
                             });
 
