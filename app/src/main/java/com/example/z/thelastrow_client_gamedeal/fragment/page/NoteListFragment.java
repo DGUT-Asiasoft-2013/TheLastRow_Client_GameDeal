@@ -1,9 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -19,9 +17,7 @@ import android.widget.TextView;
 import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.service.GoodService;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,7 +39,7 @@ public class NoteListFragment extends Fragment {
     private TextView notes_sell,notes_buy;
     private ListView notes_list;
 
-    private List<Good> equipList;
+    private List<Equipment> equipList;
     private int page;
 
     @Nullable
@@ -70,18 +66,12 @@ public class NoteListFragment extends Fragment {
     }
 
     private void reload() {
-        Request request = Server.requestBuilderWithApi("/goodfeeds").get().build();
+        Request request = Server.getAllEquipment().get().build();
 
         Server.getSharedClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
 
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        showAlertDialog(e.getMessage());
-//                    }
-//                });
             }
 
             @Override
@@ -89,26 +79,21 @@ public class NoteListFragment extends Fragment {
 
                 try {
 
-                    final Page<Good> data = new ObjectMapper()
-                            .readValue(response.body().string(), new TypeReference<Page<Good>>() {});
+                    final List<Equipment> data = new ObjectMapper()
+                            .readValue(response.body().string(), new TypeReference<List<Equipment>>() {});
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            NoteListFragment.this.equipList = data.getContent();
-                            NoteListFragment.this.page = data.getNumber();
+                            NoteListFragment.this.equipList = data;
+//                            NoteListFragment.this.equipList = data.getContent();
+//                            NoteListFragment.this.page = data.getNumber();
 
                             baseAdapter.notifyDataSetChanged();
                         }
                     });
 
                 } catch (final Exception ex) {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            showAlertDialog(ex.getMessage());
-//                        }
-//                    });
 
                 }
             }
@@ -117,7 +102,7 @@ public class NoteListFragment extends Fragment {
     }
 
     public void   listClick(int position){
-        Good good=equipList.get(position);
+        Equipment good=equipList.get(position);
         Intent intent=new Intent(getActivity(), GoodActivity.class);
         intent.putExtra("good",good);
         startActivity(intent);
@@ -150,18 +135,18 @@ public class NoteListFragment extends Fragment {
                 final ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.list_good_avatar);
 
                 if (equipList.get(position)!=null){
-                    final Good equip = equipList.get(position);
-                    final Bitmap bmp=new GoodService().getBmp(equip.getAvatar_img1());
+                    final Equipment equip = equipList.get(position);
+//                    final Bitmap bmp=new GoodService().getBmp(equip.getAvatar_img1());
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            notes_listitem_thingspicture.setImageBitmap(bmp);
+//                            notes_listitem_thingspicture.setImageBitmap(bmp);
                             notes_listitem_thingsname.setText(""
-                                    +"["+equip.getGame_name()+"]"
-                                    +"["+equip.getGame_area()+"]"
+                                    +"["+equip.getGameservice().getGame().getGamename()+"]"
+                                    +"["+equip.getGameservice().getGameservicename()+"]"
                             );
-                            text_equip.setText(equip.getGame_equip());
-                            notes_listitem_thingsvalue.setText("" +equip.getPrice());
+                            text_equip.setText(equip.getEquipname());
+                            notes_listitem_thingsvalue.setText("" +equip.getEquipvalue());
                         }
                     });
                 }
@@ -170,9 +155,4 @@ public class NoteListFragment extends Fragment {
         }
     };
 
-    private void showAlertDialog(String text) {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(text).setNegativeButton("知道",null).show();
-
-    }
 }
