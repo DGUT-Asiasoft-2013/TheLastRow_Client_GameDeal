@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.ClassifyActivity;
+import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
@@ -65,7 +67,11 @@ public class NewFeedsListFragment extends Fragment {
             mainBarFragment.setOnAddListener(new MainBarFragment.OnAddListener() {
                 @Override
                 public void add() {
-                    startActivity(new Intent(getActivity(), SellActivity.class));
+                    if (Server.getUser() == null) {
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                    } else {
+                        startActivity(new Intent(getActivity(), SellActivity.class));
+                    }
                 }
             });
 
@@ -80,7 +86,8 @@ public class NewFeedsListFragment extends Fragment {
             newFeeds_tab_image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    goFeedsFragment();
+                    startActivity(new Intent(getActivity(), ClassifyActivity.class));
+//                    goClassifyActivity();
                 }
             });
 
@@ -213,7 +220,7 @@ public class NewFeedsListFragment extends Fragment {
         this.onGoFeedsFragmentListener = onGoFeedsFragmentListener;
     }
 
-    private void goFeedsFragment() {
+    private void goClassifyActivity() {
         if (onGoFeedsFragmentListener != null) {
             onGoFeedsFragmentListener.onGoFeedsFragment();
         }

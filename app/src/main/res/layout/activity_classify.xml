@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/classity_bar"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment"
+        tools:layout="@layout/fragment_action_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <fragment
+            android:id="@+id/classify_fragment1"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+        <fragment
+            android:id="@+id/classify_fragment2"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <fragment
+            android:id="@+id/classify_fragment3"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+        <fragment
+            android:id="@+id/classify_fragment4"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <fragment
+            android:id="@+id/classify_fragment5"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+        <fragment
+            android:id="@+id/classify_fragment6"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <fragment
+            android:id="@+id/classify_fragment7"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+        <fragment
+            android:id="@+id/classify_fragment8"
+            class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.CompanyEntity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_page_feeds_companyentity" />
+
+    </LinearLayout>
+</LinearLayout>
