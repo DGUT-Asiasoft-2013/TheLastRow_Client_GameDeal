@@ -37,6 +37,7 @@
                 android:id="@+id/sreachactivity_search"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:imeOptions="actionSearch"
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:inputType="text"

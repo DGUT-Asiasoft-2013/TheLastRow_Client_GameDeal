@@ -1,16 +1,23 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.sreach;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
@@ -30,7 +37,6 @@ import okhttp3.Response;
 
 public class SearchListActivity extends Activity {
 
-    private ImageView backBT;
     private EditText textET;
     private ListView searchList;
     private String searchText;
@@ -43,11 +49,46 @@ public class SearchListActivity extends Activity {
 
         searchText = this.getIntent().getStringExtra("sreachtext");
 
-        backBT = (ImageView) findViewById(R.id.sreachactivity_back);
+        findViewById(R.id.sreachactivity_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         textET = (EditText) findViewById(R.id.sreachactivity_search);
         textET.setText(searchText);
+        textET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ) {
+
+                    searchText = v.getText().toString().trim();
+
+                    reload();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    return  true;
+                }
+                return  false;
+            }
+        });
+
         searchList = (ListView) findViewById(R.id.sreachactivity_list);
+        searchList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goGoodActivity(position);
+            }
+        });
         searchList.setAdapter(searchListAdapter);
+    }
+
+    private void goGoodActivity(int position) {
+            Equipment good=equipmentList.get(position);
+            Intent intent=new Intent(SearchListActivity.this, GoodActivity.class);
+            intent.putExtra("good",good);
+            startActivity(intent);
     }
 
     @Override

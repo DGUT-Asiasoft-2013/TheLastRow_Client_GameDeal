@@ -31,6 +31,7 @@ public class GetAllLocalPictureActivity extends Activity {
     private GridView gridView;
     private List<Uri> imagePathList;
     private List<String> positionList;
+    private int size;
     private Button button;
 //    private SimpleAdapter simpleAdapter;
 //    private List<Map<String,Object>> pictureMap;
@@ -39,6 +40,9 @@ public class GetAllLocalPictureActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getalllocalpicyure);
+
+        size = this.getIntent().getIntExtra("size", 0);
+
 
         gridView = (GridView) findViewById(R.id.getalllocalpicture_gridview);
         checkText = (TextView) findViewById(R.id.getalllocalpicture_text);
@@ -164,14 +168,14 @@ public class GetAllLocalPictureActivity extends Activity {
                         view.setChecked(false);
                         positionList.remove(positionList.indexOf(uri));
                     } else {
-                        if (positionList.size() < 6) {
+                        if (positionList.size() < 6 - size) {
                             view.setChecked(true);
                             positionList.add(uri);
                         } else {
                             return;
                         }
                     }
-                    checkText.setText("已选择（" + positionList.size() + "/6）张");
+                    checkText.setText("已选择（" + positionList.size() + "/" + String.valueOf(6-size) +"）张");
                     if (positionList.size() == 0) {
                         button.setText("取消");
                     } else {

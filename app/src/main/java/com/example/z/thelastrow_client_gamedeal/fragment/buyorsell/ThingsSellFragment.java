@@ -35,6 +35,7 @@ public class ThingsSellFragment extends Fragment {
     private EditText things_number;
     private GridView thing_picture;
     private List<String> picturechoose;
+    private ImageView addbutton;
     private LinearLayout layout;
 
     @Nullable
@@ -95,7 +96,8 @@ public class ThingsSellFragment extends Fragment {
             });
             ///////////
             layout = (LinearLayout) view.findViewById(R.id.things_sell_layout);
-            layout.addView(addButton());
+            addbutton = addButton();
+            layout.addView(addbutton);
 
             picturechoose = new ArrayList<>();
 
@@ -114,7 +116,9 @@ public class ThingsSellFragment extends Fragment {
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(), GetAllLocalPictureActivity.class), REQUEST_CODE_PICTURECHOOSE);
+                Intent intent = new Intent(getActivity(), GetAllLocalPictureActivity.class);
+                intent.putExtra("size", picturechoose == null ? 0 : picturechoose.size());
+                startActivityForResult(intent , REQUEST_CODE_PICTURECHOOSE);
             }
         });
         return  addPicture;
@@ -244,7 +248,14 @@ public class ThingsSellFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_PICTURECHOOSE) {
             if (resultCode == RESULT_CODE_PICTURECHOOSE) {
-                picturechoose = data.getStringArrayListExtra("picturechoose");
+                if (picturechoose == null) {
+                    picturechoose = data.getStringArrayListExtra("picturechoose");
+                } else {
+                    picturechoose.addAll(data.getStringArrayListExtra("picturechoose"));
+                }
+                if (picturechoose.size() == 6) {
+                    layout.removeView(addbutton);
+                }
                 chooseAdapter.notifyDataSetChanged();
             }
         }

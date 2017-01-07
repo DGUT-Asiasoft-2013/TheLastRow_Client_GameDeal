@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.ClassifyActivity;
 import com.example.z.thelastrow_client_gamedeal.FeedsSearchActivity;
+import com.example.z.thelastrow_client_gamedeal.GoodActivity;
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
@@ -55,6 +57,7 @@ public class NewFeedsListFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_page_feeds_new, null);
             equiplisthead = inflater.inflate(R.layout.fragment_page_feeds_new_headview, null);
+            equiplisthead.setClickable(false);
 
             if (SDKVersion.isMoreThanAPI19()) {
                 mainBarFragment = (MainBarFragment) getChildFragmentManager().findFragmentById(R.id.frag_main_bar1);
@@ -99,11 +102,27 @@ public class NewFeedsListFragment extends Fragment {
             });
 
             listView = (ListView) view.findViewById(R.id.new_feeds_listview);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    goGoodActivity(position);
+                }
+            });
             listView.addHeaderView(equiplisthead);
 
             listView.setAdapter(listAdapter);
         }
         return view;
+    }
+
+    private void goGoodActivity(int position) {
+        if (position == 0) {
+            return;
+        }
+            Equipment good=equipmentList.get(position-1);
+            Intent intent=new Intent(getActivity(), GoodActivity.class);
+            intent.putExtra("good",good);
+            startActivity(intent);
     }
 
     @Override
