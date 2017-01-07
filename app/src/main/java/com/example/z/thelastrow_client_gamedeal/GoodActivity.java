@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Good;
-
-import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Like;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Payments;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.GoodNumberFragment;
@@ -39,7 +37,7 @@ public class GoodActivity extends Activity {
     Button btn_buy,btn_like,btn_comment;
 
     Handler handler;
-    Good good;
+    Equipment good;
     Integer like_number=0;
     Boolean like_state=false;
     @Override
@@ -81,7 +79,7 @@ public class GoodActivity extends Activity {
             }
         });
 
-        good= (Good) getIntent().getSerializableExtra("good");
+        good= (Equipment) getIntent().getSerializableExtra("good");
 
     }
 
@@ -96,12 +94,12 @@ public class GoodActivity extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        text_title.setText(good.getGame_equip());
-        text_name.setText(good.getGame_name());
-        text_area.setText(good.getGame_area());
-        text_price.setText("￥"+good.getPrice());
-        text_price_bottom.setText(""+good.getPrice());
-        goodNumberFragment.ediTextChange(good.getPrice()+"",9,text_price_bottom);
+        text_title.setText(good.getEquipname());
+        text_name.setText(good.getGameservice().getGame().getGamename());
+        text_area.setText(good.getGameservice().getGameservicename());
+        text_price.setText("￥"+good.getEquipvalue());
+        text_price_bottom.setText(""+good.getEquipvalue());
+        goodNumberFragment.ediTextChange(good.getEquipvalue()+"",9,text_price_bottom);
     }
 
     public void btnLikeLisener() {
