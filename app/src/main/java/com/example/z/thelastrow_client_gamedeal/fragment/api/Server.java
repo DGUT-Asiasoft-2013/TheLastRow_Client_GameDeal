@@ -58,6 +58,10 @@ public class Server {
         return (new Request.Builder().url(serverAddress + "equip/getequipmentnew10"));
     }
 
+    public static Request.Builder getEquipmentBySearch(String equipname) {
+        return (new Request.Builder().url(serverAddress + "equip/getequipment/byequipname/" + equipname));
+    }
+
     public static Request.Builder requestBuilderWithApi(String api) {
         return new Request.Builder()
                 .url(serverAddress + "api/" + api);

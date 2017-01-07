@@ -12,20 +12,28 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/1/7.
  */
 
-public class SreachListActivity extends Activity {
+public class SearchListActivity extends Activity {
 
     private ImageView backBT;
     private EditText textET;
-    private ListView sreachList;
-    private String sreachText;
+    private ListView searchList;
+    private String searchText;
     private List<Equipment> equipmentList;
 
     @Override
@@ -33,13 +41,13 @@ public class SreachListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sreachlist);
 
-        sreachText = this.getIntent().getStringExtra("sreachtext");
+        searchText = this.getIntent().getStringExtra("sreachtext");
 
         backBT = (ImageView) findViewById(R.id.sreachactivity_back);
         textET = (EditText) findViewById(R.id.sreachactivity_search);
-        textET.setText(sreachText);
-        sreachList = (ListView) findViewById(R.id.sreachactivity_list);
-        sreachList.setAdapter(sreachListAdapter);
+        textET.setText(searchText);
+        searchList = (ListView) findViewById(R.id.sreachactivity_list);
+        searchList.setAdapter(searchListAdapter);
     }
 
     @Override
@@ -50,10 +58,44 @@ public class SreachListActivity extends Activity {
 
     private void reload() {
 
-//        Server.getSharedClient().newCall()
+        Server.getSharedClient().newCall(Server.getEquipmentBySearch(searchText).get().build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    final List<Equipment> equipmentGet = new ObjectMapper().readValue(response.body().string(),
+                            new TypeReference<List<Equipment>>() {
+                            });
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            SearchListActivity.this.equipmentList = equipmentGet;
+                            searchListAdapter.notifyDataSetChanged();
+                        }
+                    });
+                } catch (final Exception e) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+////                            new AlertDialog.Builder(getActivity())
+////                                    .setMessage(e.getMessage()).setNegativeButton("知道",null).show();
+//                            NewFeedsListFragment.this.loadingPanelFragment.setMiss(true);
+//                            NewFeedsListFragment.this.equipmentList.clear();
+//                            NewFeedsListFragment.this.failurePanelFragment.setTextText(R.string.failureLink_response);
+//                            NewFeedsListFragment.this.failurePanelFragment.setMiss(false);
+//                        }
+//                    });
+                }
+            }
+        });
     }
 
-    private BaseAdapter sreachListAdapter = new BaseAdapter() {
+    private BaseAdapter searchListAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return (equipmentList == null ? 0 : equipmentList.size());
