@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="0dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/sreachactivity_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/action_bar_back" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/feeds_seach_background">
+
+            <EditText
+                android:background="@null"
+                android:id="@+id/sreachactivity_search"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:padding="0dp"
+                android:inputType="text"
+                android:drawablePadding="3dp"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:gravity="center_vertical"
+                android:hint="@string/frag_seach" />
+
+            <ImageView
+                android:id="@+id/sreachactivity_camera"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@android:drawable/ic_menu_camera" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/sreachactivity_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/list_view_goods_item">
+
+    </ListView>
+
+</LinearLayout>

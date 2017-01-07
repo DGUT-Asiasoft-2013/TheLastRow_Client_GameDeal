@@ -181,6 +181,10 @@ public class ThingsSellFragment extends Fragment {
         return things_number.getText().toString();
     }
 
+    public List<String> getPictures() {
+        return picturechoose;
+    }
+
 //    public byte[] getThingPicture() {
 //        return things_picture.getData();
 //    }

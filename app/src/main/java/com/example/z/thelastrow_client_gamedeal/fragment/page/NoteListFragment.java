@@ -14,10 +14,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.FeedsSearchActivity;
 import com.example.z.thelastrow_client_gamedeal.GoodActivity;
+import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.SellActivity;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.MainBarFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,6 +44,8 @@ public class NoteListFragment extends Fragment {
     private TextView notes_sell,notes_buy;
     private ListView notes_list;
 
+    private MainBarFragment mainBarFragment;
+
     private List<Equipment> equipList;
     private int page;
 
@@ -55,7 +62,32 @@ public class NoteListFragment extends Fragment {
                     listClick(position);
                 }
             });
+
+            if (SDKVersion.isMoreThanAPI19()) {
+                mainBarFragment = (MainBarFragment) getChildFragmentManager().findFragmentById(R.id.frag_main_bar2);
+            } else {
+                mainBarFragment = (MainBarFragment) getFragmentManager().findFragmentById(R.id.frag_main_bar2);
+            }
+            mainBarFragment.setOnAddListener(new MainBarFragment.OnAddListener() {
+                @Override
+                public void add() {
+                    if (Server.getUser() == null) {
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                    } else {
+                        startActivity(new Intent(getActivity(), SellActivity.class));
+                    }
+                }
+            });
+            mainBarFragment.setOnSearchListener(new MainBarFragment.OnSearchListener() {
+                @Override
+                public void onSearch() {
+                    startActivity(new Intent(getActivity() , FeedsSearchActivity.class));
+                }
+            });
         }
+
+
+
         return view;
     }
 

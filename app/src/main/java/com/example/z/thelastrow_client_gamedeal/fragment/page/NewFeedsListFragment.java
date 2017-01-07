@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.ClassifyActivity;
+import com.example.z.thelastrow_client_gamedeal.FeedsSearchActivity;
 import com.example.z.thelastrow_client_gamedeal.LoginActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.SellActivity;
@@ -72,6 +73,12 @@ public class NewFeedsListFragment extends Fragment {
                     } else {
                         startActivity(new Intent(getActivity(), SellActivity.class));
                     }
+                }
+            });
+            mainBarFragment.setOnSearchListener(new MainBarFragment.OnSearchListener() {
+                @Override
+                public void onSearch() {
+                    startActivity(new Intent(getActivity(),FeedsSearchActivity.class));
                 }
             });
 

@@ -55,5 +55,18 @@ public class MainBarFragment extends Fragment {
     }
 
     private void searchClick() {
+        if (onSearchListener != null) {
+            onSearchListener.onSearch();
+        }
+    }
+
+    public interface OnSearchListener{
+        void onSearch();
+    }
+
+    private OnSearchListener onSearchListener;
+
+    public void setOnSearchListener(OnSearchListener onSearchListener) {
+        this.onSearchListener = onSearchListener;
     }
 }

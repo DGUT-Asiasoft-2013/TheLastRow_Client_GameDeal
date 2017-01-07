@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.MainTabBarFragment;
-import com.example.z.thelastrow_client_gamedeal.fragment.api.service.LoginService;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.FeedsListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MeListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.NewFeedsListFragment;
@@ -65,9 +64,10 @@ public class MainActivity extends Activity {
             tabbar.setSelectedItem(0);
             mexitTime = -2001;
         }
-        if (i==0){
-            new LoginService().Login(this,"t","t");
-        }
+//        if (i==0){
+//            new LoginService().Login(this,"t","t");
+//            i=1;
+//        }
 
     }
 

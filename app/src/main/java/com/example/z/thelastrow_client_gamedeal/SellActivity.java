@@ -15,12 +15,16 @@ import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFr
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsSellFragment;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -33,7 +37,8 @@ public class SellActivity extends Activity {
     private GameIDFragment gameIDFragment;
     private GameFragment gameFragment;
     private GameServiceFragment gameServiceFragment;
-    private String gamenamestring,gameservicenamestring,gameidstring,thingsname,thingsvalue,thingsnumber;
+    private String gamenamestring, gameservicenamestring, gameidstring, thingsname, thingsvalue, thingsnumber;
+    private List<String> thingsPictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +82,12 @@ public class SellActivity extends Activity {
     }
 
     private void ongameIDClick(View view) {
-        TextView gameservicename = (TextView)view.findViewById(R.id.gameservice_listitem_text);
+        TextView gameservicename = (TextView) view.findViewById(R.id.gameservice_listitem_text);
         gameservicenamestring = gameservicename.getText().toString();
 
         Bundle data = new Bundle();
-        data.putString("gameservicename",gameservicenamestring);
-        data.putString("gamename",gamenamestring);
+        data.putString("gameservicename", gameservicenamestring);
+        data.putString("gamename", gamenamestring);
 
         gameIDFragment.setArguments(data);
 
@@ -95,11 +100,11 @@ public class SellActivity extends Activity {
 
     private void ongameserviceClick(View view) {
 
-        TextView gamename = (TextView)view.findViewById(R.id.game_listitem_text);
+        TextView gamename = (TextView) view.findViewById(R.id.game_listitem_text);
         gamenamestring = gamename.getText().toString();
 
         Bundle data = new Bundle();
-        data.putString("gamename",gamenamestring);
+        data.putString("gamename", gamenamestring);
 
         gameServiceFragment.setArguments(data);
 
@@ -115,28 +120,38 @@ public class SellActivity extends Activity {
         thingsname = thingsSellFragment.getThingsName();
         thingsvalue = thingsSellFragment.getThingValue();
         thingsnumber = thingsSellFragment.getThingNumber();
+        thingsPictures = thingsSellFragment.getPictures();
 
 
         OkHttpClient client = Server.getSharedClient();
 
         //待编辑
         MultipartBody.Builder multipartBody = new MultipartBody.Builder()
-                .addFormDataPart("gamename",gamenamestring)
-                .addFormDataPart("gameservicename",gameservicenamestring)
-                .addFormDataPart("equipname",thingsname)
-                .addFormDataPart("equipvalue",thingsvalue)
-                .addFormDataPart("gameid",gameidstring)
-                .addFormDataPart("equipnumber",thingsnumber)
-                .addFormDataPart("isSell" , "true");
+                .addFormDataPart("gamename", gamenamestring)
+                .addFormDataPart("gameservicename", gameservicenamestring)
+                .addFormDataPart("equipname", thingsname)
+                .addFormDataPart("equipvalue", thingsvalue)
+                .addFormDataPart("gameid", gameidstring)
+                .addFormDataPart("equipnumber", thingsnumber)
+                .addFormDataPart("isSell", "true");
 
-//        if (thingsSellFragment.getThingPicture() != null) {
-//            Calendar calendar = Calendar.getInstance();
-//            String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
-//            multipartBody.addFormDataPart("avatar_img1", "equip_picture" + string + System.currentTimeMillis(), RequestBody.create(MediaType.parse("image/png"), thingsSellFragment.getThingPicture()));
-//        }
+        for (String picture : thingsPictures) {
+            if (picture != null && !picture.equals("")) {
+
+                    Calendar calendar = Calendar.getInstance();
+//                    String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
+                    multipartBody.addFormDataPart("pictures",
+                            "_equip_picture" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND),
+                            RequestBody.create(MediaType.parse("image/png"), picture));
+
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//                data = baos.toByteArray();
+            }
+        }
 
 
-        Request request = Server.saveEquipment(gamenamestring,gameservicenamestring).post(multipartBody.build()).build();
+        Request request = Server.saveEquipment(gamenamestring, gameservicenamestring).post(multipartBody.build()).build();
 
         final ProgressDialog progressDialog = new ProgressDialog(SellActivity.this);
         progressDialog.setMessage("请稍等");

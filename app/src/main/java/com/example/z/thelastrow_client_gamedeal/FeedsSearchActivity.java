@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.z.thelastrow_client_gamedeal.fragment.sreach.SreachListActivity;
 
 /**
  * Created by Administrator on 2016/12/23.
@@ -78,7 +81,10 @@ public class FeedsSearchActivity extends Activity {
 
                     //待实现自动换行
                     frag_search_history.addView(button);
-                    showAlertDialog(textView.getText().toString());
+//                    showAlertDialog(textView.getText().toString());
+                    startActivity(new Intent(FeedsSearchActivity.this, SreachListActivity.class).putExtra("sreachtext" , textView.getText().toString()));
+                    textView.setText("");
+                    finish();
                     return true;
                 }
 

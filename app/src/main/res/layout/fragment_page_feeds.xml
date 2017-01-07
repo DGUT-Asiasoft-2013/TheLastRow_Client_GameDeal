@@ -8,6 +8,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="0dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/frag_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/action_bar_back" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/feeds_seach_background">
+
+            <TextView
+                android:id="@+id/frag_search"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:drawableLeft="@android:drawable/ic_menu_search"
+                android:drawablePadding="3dp"
+                android:gravity="center_vertical"
+                android:hint="@string/frag_seach" />
+
+            <ImageView
+                android:id="@+id/frag_camera"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@android:drawable/ic_menu_camera" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginTop="35dp"
         android:weightSum="2">
@@ -172,52 +220,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_margin="0dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="2dp"
-        android:weightSum="1">
-
-        <ImageView
-            android:id="@+id/frag_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/action_bar_back" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/feeds_seach_background">
-
-            <TextView
-                android:id="@+id/frag_search"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:drawableLeft="@android:drawable/ic_menu_search"
-                android:drawablePadding="3dp"
-                android:gravity="center_vertical"
-                android:hint="@string/frag_seach" />
-
-            <ImageView
-                android:id="@+id/frag_camera"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@android:drawable/ic_menu_camera" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </FrameLayout>
