@@ -63,4 +63,11 @@ public class PaymentService {
 
         }
     }
+    private  class setGoodStateThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            //Request request=Server.requestBuilderWithApi("")
+        }
+    }
 }

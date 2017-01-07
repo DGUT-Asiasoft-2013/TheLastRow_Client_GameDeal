@@ -55,4 +55,8 @@
     <string name="choosegameservice">请选择游戏区服</string>
     <string name="finish">完成</string>
     <string name="entity_picture_text">实物照：</string>
+    <string name="failurelink_internet">服务器响应超时</string>
+    <string name="failureLink_response">数据出错</string>
+    <string name="loading">正在努力加载…</string>
+    <string name="failurelink_linkagain">重新连接</string>
 </resources>

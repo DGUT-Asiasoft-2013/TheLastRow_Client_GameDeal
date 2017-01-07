@@ -27,7 +27,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/ticketpurchase_50" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/moneybag_50" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -184,12 +184,12 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/frag_avatar"
+            android:id="@+id/frag_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:background="@android:color/transparent"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/action_bar_back" />
 
 
         <LinearLayout

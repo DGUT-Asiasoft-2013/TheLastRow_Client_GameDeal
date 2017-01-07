@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -122,9 +123,10 @@ public class BuyActivity extends Activity {
                 .addFormDataPart("gamename",gamenamestring)
                 .addFormDataPart("gameservicename",gameservicenamestring)
                 .addFormDataPart("equipname",thingsname)
-                .addFormDataPart("minvalue",thingsvalue)
+                .addFormDataPart("equipvalue",thingsvalue)
                 .addFormDataPart("gameid",gameidstring)
-                .addFormDataPart("equipnumber",thingsnumber);
+                .addFormDataPart("equipnumber",thingsnumber)
+                .addFormDataPart("isSell" , "false");
 
 //        if (thingsSellFragment.getThingPicture() != null) {
 //            Calendar calendar = Calendar.getInstance();
@@ -133,7 +135,7 @@ public class BuyActivity extends Activity {
 //        }
 
 
-        Request request = Server.saveEquipmentOfBuy(gamenamestring,gameservicenamestring).post(multipartBody.build()).build();
+        Request request = Server.saveEquipment(gamenamestring,gameservicenamestring).post(multipartBody.build()).build();
 
         final ProgressDialog progressDialog = new ProgressDialog(BuyActivity.this);
         progressDialog.setMessage("请稍等");
@@ -192,6 +194,11 @@ public class BuyActivity extends Activity {
     private void showAlertDialog(String string) {
         new AlertDialog.Builder(BuyActivity.this)
                 .setMessage(string)
-                .setPositiveButton("好", null).show();
+                .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 }

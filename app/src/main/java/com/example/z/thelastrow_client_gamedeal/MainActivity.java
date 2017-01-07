@@ -19,10 +19,12 @@ import com.example.z.thelastrow_client_gamedeal.fragment.page.SearchListFragment
  */
 
 public class MainActivity extends Activity {
+
     NewFeedsListFragment contentFeedList = new NewFeedsListFragment();
     NoteListFragment contentNoteList = new NoteListFragment();
     SearchListFragment contentSearchPage = new SearchListFragment();
     MeListFragment contentMyProfile = new MeListFragment();
+    FeedsListFragment feedsListFragment ;
     MainTabBarFragment tabbar;
     long mexitTime = -2000;
     int i=0;
@@ -40,6 +42,20 @@ public class MainActivity extends Activity {
                 changeContentFragment(index);
             }
         });
+
+        feedsListFragment = new FeedsListFragment();
+        contentFeedList.setOnGoFeedsFragmentListene(new NewFeedsListFragment.OnGoFeedsFragmentListener() {
+            @Override
+            public void onGoFeedsFragment() {
+                goFeedsFragment();
+            }
+        });
+    }
+
+    private void goFeedsFragment() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.main_contain ,feedsListFragment)
+                .addToBackStack(null).commit();
     }
 
     @Override
@@ -94,9 +110,19 @@ public class MainActivity extends Activity {
         //tabbar.setTextColor(index);
         if (newFrag == null) return;
 
+//        if (newFrag instanceof NewFeedsListFragment) {
+//            contentFeedList.setIsNewFeeds(new NewFeedsListFragment.IsNewFeeds() {
+//                @Override
+//                public boolean isNewFeeds() {
+//                    return true;
+//                }
+//            });
+//        }
+
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_contain, newFrag)
                 .commit();
     }
+
 }

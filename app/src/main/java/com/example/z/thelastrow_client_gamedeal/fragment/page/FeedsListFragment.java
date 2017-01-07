@@ -37,7 +37,7 @@ public class FeedsListFragment extends Fragment {
 
     private View view, frag_buy, frag_sell;
     private TextView frag_search;
-    private ImageView frag_avatar, frag_camera;
+    private ImageView frag_back, frag_camera;
     private CompanyEntity[] feeds_fragments;
 
 
@@ -56,11 +56,11 @@ public class FeedsListFragment extends Fragment {
                 }
             });
 
-            frag_avatar = (ImageView) view.findViewById(R.id.frag_avatar);
-            frag_avatar.setOnClickListener(new View.OnClickListener() {
+            frag_back = (ImageView) view.findViewById(R.id.frag_back);
+            frag_back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    goLogin();
+                    getFragmentManager().popBackStack();
                 }
             });
 
@@ -172,6 +172,8 @@ public class FeedsListFragment extends Fragment {
     private void goLogin() {
         startActivity(new Intent(getActivity(), LoginActivity.class));
     }
+
+
 
     private void goFeedsSearch() {
         startActivity(new Intent(getActivity(), FeedsSearchActivity.class));

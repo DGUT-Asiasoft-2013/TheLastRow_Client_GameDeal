@@ -3,7 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="125dp"
     android:descendantFocusability= "blocksDescendants">
-    android:layout_height="125dp">
+
 
     <ImageView
         android:layout_marginTop="@dimen/item_space_margin"
@@ -11,7 +11,7 @@
         android:id="@+id/list_good_avatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@color/colorAccent"
+        android:src="@android:color/white"
         android:layout_marginBottom="4dp"/>
 
 

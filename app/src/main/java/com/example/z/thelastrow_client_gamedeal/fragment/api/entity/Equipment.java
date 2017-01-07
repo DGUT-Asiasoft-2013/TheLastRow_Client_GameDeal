@@ -1,5 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import java.util.Date;
  * Created by Administrator on 2016/12/30.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Equipment implements Serializable {
 
     private Integer id;
@@ -19,10 +22,28 @@ public class Equipment implements Serializable {
 
     private String equipname;
     private String equipvalue;
+    private String gameid;
 
     private Integer equipnumber;
 
     private String[] equippicture;
+    private Boolean isSell;
+
+    public String getGameid() {
+        return gameid;
+    }
+
+    public void setGameid(String gameid) {
+        this.gameid = gameid;
+    }
+
+    public Boolean getSell() {
+        return isSell;
+    }
+
+    public void setSell(Boolean sell) {
+        isSell = sell;
+    }
 
     public Integer getId() {
         return id;

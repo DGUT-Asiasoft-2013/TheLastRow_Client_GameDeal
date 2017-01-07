@@ -114,7 +114,7 @@ public class ThingsSellFragment extends Fragment {
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getActivity(), GetAllLocalPicture.class), REQUEST_CODE_PICTURECHOOSE);
+                startActivityForResult(new Intent(getActivity(), GetAllLocalPictureActivity.class), REQUEST_CODE_PICTURECHOOSE);
             }
         });
         return  addPicture;

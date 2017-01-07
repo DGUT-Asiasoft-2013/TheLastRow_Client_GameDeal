@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/boot_imageView"
-            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:src="@drawable/advertisement"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 

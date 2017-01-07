@@ -1,8 +1,6 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.buyorsell;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,12 +12,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.z.thelastrow_client_gamedeal.R;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Game;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -36,6 +38,8 @@ public class GameFragment extends Fragment {
     private View view;
     private ListView list;
     private List<Game> games;
+    private FailurePanelFragment failurePanelFragment;
+    private LoadingPanelFragment loadingPanelFragment;
 
     @Nullable
     @Override
@@ -44,6 +48,22 @@ public class GameFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_game, null);
             list = (ListView)view.findViewById(R.id.game_listview);
+
+
+            if (SDKVersion.isMoreThanAPI19()) {
+                failurePanelFragment = (FailurePanelFragment) getChildFragmentManager().findFragmentById(R.id.game_failurepanel);
+                loadingPanelFragment = (LoadingPanelFragment) getChildFragmentManager().findFragmentById(R.id.game_loadingpanel);
+            } else {
+                failurePanelFragment = (FailurePanelFragment) getFragmentManager().findFragmentById(R.id.game_failurepanel);
+                loadingPanelFragment = (LoadingPanelFragment) getFragmentManager().findFragmentById(R.id.game_loadingpanel);
+            }
+
+            failurePanelFragment.setOnFailureButtonClickListener(new FailurePanelFragment.OnFailureButtonClickListener() {
+                @Override
+                public void click() {
+                    reload();
+                }
+            });
 
             list.setAdapter(gameslist);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,7 +86,7 @@ public class GameFragment extends Fragment {
 
     public interface OnGameItemClick{
         void onItemClick(View view);
-    };
+    }
 
     private OnGameItemClick onGameItemClick;
 
@@ -83,32 +103,41 @@ public class GameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        games = new ArrayList<>();
         reload();
     }
 
     private void reload() {
+        failurePanelFragment.setMiss(true);
+        loadingPanelFragment.setMiss(false);
+
         Request request = Server.getAllGame().get().build();
 
 
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("请稍等");
-        //点屏幕和物理返回键退出进度对话框
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        //物理返回键可以退出进度框，点屏幕无效
-        progressDialog.setCanceledOnTouchOutside(false);
+//        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+//        progressDialog.setMessage("请稍等");
+//        //点屏幕和物理返回键退出进度对话框
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
+//        //物理返回键可以退出进度框，点屏幕无效
+//        progressDialog.setCanceledOnTouchOutside(false);
 
 
         Server.getSharedClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
 
+                if (getActivity() == null) {
+                    return;
+                }
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        progressDialog.dismiss();
-                        showAlertDialog(e.getMessage());
+                        GameFragment.this.loadingPanelFragment.setMiss(true);
+                        GameFragment.this.games.clear();
+                        GameFragment.this.failurePanelFragment.setTextText(R.string.failurelink_internet);
+                        GameFragment.this.failurePanelFragment.setMiss(false);
                     }
                 });
             }
@@ -120,29 +149,43 @@ public class GameFragment extends Fragment {
 
                     final List<Game> getgames = new ObjectMapper().readValue(response.body().string(), new TypeReference<List<Game>>() {});
 
+                    if (getActivity() == null) {
+                        return;
+                    }
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressDialog.dismiss();
 
+                            GameFragment.this.loadingPanelFragment.setMiss(true);
                             GameFragment.this.games = getgames;
 
                             gameslist.notifyDataSetChanged();
+                            GameFragment.this.failurePanelFragment.setMiss(true);
                         }
                     });
 
                 } catch (Exception ex) {
-                    showAlertDialog(ex.getMessage());
+                    if (getActivity() == null) {
+                        return;
+                    }
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            new AlertDialog.Builder(getActivity())
+//                                    .setMessage(e.getMessage()).setNegativeButton("知道",null).show();
+                            GameFragment.this.loadingPanelFragment.setMiss(true);
+                            GameFragment.this.games.clear();
+                            GameFragment.this.failurePanelFragment.setTextText(R.string.failureLink_response);
+                            GameFragment.this.failurePanelFragment.setMiss(false);
+                        }
+                    });
                 }
             }
         });
     }
 
-    private void showAlertDialog(String message) {
-
-        new AlertDialog.Builder(getActivity())
-                .setMessage(message).setNegativeButton("知道",null).show();
-    }
 
     BaseAdapter gameslist = new BaseAdapter() {
         @Override

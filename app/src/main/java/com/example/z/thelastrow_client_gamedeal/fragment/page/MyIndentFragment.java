@@ -1,8 +1,10 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -23,7 +25,9 @@ import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Payments;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.service.GoodService;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.service.LikeService;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.service.PaymentService;
+import com.example.z.thelastrow_client_gamedeal.fragment.widget.ToastAndDialog;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,6 +49,7 @@ public class MyIndentFragment extends Fragment {
     ListView listView;
     List<Payments> data;
     Handler handler = new Handler();
+    int postState=0;
     final String[] stateArray = {"发货", "等待收货", "等待评价", "交易成功","等待发货", "收货", "评价"};
     @Nullable
     @Override
@@ -153,14 +158,27 @@ public class MyIndentFragment extends Fragment {
             }
         }
 
-    }
-    void setBtnClick(Button btn){
         String btn_text=btn.getText().toString();
-        int postState=0;
         switch (btn_text){
-            case stateArray[0]: postState=1;break;
+            case "发货": postState=1;break;
+            case "确认收货": postState=2;break;
+            case "评价": postState=3;break;
+            default:btn.setEnabled(false); btn.setBackgroundColor(Color.GRAY); break;
         }
 
+    }
+    void setBtnClick(Button btn){
+        String msg;
+        String text=btn.getText().toString();
+        if(text.contentEquals(stateArray[0])){msg="确定"+stateArray[0]+"？";}
+        else if (text.contentEquals(stateArray[5])){msg="确定"+stateArray[5]+"？";}
+        else if(text.contentEquals(stateArray[6])){msg="确定"+stateArray[6]+"？";}
+        ToastAndDialog.setDialog(getActivity(), "取消收藏？", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
 
     }
 }

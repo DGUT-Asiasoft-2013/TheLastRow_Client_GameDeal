@@ -2,12 +2,15 @@ package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,6 +20,7 @@ public class BootActivity extends Activity {
     private Button pass;
     private int passtime;
     private Timer timer;
+    private ImageView advertisement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,9 @@ public class BootActivity extends Activity {
                 startMainActivity();
             }
         });
+
+        advertisement = (ImageView) findViewById(R.id.boot_imageView);
+
         Server.getUser();
     }
 
@@ -49,6 +56,16 @@ public class BootActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
+        int random = (new Random()).nextInt()%100 + 1;
+        if (random < 50) {
+            advertisement.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.advertisement2));
+        } else {
+            advertisement.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.advertisement));
+        }
+
+
 
         passtime = 5;
         timer = new Timer();
