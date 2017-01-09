@@ -59,4 +59,5 @@
     <string name="failureLink_response">数据出错</string>
     <string name="loading">正在努力加载…</string>
     <string name="failurelink_linkagain">重新连接</string>
+    <string name="charts_check">点击率</string>
 </resources>

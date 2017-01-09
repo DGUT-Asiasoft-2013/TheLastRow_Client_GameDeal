@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_height="110dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="25dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/charts_list_item_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/charts_list_item_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:src="@android:color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/charts_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pure_bg_equip"
+            android:text="装备"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/charts_list_item_equipservice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/charts_list_item_title"
+            android:text="装备区服"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_alignStart="@id/charts_list_item_equipservice"
+            android:id="@+id/charts_list_item_equipname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/charts_list_item_equipservice"
+            android:text="装备名"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_below="@id/charts_list_item_equipname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="￥"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_min" />
+
+            <TextView
+                android:id="@+id/charts_list_item_equipvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/charts_list_item_equipcheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="1亿次"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="25dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=">"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

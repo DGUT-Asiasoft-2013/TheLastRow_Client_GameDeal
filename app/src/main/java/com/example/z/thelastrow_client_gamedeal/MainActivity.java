@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.example.z.thelastrow_client_gamedeal.fragment.MainTabBarFragment;
-import com.example.z.thelastrow_client_gamedeal.fragment.page.FeedsListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.MeListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.NewFeedsListFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.page.NoteListFragment;
@@ -23,7 +22,6 @@ public class MainActivity extends Activity {
     NoteListFragment contentNoteList = new NoteListFragment();
     SearchListFragment contentSearchPage = new SearchListFragment();
     MeListFragment contentMyProfile = new MeListFragment();
-    FeedsListFragment feedsListFragment ;
     MainTabBarFragment tabbar;
     long mexitTime = -2000;
     int i=0;
@@ -42,19 +40,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        feedsListFragment = new FeedsListFragment();
-        contentFeedList.setOnGoFeedsFragmentListene(new NewFeedsListFragment.OnGoFeedsFragmentListener() {
-            @Override
-            public void onGoFeedsFragment() {
-                goFeedsFragment();
-            }
-        });
-    }
-
-    private void goFeedsFragment() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.main_contain ,feedsListFragment)
-                .addToBackStack(null).commit();
     }
 
     @Override
@@ -110,14 +95,6 @@ public class MainActivity extends Activity {
         //tabbar.setTextColor(index);
         if (newFrag == null) return;
 
-//        if (newFrag instanceof NewFeedsListFragment) {
-//            contentFeedList.setIsNewFeeds(new NewFeedsListFragment.IsNewFeeds() {
-//                @Override
-//                public boolean isNewFeeds() {
-//                    return true;
-//                }
-//            });
-//        }
 
         getFragmentManager()
                 .beginTransaction()

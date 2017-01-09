@@ -34,8 +34,8 @@ public class Server {
     }
 
     //192.168.253.4  //宿舍-172.27.148.80:8080
-    public static String serverAddress = "http://172.27.163.9:8080/membercenter/";
-//    public static String serverAddress = "http://172.27.15.26:8080/membercenter/";
+//    public static String serverAddress = "http://172.27.163.9:8080/membercenter/";
+    public static String serverAddress = "http://172.27.15.26:8080/membercenter/";
 //    public static String serverAddress = "http://172.27.15.20:8080/membercenter/";
 //	public static String serverAddress = "http://172.27.148.80:8080/membercenter/";
 
@@ -61,6 +61,14 @@ public class Server {
 
     public static Request.Builder getEquipmentBySearch(String equipname) {
         return (new Request.Builder().url(serverAddress + "equip/getequipment/byequipname/" + equipname));
+    }
+
+    public static Request.Builder getEquipmentCheck20() {
+        return (new Request.Builder().url(serverAddress + "equip/getequipmentcheck20"));
+    }
+
+    public static Request.Builder saveLookCheck() {
+        return (new Request.Builder().url(serverAddress + "equip/saveLookCheck"));
     }
 
     public static Request.Builder requestBuilderWithApi(String api) {

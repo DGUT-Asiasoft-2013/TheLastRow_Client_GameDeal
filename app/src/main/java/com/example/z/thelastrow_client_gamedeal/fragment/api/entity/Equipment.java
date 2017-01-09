@@ -28,6 +28,15 @@ public class Equipment implements Serializable {
 
     private String[] equippicture;
     private Boolean isSell;
+    private Integer lookcheck;
+
+    public Integer getLookcheck() {
+        return lookcheck;
+    }
+
+    public void setLookcheck(Integer lookcheck) {
+        this.lookcheck = lookcheck;
+    }
 
     public String getGameid() {
         return gameid;

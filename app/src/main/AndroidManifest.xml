@@ -31,6 +31,7 @@
         <activity android:name=".fragment.buyorsell.GetAllLocalPictureActivity"/>
         <activity android:name=".PersonInfoActivity"/>
         <activity android:name=".ClassifyActivity"/>
+        <activity android:name=".ChartsActivity"/>
         <activity android:name=".fragment.sreach.SearchListActivity"
             android:windowSoftInputMode="stateAlwaysHidden"/>
     </application>

@@ -81,6 +81,25 @@ public class GoodActivity extends Activity {
 
         good= (Equipment) getIntent().getSerializableExtra("good");
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Server.getSharedClient().newCall(
+                        Server.saveLookCheck().post(
+                        new MultipartBody.Builder().addFormDataPart("id", String.valueOf(good.getId())).build())
+                        .build()).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override

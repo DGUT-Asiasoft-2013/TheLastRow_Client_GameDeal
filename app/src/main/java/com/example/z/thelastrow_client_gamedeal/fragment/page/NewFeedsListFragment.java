@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.ChartsActivity;
 import com.example.z.thelastrow_client_gamedeal.ClassifyActivity;
 import com.example.z.thelastrow_client_gamedeal.FeedsSearchActivity;
 import com.example.z.thelastrow_client_gamedeal.GoodActivity;
@@ -44,7 +45,7 @@ import okhttp3.Response;
 public class NewFeedsListFragment extends Fragment {
 
     private View view, equiplisthead;
-    private ImageView newFeeds_tab_image2;
+    private ImageView newFeeds_tab_image2 , newFeeds_tab_image1;
     private ListView listView;
     private List<Equipment> equipmentList;
     private MainBarFragment mainBarFragment;
@@ -98,6 +99,14 @@ public class NewFeedsListFragment extends Fragment {
                 public void onClick(View v) {
                     startActivity(new Intent(getActivity(), ClassifyActivity.class));
 //                    goClassifyActivity();
+                }
+            });
+
+            newFeeds_tab_image1 = (ImageView) equiplisthead.findViewById(R.id.new_feeds_head_tab_img1);
+            newFeeds_tab_image1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity() , ChartsActivity.class));
                 }
             });
 
@@ -235,37 +244,4 @@ public class NewFeedsListFragment extends Fragment {
         }
     };
 
-
-    public interface OnGoFeedsFragmentListener {
-        void onGoFeedsFragment();
-    }
-
-    private OnGoFeedsFragmentListener onGoFeedsFragmentListener;
-
-    public void setOnGoFeedsFragmentListene(OnGoFeedsFragmentListener onGoFeedsFragmentListener) {
-        this.onGoFeedsFragmentListener = onGoFeedsFragmentListener;
-    }
-
-    private void goClassifyActivity() {
-        if (onGoFeedsFragmentListener != null) {
-            onGoFeedsFragmentListener.onGoFeedsFragment();
-        }
-    }
-
-//    public interface IsNewFeeds {
-//        boolean isNewFeeds();
-//    }
-//
-//    private IsNewFeeds isNewFeeds;
-//
-//    public void setIsNewFeeds(IsNewFeeds isNewFeeds) {
-//        this.isNewFeeds = isNewFeeds;
-//    }
-//
-//    private boolean getIsNewFeeds() {
-//        if (isNewFeeds != null) {
-//            return isNewFeeds.isNewFeeds();
-//        }
-//        return false;
-//    }
 }
