@@ -2,10 +2,12 @@ package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,14 +47,27 @@ public class ChartsActivity extends Activity {
         actionBarFragment = (ActionBarFragment) getFragmentManager().findFragmentById(R.id.charts_bar);
         actionBarFragment.setTitle("排行榜");
         listView = (ListView) findViewById(R.id.charts_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                goGoodActivity(position);
+            }
+        });
         listView.setAdapter(listAdapter);
 
+    }
+
+    private void goGoodActivity(int position) {
+        Equipment good=equipmentList.get(position);
+        Intent intent=new Intent(ChartsActivity.this, GoodActivity.class);
+        intent.putExtra("good",good);
+        startActivity(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        equipmentList.clear();
         loadCheck();
     }
 
