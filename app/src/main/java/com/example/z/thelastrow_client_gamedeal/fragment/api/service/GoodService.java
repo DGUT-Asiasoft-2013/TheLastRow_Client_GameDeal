@@ -3,7 +3,6 @@ package com.example.z.thelastrow_client_gamedeal.fragment.api.service;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 
 import java.io.IOException;
@@ -18,43 +17,42 @@ import okhttp3.Response;
  */
 
 public class GoodService {
-    Bitmap bmp;
-    String imgUrl;
-    int i=0;
+    private Bitmap bmp;
+    private String imgUrl;
 
-    public Bitmap getBmp(String urlWithoutMemberCenter){
-        this.imgUrl = urlWithoutMemberCenter;
+    public Bitmap getBmp(String urlWithoutMemberCenter) {
+        imgUrl = urlWithoutMemberCenter;
 
-        new Thread(new imgThread()).start();
-        while (i == 0) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        new imgThread().start();
+
         return bmp;
     }
 
-    private class imgThread extends Thread{
+    private class imgThread extends Thread {
         @Override
         public void run() {
             super.run();
+
             Request request = new Request.Builder()
-                    .url(Server.serverAddress+imgUrl)
+                    .url(Server.serverAddress + imgUrl)
                     .get()
                     .build();
+
             Server.getSharedClient().newCall(request).enqueue(new Callback() {
                 @Override
                 public void onResponse(Call arg0, Response arg1) throws IOException {
 
                     byte[] bytes = arg1.body().bytes();
-                    bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                   i=1;
+                    try {
+                        bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    } catch (Exception e) {
+                        bmp = null;
+                    }
                 }
+
                 @Override
                 public void onFailure(Call arg0, IOException arg1) {
-                   i=1;
+                    bmp = null;
                 }
             });
         }

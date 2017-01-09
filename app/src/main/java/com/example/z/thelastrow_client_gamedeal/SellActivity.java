@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameIDFragmen
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.GameServiceFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.buyorsell.ThingsSellFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -136,17 +139,18 @@ public class SellActivity extends Activity {
                 .addFormDataPart("isSell", "true");
 
         for (String picture : thingsPictures) {
-            if (picture != null && !picture.equals("")) {
+            if (picture != null) {
+
+                Bitmap bmp = BitmapFactory.decodeFile(picture);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 
                     Calendar calendar = Calendar.getInstance();
 //                    String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
                     multipartBody.addFormDataPart("pictures",
                             "_equip_picture" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND),
-                            RequestBody.create(MediaType.parse("image/png"), picture));
-
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//                data = baos.toByteArray();
+                            RequestBody.create(MediaType.parse("image/png"), baos.toByteArray()));
             }
         }
 

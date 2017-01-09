@@ -2,6 +2,8 @@ package com.example.z.thelastrow_client_gamedeal.fragment.page;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -39,9 +41,9 @@ import okhttp3.Response;
  */
 
 public class NoteListFragment extends Fragment {
-    Handler handler=new Handler();
+    Handler handler = new Handler();
     private View view;
-    private TextView notes_sell,notes_buy;
+    private TextView notes_sell, notes_buy;
     private ListView notes_list;
 
     private MainBarFragment mainBarFragment;
@@ -81,11 +83,10 @@ public class NoteListFragment extends Fragment {
             mainBarFragment.setOnSearchListener(new MainBarFragment.OnSearchListener() {
                 @Override
                 public void onSearch() {
-                    startActivity(new Intent(getActivity() , FeedsSearchActivity.class));
+                    startActivity(new Intent(getActivity(), FeedsSearchActivity.class));
                 }
             });
         }
-
 
 
         return view;
@@ -112,7 +113,8 @@ public class NoteListFragment extends Fragment {
                 try {
 
                     final List<Equipment> data = new ObjectMapper()
-                            .readValue(response.body().string(), new TypeReference<List<Equipment>>() {});
+                            .readValue(response.body().string(), new TypeReference<List<Equipment>>() {
+                            });
 
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -133,10 +135,10 @@ public class NoteListFragment extends Fragment {
 
     }
 
-    public void   listClick(int position){
-        Equipment good=equipList.get(position);
-        Intent intent=new Intent(getActivity(), GoodActivity.class);
-        intent.putExtra("good",good);
+    public void listClick(int position) {
+        Equipment good = equipList.get(position);
+        Intent intent = new Intent(getActivity(), GoodActivity.class);
+        intent.putExtra("good", good);
         startActivity(intent);
     }
 
@@ -160,28 +162,64 @@ public class NoteListFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_goods_item, null);
-                TextView text_type=(TextView)convertView.findViewById(R.id.list_good_text_type);
-                final TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.list_good_text_title);
-                final TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.list_good_text_price);
-                final TextView text_equip=(TextView)convertView.findViewById(R.id.list_good_text_equip);
+                TextView text_type = (TextView) convertView.findViewById(R.id.list_good_text_type);
+                TextView notes_listitem_thingsname = (TextView) convertView.findViewById(R.id.list_good_text_title);
+                TextView notes_listitem_thingsvalue = (TextView) convertView.findViewById(R.id.list_good_text_price);
+                TextView text_equip = (TextView) convertView.findViewById(R.id.list_good_text_equip);
                 final ImageView notes_listitem_thingspicture = (ImageView) convertView.findViewById(R.id.list_good_avatar);
 
-                if (equipList.get(position)!=null){
-                    final Equipment equip = equipList.get(position);
+                final Equipment equip = equipList.get(position);
+                if (equip != null) {
 //                    final Bitmap bmp=new GoodService().getBmp(equip.getAvatar_img1());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
 //                            notes_listitem_thingspicture.setImageBitmap(bmp);
-                            notes_listitem_thingsname.setText(""
-                                    +"["+equip.getGameservice().getGame().getGamename()+"]"
-                                    +"["+equip.getGameservice().getGameservicename()+"]"
-                            );
-                            text_equip.setText(equip.getEquipname());
-                            notes_listitem_thingsvalue.setText("" +equip.getEquipvalue());
-                        }
-                    });
+                    notes_listitem_thingsname.setText(""
+                            + "[" + equip.getGameservice().getGame().getGamename() + "]"
+                            + "[" + equip.getGameservice().getGameservicename() + "]"
+                    );
+                    text_equip.setText(equip.getEquipname());
+                    notes_listitem_thingsvalue.setText("" + equip.getEquipvalue());
                 }
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (equip.getEquippicture() == null) {
+                            return;
+                        }
+
+                        Server.getSharedClient().newCall(
+                                new Request.Builder().url(Server.serverAddress + equip.getEquippicture()[0]).get().build()
+                        ).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, final IOException e) {
+
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                try {
+                                    byte[] bytes = response.body().bytes();
+                                    final Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notes_listitem_thingspicture.setImageBitmap(bmp);
+                                        }
+                                    });
+                                } catch (final Exception e) {
+//                                    getActivity().runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+                                }
+                            }
+                        });
+
+                    }
+                });
             }
             return convertView;
         }

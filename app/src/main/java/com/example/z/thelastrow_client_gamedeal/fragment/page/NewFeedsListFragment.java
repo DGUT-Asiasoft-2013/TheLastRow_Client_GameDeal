@@ -24,6 +24,7 @@ import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
+import com.example.z.thelastrow_client_gamedeal.fragment.api.service.GoodService;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.MainBarFragment;
@@ -45,7 +46,7 @@ import okhttp3.Response;
 public class NewFeedsListFragment extends Fragment {
 
     private View view, equiplisthead;
-    private ImageView newFeeds_tab_image2 , newFeeds_tab_image1;
+    private ImageView newFeeds_tab_image2, newFeeds_tab_image1;
     private ListView listView;
     private List<Equipment> equipmentList;
     private MainBarFragment mainBarFragment;
@@ -82,7 +83,7 @@ public class NewFeedsListFragment extends Fragment {
             mainBarFragment.setOnSearchListener(new MainBarFragment.OnSearchListener() {
                 @Override
                 public void onSearch() {
-                    startActivity(new Intent(getActivity(),FeedsSearchActivity.class));
+                    startActivity(new Intent(getActivity(), FeedsSearchActivity.class));
                 }
             });
 
@@ -106,9 +107,11 @@ public class NewFeedsListFragment extends Fragment {
             newFeeds_tab_image1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getActivity() , ChartsActivity.class));
+                    startActivity(new Intent(getActivity(), ChartsActivity.class));
                 }
             });
+
+            equipmentList = new ArrayList<>();
 
             listView = (ListView) view.findViewById(R.id.new_feeds_listview);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,16 +131,15 @@ public class NewFeedsListFragment extends Fragment {
         if (position == 0) {
             return;
         }
-            Equipment good=equipmentList.get(position-1);
-            Intent intent=new Intent(getActivity(), GoodActivity.class);
-            intent.putExtra("good",good);
-            startActivity(intent);
+        Equipment good = equipmentList.get(position - 1);
+        Intent intent = new Intent(getActivity(), GoodActivity.class);
+        intent.putExtra("good", good);
+        startActivity(intent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        equipmentList = new ArrayList<>();
         reload();
     }
 
@@ -235,10 +237,16 @@ public class NewFeedsListFragment extends Fragment {
             TextView buyNumber = (TextView) convertView.findViewById(R.id.list_good_text_people_buy);
 
             Equipment equipment = equipmentList.get(position);
+            GoodService goodService = new GoodService();
 
-            gamenameAndService.setText("[" + equipment.getGameservice().getGame().getGamename() + "][" + equipment.getGameservice().getGameservicename() + "]");
-            equipname.setText(equipment.getEquipname());
-            equipvalue.setText(equipment.getEquipvalue());
+            if (equipment != null) {
+
+                gamenameAndService.setText("[" + equipment.getGameservice().getGame().getGamename() + "][" + equipment.getGameservice().getGameservicename() + "]");
+                equipname.setText(equipment.getEquipname());
+                equipvalue.setText(equipment.getEquipvalue());
+
+                equipmentPicture.setImageBitmap(goodService.getBmp(equipment.getEquippicture()[0]));
+            }
 
             return convertView;
         }
