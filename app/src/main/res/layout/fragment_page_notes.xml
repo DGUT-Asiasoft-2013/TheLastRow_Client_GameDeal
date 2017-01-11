@@ -46,11 +46,31 @@
     </LinearLayout>
 
 
+    <fragment
+        android:layout_gravity="center"
+        android:id="@+id/notes_loadingpanel"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment"
+        tools:layout="@layout/fragment_loading" />
+
+
+    <fragment
+        android:layout_gravity="center"
+        android:id="@+id/notes_failurepanel"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment"
+        tools:layout="@layout/fragment_failurepanel" />
+
     <ListView
         android:id="@+id/notes_list"
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:minHeight="100dp"
         tools:listitem="@layout/fragment_page_notes_listitem">
 

@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    android:padding="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <fragment
+            android:id="@+id/new_feeds_head_advertisement"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher" />
+            android:name="com.example.z.thelastrow_client_gamedeal.fragment.widget.ViewPagerFragment"
+            tools:layout="@layout/fragment_viewpager" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            android:paddingEnd="1dp"
+            android:paddingStart="1dp">
 
             <FrameLayout
                 android:layout_width="0dp"

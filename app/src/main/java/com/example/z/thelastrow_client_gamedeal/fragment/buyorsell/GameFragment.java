@@ -160,7 +160,6 @@ public class GameFragment extends Fragment {
                             GameFragment.this.loadingPanelFragment.setMiss(true);
                             GameFragment.this.games = getgames;
 
-                            gameslist.notifyDataSetChanged();
                             GameFragment.this.failurePanelFragment.setMiss(true);
                         }
                     });
@@ -184,6 +183,8 @@ public class GameFragment extends Fragment {
                 }
             }
         });
+
+        gameslist.notifyDataSetChanged();
     }
 
 

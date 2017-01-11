@@ -1,8 +1,9 @@
 package com.example.z.thelastrow_client_gamedeal;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.z.thelastrow_client_gamedeal.fragment.api.ImageDownload;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.Server;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Equipment;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.entity.Page;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment;
+import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment;
 import com.example.z.thelastrow_client_gamedeal.fragment.widget.ActionBarFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,10 +42,25 @@ public class ChartsActivity extends Activity {
     private ActionBarFragment actionBarFragment;
     private List<Equipment> equipmentList;
 
+    private FailurePanelFragment failurePanelFragment;
+    private LoadingPanelFragment loadingPanelFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charts);
+
+            failurePanelFragment = (FailurePanelFragment) getFragmentManager().findFragmentById(R.id.charts_failurepanel);
+            loadingPanelFragment = (LoadingPanelFragment) getFragmentManager().findFragmentById(R.id.charts_loadingpanel);
+
+        failurePanelFragment.setOnFailureButtonClickListener(new FailurePanelFragment.OnFailureButtonClickListener() {
+            @Override
+            public void click() {
+                loadCheck();
+            }
+        });
+
 
         equipmentList = new ArrayList<>();
         actionBarFragment = (ActionBarFragment) getFragmentManager().findFragmentById(R.id.charts_bar);
@@ -58,10 +77,11 @@ public class ChartsActivity extends Activity {
     }
 
     private void goGoodActivity(int position) {
-        Equipment good=equipmentList.get(position);
-        Intent intent=new Intent(ChartsActivity.this, GoodActivity.class);
-        intent.putExtra("good",good);
+        Equipment good = equipmentList.get(position);
+        Intent intent = new Intent(ChartsActivity.this, GoodActivity.class);
+        intent.putExtra("good", good);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -75,11 +95,14 @@ public class ChartsActivity extends Activity {
         Server.getSharedClient().newCall(Server.getEquipmentCheck20().get().build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        new AlertDialog.Builder(ChartsActivity.this).setMessage(e.getMessage())
-                                .setPositiveButton("好", null).show();
+                        loadingPanelFragment.setMiss(true);
+                        equipmentList.clear();
+                        failurePanelFragment.setTextText(R.string.failurelink_internet);
+                        failurePanelFragment.setMiss(false);
                     }
                 });
             }
@@ -89,28 +112,34 @@ public class ChartsActivity extends Activity {
                 try {
                     final Page<Equipment> getData = new ObjectMapper().readValue(response.body().string(), new TypeReference<Page<Equipment>>() {
                     });
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            for (Equipment equipment : getData.getContent()) {
-                                if (equipment.getLookcheck() != 0) {
-                                    equipmentList.add(equipment);
-                                    listAdapter.notifyDataSetChanged();
-                                }
-                            }
+                            loadingPanelFragment.setMiss(true);
+                            equipmentList = getData.getContent();
+
+                            failurePanelFragment.setMiss(true);
+
                         }
                     });
                 } catch (final Exception e) {
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            new AlertDialog.Builder(ChartsActivity.this).setMessage(e.getMessage())
-                                    .setPositiveButton("好", null).show();
+//                            new AlertDialog.Builder(getActivity())
+//                                    .setMessage(e.getMessage()).setNegativeButton("知道",null).show();
+                            loadingPanelFragment.setMiss(true);
+                            equipmentList.clear();
+                            failurePanelFragment.setTextText(R.string.failureLink_response);
+                            failurePanelFragment.setMiss(false);
                         }
                     });
                 }
             }
         });
+        listAdapter.notifyDataSetChanged();
     }
 
     BaseAdapter listAdapter = new BaseAdapter() {
@@ -130,25 +159,47 @@ public class ChartsActivity extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, final ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.charts_list_item, null);
             }
 
-            ImageView equipmentPicture = (ImageView) convertView.findViewById(R.id.charts_list_item_image);
+            final ImageView equipmentPicture = (ImageView) convertView.findViewById(R.id.charts_list_item_image);
             TextView listNo = (TextView) convertView.findViewById(R.id.charts_list_item_no);
             TextView equipservice = (TextView) convertView.findViewById(R.id.charts_list_item_equipservice);
             TextView equipname = (TextView) convertView.findViewById(R.id.charts_list_item_equipname);
             TextView equipvalue = (TextView) convertView.findViewById(R.id.charts_list_item_equipvalue);
             TextView equipcheck = (TextView) convertView.findViewById(R.id.charts_list_item_equipcheck);
 
-            Equipment equipment = equipmentList.get(position);
+            final Equipment equipment = equipmentList.get(position);
 
-            listNo.setText(String.valueOf(position + 1));
-            equipservice.setText("[" + equipment.getGameservice().getGame().getGamename() + "][" + equipment.getGameservice().getGameservicename() + "]");
-            equipname.setText(equipment.getEquipname());
-            equipvalue.setText(equipment.getEquipvalue());
-            equipcheck.setText("" + equipment.getLookcheck() + "次");
+            if (equipment != null) {
+                listNo.setText(String.valueOf(position + 1));
+                equipservice.setText("[" + equipment.getGameservice().getGame().getGamename() + "][" + equipment.getGameservice().getGameservicename() + "]");
+                equipname.setText(equipment.getEquipname());
+                equipvalue.setText(equipment.getEquipvalue());
+                equipcheck.setText("" + equipment.getLookcheck() + "次");
+            }
+
+            if (equipment != null && equipment.getEquippicture() != null) {
+//                ImageDownload imageDownload = new ImageDownload(parent.getContext());
+//                long time = 0;
+//                if (position % 2 == 0) {
+//                    time = 0;
+//                } else {
+//                    time = 2000;
+//                }
+                new ImageDownload(parent.getContext()).download(equipmentPicture, equipment.getEquippicture()[0],
+                        new ImageDownload.ImageDownloadBack() {
+                            @Override
+                            public void onBack(ImageView imageView, Bitmap bmp) {
+                                imageView.setImageBitmap(bmp);
+                            }
+                        } , 0);
+            } else {
+                equipmentPicture.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.cancel_50));
+            }
+
 
             return convertView;
         }

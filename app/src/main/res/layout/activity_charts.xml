@@ -21,11 +21,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/charts_check" />
+                android:text="@string/charts_check"
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
@@ -36,10 +36,27 @@
         android:layout_height="1dp"
         android:background="@android:color/darker_gray" />
 
+    <fragment
+        android:id="@+id/charts_failurepanel"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_failurepanel" />
+
+    <fragment
+        android:id="@+id/charts_loadingpanel"
+        class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.LoadingPanelFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_loading" />
+
     <ListView
         android:id="@+id/charts_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         tools:listitem="@layout/charts_list_item">
 
 

@@ -29,14 +29,6 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:layout_weight="1"
-        android:id="@+id/gameservice_listview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-    </ListView>
-
     <fragment
         android:id="@+id/gameservice_loadingpanel"
         android:layout_weight="1"
@@ -53,5 +45,14 @@
         android:layout_height="0dp"
         class="com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.FailurePanelFragment"
         tools:layout="@layout/fragment_failurepanel" />
+
+    <ListView
+        android:layout_weight="1"
+        android:id="@+id/gameservice_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </ListView>
+
 
 </LinearLayout>

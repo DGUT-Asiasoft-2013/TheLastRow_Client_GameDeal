@@ -55,6 +55,11 @@ public class Server {
         return (new Request.Builder().url(serverAddress + "equip/saveequipment/" + gamename +"/"+ gameservicename));
     }
 
+    public static Request.Builder getEquipmentByCompany(String companyname) {
+        return (new Request.Builder().url(serverAddress + "equip/getequipment/bycompany/" + companyname));
+    }
+
+
     public static Request.Builder getEquipmentNew10() {
         return (new Request.Builder().url(serverAddress + "equip/getequipmentnew10"));
     }

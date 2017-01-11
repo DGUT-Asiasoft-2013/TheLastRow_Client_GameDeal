@@ -17,24 +17,36 @@ import okhttp3.Response;
  */
 
 public class GoodService {
-    private Bitmap bmp;
-    private String imgUrl;
+    Bitmap bmp;
+    String imgUrl;
+    int i=0;
 
-    public Bitmap getBmp(String urlWithoutMemberCenter) {
-        imgUrl = urlWithoutMemberCenter;
+    public Bitmap getBmp(String urlWithoutMemberCenter){
+        this.imgUrl = urlWithoutMemberCenter;
 
         new imgThread().start();
-
+//        new Thread(new imgThread()).start();
+        while (i == 0) {
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+        }
         return bmp;
     }
 
-    private class imgThread extends Thread {
+    private class imgThread extends Thread{
         @Override
         public void run() {
             super.run();
-
+            try {
+                sleep(1*1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Request request = new Request.Builder()
-                    .url(Server.serverAddress + imgUrl)
+                    .url(Server.serverAddress+imgUrl)
                     .get()
                     .build();
 
@@ -43,16 +55,12 @@ public class GoodService {
                 public void onResponse(Call arg0, Response arg1) throws IOException {
 
                     byte[] bytes = arg1.body().bytes();
-                    try {
-                        bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                    } catch (Exception e) {
-                        bmp = null;
-                    }
+                    bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    i=1;
                 }
-
                 @Override
                 public void onFailure(Call arg0, IOException arg1) {
-                    bmp = null;
+                    i=1;
                 }
             });
         }
