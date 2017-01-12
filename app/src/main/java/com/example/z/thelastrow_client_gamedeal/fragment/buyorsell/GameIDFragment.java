@@ -1,6 +1,8 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.buyorsell;
 
 import android.app.Fragment;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -71,7 +73,10 @@ public class GameIDFragment extends Fragment {
         return gameid_gameid.getText().toString();
     }
 
-
+    public void setGameIdTextHint(String text) {
+        gameid_gameid.setHintTextColor(ColorStateList.valueOf(Color.RED));
+        gameid_gameid.setHint(text);
+    }
 
     public interface OnNextStepListener {
         void onNextstep();

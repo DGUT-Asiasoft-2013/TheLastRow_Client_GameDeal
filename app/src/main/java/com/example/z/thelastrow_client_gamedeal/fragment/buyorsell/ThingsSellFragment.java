@@ -3,6 +3,7 @@ package com.example.z.thelastrow_client_gamedeal.fragment.buyorsell;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.z.thelastrow_client_gamedeal.PictureDeleteActivity;
 import com.example.z.thelastrow_client_gamedeal.R;
 import com.example.z.thelastrow_client_gamedeal.fragment.api.SDKVersion;
 import com.example.z.thelastrow_client_gamedeal.fragment.inputmodule.InputThingsFragment;
@@ -30,6 +32,9 @@ public class ThingsSellFragment extends Fragment {
 
     final static int RESULT_CODE_PICTURECHOOSE = 0x606;
     final static int REQUEST_CODE_PICTURECHOOSE = 0x616;
+    final static int RESULT_CODE_PICTUREDELETE = 0x101;
+    final static int REQUEST_CODE_PICTUREDELETE = 0x111;
+
     private View view;
     private InputThingsFragment things_name, things_value;
     private EditText things_number;
@@ -124,6 +129,15 @@ public class ThingsSellFragment extends Fragment {
         return  addPicture;
     }
 
+    public void setThingsNameHint(String text) {
+        things_name.setThingsInputItemHint(text);
+        things_name.setThingsInputItemHintColor(Color.RED);
+    }
+
+    public void setThingsValueHint(String text) {
+        things_value.setThingsInputItemHint(text);
+        things_value.setThingsInputItemHintColor(Color.RED);
+    }
 //    private void removeAddButton() {
 //        if (picturechoose.size() < 6) {
 //            thing_picture.addView(addPicture);
@@ -226,7 +240,7 @@ public class ThingsSellFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ImageView imageView;
 
 
@@ -239,6 +253,15 @@ public class ThingsSellFragment extends Fragment {
             }
 
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturechoose.get(position)));
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), PictureDeleteActivity.class);
+                    intent.putStringArrayListExtra("pictureget", (ArrayList<String>) picturechoose);
+                    intent.putExtra("position", position);
+                    startActivityForResult(intent, REQUEST_CODE_PICTUREDELETE);
+                }
+            });
             return imageView;
         }
     };
@@ -258,6 +281,17 @@ public class ThingsSellFragment extends Fragment {
                 }
                 chooseAdapter.notifyDataSetChanged();
             }
+        }
+        if (requestCode == REQUEST_CODE_PICTUREDELETE) {
+            if (resultCode == RESULT_CODE_PICTUREDELETE) {
+                picturechoose.clear();
+                picturechoose = data.getStringArrayListExtra("deletelist");
+            }
+            if (layout.indexOfChild(addbutton) == -1) {
+                layout.addView(addbutton);
+            }
+
+            chooseAdapter.notifyDataSetChanged();
         }
     }
 }

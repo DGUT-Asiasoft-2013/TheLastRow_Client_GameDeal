@@ -34,6 +34,7 @@
         <activity android:name=".ChartsActivity"/>
         <activity android:name=".fragment.sreach.SearchListActivity"
             android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".PictureDeleteActivity" />
     </application>
 
 </manifest>

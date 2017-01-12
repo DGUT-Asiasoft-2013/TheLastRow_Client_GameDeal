@@ -1,6 +1,7 @@
 package com.example.z.thelastrow_client_gamedeal.fragment.inputmodule;
 
 import android.app.Fragment;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
@@ -42,6 +43,10 @@ public class InputThingsFragment extends Fragment {
 
     public void setThingsInputItemHint(String s) {
         things_input_itemtext.setHint(s);
+    }
+
+    public void setThingsInputItemHintColor(int color) {
+        things_input_itemtext.setHintTextColor(ColorStateList.valueOf(color));
     }
 
     public void setThingsInputItemImeOption(int itemImeOption) {

@@ -92,6 +92,7 @@ public class ViewPagerFragment extends Fragment {
 
             viewPager.setAdapter(advertisementAdapter);
             viewPager.addOnPageChangeListener(new PagerChangeListener());
+            doService();
         }
         return view;
     }
@@ -99,31 +100,34 @@ public class ViewPagerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+    }
+
+    private void doService() {
         viewPager.setCurrentItem(currentposition ,false);
         dotList.get(dotposition).setSelected(true);
         autoService = Executors.newSingleThreadScheduledExecutor();
         //第一个参数执行线程，第二个第一次执行延迟时间，第三个上一次结束到下一次开始时间，第四个延迟时间单位
         autoService.scheduleWithFixedDelay(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (viewPager) {
-                            viewPager.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (isHeadle) {
-                                        return;
-                                    }
-//                                    Log.d("currentposition", "---------------------------" + currentposition);
-//                                    currentposition++;
-                                    currentposition = (currentposition % dotList.size()) + 1;
-//                                    currentposition = currentposition % (viewPager.getAdapter().getCount() - 2);
-                                    viewPager.setCurrentItem(currentposition);
-                                }
-                            });
+            @Override
+            public void run() {
+                synchronized (viewPager) {
+                    viewPager.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (isHeadle) {
+                                return;
+                            }
+                            currentposition = (currentposition % dotList.size()) + 1;
+                            viewPager.setCurrentItem(currentposition);
                         }
-                    }
-                }, 1000, 3000, TimeUnit.MILLISECONDS);
+                    });
+                }
+            }
+        }, 1000, 3000, TimeUnit.MILLISECONDS);
     }
+
+
 
     private class PagerChangeListener implements ViewPager.OnPageChangeListener {
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:id="@+id/picturedeletd_back"
+            android:background="@drawable/action_bar_back"
+            android:layout_marginStart="10dp"
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/picturedeletd_deletd"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="right"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/ic_menu_delete" />
+
+        <TextView
+            android:id="@+id/picturedeletd_text"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="(0/6)"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/picturedeletd_viewpager"
+            android:background="@android:color/white"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="350dp">
+
+        </android.support.v4.view.ViewPager>
+
+    </FrameLayout>
+
+</LinearLayout>

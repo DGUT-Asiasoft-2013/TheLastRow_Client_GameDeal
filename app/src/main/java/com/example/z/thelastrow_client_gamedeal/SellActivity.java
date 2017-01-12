@@ -120,11 +120,20 @@ public class SellActivity extends Activity {
 
     private void submit() {
 
-        thingsname = thingsSellFragment.getThingsName();
-        thingsvalue = thingsSellFragment.getThingValue();
+        thingsname = thingsSellFragment.getThingsName().trim();
+        thingsvalue = thingsSellFragment.getThingValue().trim();
         thingsnumber = thingsSellFragment.getThingNumber();
         thingsPictures = thingsSellFragment.getPictures();
 
+        if (thingsname.equals("")) {
+            thingsSellFragment.setThingsNameHint("请输入商品名");
+            return;
+        }
+
+        if (thingsvalue.equals("")) {
+            thingsSellFragment.setThingsValueHint("请输入价格");
+            return;
+        }
 
         OkHttpClient client = Server.getSharedClient();
 
@@ -149,7 +158,7 @@ public class SellActivity extends Activity {
                     Calendar calendar = Calendar.getInstance();
 //                    String string = "" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE);
                     multipartBody.addFormDataPart("pictures",
-                            "_equip_picture" + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH) + calendar.get(Calendar.DATE) + calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND) + calendar.get(Calendar.MILLISECOND),
+                            "_" + System.currentTimeMillis(),
                             RequestBody.create(MediaType.parse("image/png"), baos.toByteArray()));
             }
         }
@@ -202,7 +211,12 @@ public class SellActivity extends Activity {
 
     private void nextStep() {
 
-        gameidstring = gameIDFragment.getGameId();
+        gameidstring = gameIDFragment.getGameId().trim();
+
+        if (gameidstring.equals("")) {
+            gameIDFragment.setGameIdTextHint("不能为空");
+            return;
+        }
 
         getFragmentManager()
                 .beginTransaction()
